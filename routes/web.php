@@ -12,7 +12,10 @@
 */
 
 
+//
+//Route::get('/', function () { return view('landing');
+//});
+Route::get('/', 'StaticController@home');
+Auth::routes();
 
-Route::get('/', function () {
-    return view('landing');
-});
+Route::get('/home', 'HomeController@index')->name('home');

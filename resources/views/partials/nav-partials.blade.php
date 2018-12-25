@@ -7,8 +7,8 @@
 
     <div class="col-xs-5" style="margin-top: 25px; margin-right: 10px;">
         <ul class="list-inline">
-            <li><a href="#">Register</a></li>
-            <li><a href="#">Login</a></li>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/login">Login</a></li>
         </ul>
     </div>
 </nav>
