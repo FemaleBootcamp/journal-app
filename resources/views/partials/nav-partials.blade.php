@@ -1,11 +1,10 @@
 
-<nav class="navbar navbar-default" style="margin-bottom: 0;">
-    <div class="col-xs-2" style="padding: 10px;">
-        <img alt="logo" class="img-fluid" src="{{ asset('img/Journal-app.png') }}" style="width: 150px;">
+<nav class="navbar fixed-top navbar-default" style="background-color:#32CD99">
+    <div>
+        <img alt="logo" class="img-fluid" src="{{ asset('img/Logo.png') }}" style="width: 50px;height:50px">
     </div>
 
-
-    <div class="col-xs-5" style="margin-top: 25px; margin-right: 10px;">
+    <div class="col-xs-5" style=" margin-right: 10px;">
         <ul class="list-inline">
             <li><a href="#">Register</a></li>
             <li><a href="#">Login</a></li>

@@ -1,11 +1,12 @@
-<section class="jumbotron text-center" style="margin-top: 0; background-color: #CD3266; ">
+<section> 
+    <div id="text">
+            <br><br>
+            <h1>Because everyone needs a private <span>Journal</span></h1>
+            <h4>Create <span>beautiful memories</span> with</h4>
 
-         <div class="container">
-
-               <h1 class="jumbotron-heading" style="color: white">Motus Journal</h1>
-
-               <p class="lead " style="color: lightpink">Your private, beautiful and secure online journal!</p>
-
-           </div>
-
+            <!-- logo container -->
+            <div id="logo-container">
+                <img id="logo" src={{ asset('img/journal-app.png') }} alt="No-image">
+            </div>
+            <button class="btn btn-info btn-lg text-white">Start Your FREE Journal</button>
 </section>
