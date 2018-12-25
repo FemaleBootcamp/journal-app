@@ -3,68 +3,63 @@
 @section('content')
     <!-- Main Content -->
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title" >
-                            Man must explore, and this is exploration at its greatest
-                        </h2>
-                        <h3 class="post-subtitle">
-                            Problems look mighty small from 150 miles up
-                        </h3>
-                    </a>
-                    <p class="post-meta">Posted by
-                        <a href="#">Start Bootstrap</a>
-                        on September 24, 2018</p>
-                </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                            I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
-                        </h2>
-                    </a>
-                    <p class="post-meta">Posted by
-                        <a href="#">Start Bootstrap</a>
-                        on September 18, 2018</p>
-                </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                            Science has not yet mastered prophecy
-                        </h2>
-                        <h3 class="post-subtitle">
-                            We predict too much for the next year and yet far too little for the next ten.
-                        </h3>
-                    </a>
-                    <p class="post-meta">Posted by
-                        <a href="#">Start Bootstrap</a>
-                        on August 24, 2018</p>
-                </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                            Failure is not an option
-                        </h2>
-                        <h3 class="post-subtitle">
-                            Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-                        </h3>
-                    </a>
-                    <p class="post-meta">Posted by
-                        <a href="#">Start Bootstrap</a>
-                        on July 8, 2018</p>
-                </div>
-                <hr>
-                <!-- Pager -->
-                <div class="clearfix">
-                    <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <hr>
+<!-- text container -->
+
+
+<br><br><br><br><br>
+
+<section class="row">
+    <div id="qs" class="col-6">
+    <br><br><br>
+        <h2>Who is it for?</h2>
+        <h5>Students, teacher, engineers <span>Who Cares! Basically Anyone!</span></h5>
+    </div>
+    <img style="width:50%;height:50%" class="col-6" src="{{ asset('img/people.png') }}" alt="No-image">
+</section>
+
+
+<br><br>
+
+<section class="row">
+
+    <img style="width:50%;height:50%" class="col-5" src="{{ asset('img/technology.png') }}" alt="No-image">
+
+    <div id="qs" class="col-7 text-right">
+    <br><br><br><br><br><br><br><br>
+        <h2>What it does?</h2>
+        <h5>Keep your memories, <span> all in one place!</span></h5>
+    </div>
+    
+</section>
+
+<section class="row">
+    <div id="qs" class="col-6">
+    <br><br><br><br><br><br><br><br>
+        <h2>Memories</h2>
+        <h5>See how far you've come <span>with memories!</span></h5>
+    </div>
+    <img style="width:50%;height:50%" class="col-6" src="{{ asset('img/brain.png') }}" alt="No-image">
+</section>
+
+<section class="row">
+
+    <img style="width:50%;height:50%" class="col-5" src="{{ asset('img/stats.png') }}" alt="No-image">
+
+    <div id="qs" class="col-7 text-right">
+    <br><br><br><br><br><br><br><br>
+        <h2>Whoa all this and it's free?!</h2>
+        <h5>Absolutely, and that's not all. You can <span>see your stats anytime!</span></h5>
+    </div>
+    
+</section>
+
+<section id='qs' class='text-center'>
+    <h1>So, what are you waiting for?!</h1>
+    <br><br>
+    <button class="btn btn-info btn-lg text-white">Start Your FREE Journal NOW!</button>
+    <br><br><br>
+
+</section>
+</div>
 @stop
