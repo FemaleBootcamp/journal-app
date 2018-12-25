@@ -20,8 +20,7 @@
 @include('partials.nav-partials')
 @include('layout.header')
 
-@include('partials.main-content')
-
+@yield('content')
 @include('partials.footer-partials')
 @include('partials.footer-fontscripts')
 

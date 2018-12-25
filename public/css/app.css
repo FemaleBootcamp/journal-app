@@ -10578,3 +10578,6 @@ section .section-title {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+body{
+  background: #7AE0BE;
+}
