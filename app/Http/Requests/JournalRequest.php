@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreJournal extends FormRequest
+class JournalRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,10 @@ class StoreJournal extends FormRequest
     public function rules()
     {
         return [
-            //
+            'text' => 'required|unique:posts|max:500',
+            'plan_tomorrow' => 'required|max:250',
+            'goal_tomorrow' => 'required|max:100',
+            'goal_status' => 'required'
         ];
     }
 }
