@@ -13,7 +13,7 @@ class JournalRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,9 +24,9 @@ class JournalRequest extends FormRequest
     public function rules()
     {
         return [
-            'text' => 'required|unique:posts|max:500',
-            'plan_tomorrow' => 'required|max:250',
-            'goal_tomorrow' => 'required|max:100',
+            'text' => 'required|max:500',
+            'plan_tomorrow' => 'required',
+            'goal_tomorrow' => 'required|max:255',
             'goal_status' => 'required'
         ];
     }
