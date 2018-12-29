@@ -11,10 +11,8 @@
 |
 */
 
-
-//
-//Route::get('/', function () { return view('landing');
-//});
-Route::get('/', 'StaticController@home');
 Auth::routes();
+
+Route::get('/', 'StaticController@home');
+
 
