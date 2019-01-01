@@ -63,3 +63,4 @@
 </section>
 </div>
 @stop
+@include('layout.header')
