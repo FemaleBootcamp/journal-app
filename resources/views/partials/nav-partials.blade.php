@@ -5,12 +5,24 @@
     </div>
 
 
+
     <div class="col-xs-5" style="margin-top: 25px; margin-right: 10px;">
+        @if(Auth::guest())
         <ul class="list-inline">
             <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
             <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
         </ul>
+        @else
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        <a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
+    @endif
     </div>
+
+
 </nav>
 
 

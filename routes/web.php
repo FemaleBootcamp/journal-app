@@ -11,7 +11,9 @@
 |
 */
 
+
 Auth::routes();
+
 
 Route::get('/', 'StaticController@home');
 
