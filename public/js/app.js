@@ -48111,8 +48111,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\User\Documents\journal-app\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\User\Documents\journal-app\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\codecordia\htdocs\journal-app\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\codecordia\htdocs\journal-app\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
