@@ -19,7 +19,6 @@
 
 
 @include('partials.nav-partials')
-@include('layout.header')
 
 @yield('content')
 @include('partials.footer-partials')

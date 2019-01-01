@@ -9,4 +9,5 @@
                 <img id="logo" src={{ asset('img/journal-app.png') }} alt="No-image">
             </div>
             <button class="btn btn-info btn-lg text-white">Start Your FREE Journal</button>
+    </div>
 </section>

@@ -12,7 +12,9 @@
 */
 
 
+Auth::routes();
 
-Route::get('/', function () {
-    return view('landing');
-});
+
+Route::get('/', 'StaticController@home');
+
+
