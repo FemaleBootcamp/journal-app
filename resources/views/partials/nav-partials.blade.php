@@ -7,12 +7,13 @@
 
 
     <div class="col-xs-5" style="margin-top: 25px; margin-right: 10px;">
-        @if(Auth::guest())
+        @if(!isset($user))
         <ul class="list-inline">
             <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
             <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
         </ul>
         @else
+            {{ $user -> name }}
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
