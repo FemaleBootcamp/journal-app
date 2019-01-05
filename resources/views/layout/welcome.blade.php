@@ -19,10 +19,8 @@
 
 
 @include('partials.nav-partials')
-@if(!isset($user))
+
 @yield('content')
-@endif
-@yield('dash')
 @include('partials.footer-partials')
 @include('partials.footer-fontscripts')
 

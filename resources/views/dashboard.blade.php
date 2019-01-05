@@ -1,5 +1,5 @@
 @extends('layout.welcome')
-@section('dash')
+@section('content')
 
 <div class="container text-center">
     <section>
