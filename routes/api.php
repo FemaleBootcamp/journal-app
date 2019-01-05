@@ -19,5 +19,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('journals', 'API\JournalController@store');
 
-Route::get('dashboard', 'StaticController@dashboard')->name('dashboard')->middleware('auth');
-
