@@ -71,6 +71,7 @@ class JournalController extends Controller
     /**
      * @param Request $request
      * Get a record by a given ID.
+     * @return json.
      */
     public function getById(Request $request){
 
