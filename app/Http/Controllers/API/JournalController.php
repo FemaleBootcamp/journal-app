@@ -26,7 +26,7 @@ class JournalController extends Controller
 
     public function get(Request $request) {
 
-        $goalStatus = $request->goalStatus;
+     $goalStatus = $request->goalStatus;
 
         $dateFrom=$request->dateFrom;
         $dateTo=$request->dateTo;
@@ -35,14 +35,14 @@ class JournalController extends Controller
         $wherePart=[];
 
         if(empty($dateFrom) && empty($dateTo)) {
-            $wherePart = [['date', '>=', date('Y-m-d', strtotime('first day of this month'))]];
-            $wherePart = [['date', '<=', date('Y-m-d', strtotime('last day of this month'))]];
+            $wherePart[] = ['date', '>=', date('Y-m-d', strtotime('first day of this month'))];
+            $wherePart[]= ['date', '<=', date('Y-m-d', strtotime('last day of this month'))];
         } else {
-            if(!empty($dateFrom)) {
-                $wherePart = [['date', '>=', $dateFrom]];
+            if(!empty($dateFrom) ) {
+                $wherePart[] = ['date', '>=', $dateFrom];
             }
             if(!empty($dateTo)) {
-                $wherePart = [['date', '<=', $dateTo]];
+                $wherePart[] = ['date', '<=', $dateTo];
             }
         }
 
@@ -50,13 +50,10 @@ class JournalController extends Controller
 
        if(!empty($goalStatus))
         {
-            $wherePart = [['goal_status', $goalStatus]];
-//          $journals = Journal::where($wherePart)->get();
+            $wherePart[] = ['goal_status', $goalStatus];
         }
 
-
-
-       return $journals = Journal::where($wherePart)-> get();
+          return $journals = Journal::where($wherePart)-> get();
 
 
     }
