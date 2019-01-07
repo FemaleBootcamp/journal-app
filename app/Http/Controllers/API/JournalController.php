@@ -122,9 +122,9 @@ class JournalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(JournalRequest $request, $id)
     {
-        //
+
     }
 
     /**
@@ -138,7 +138,7 @@ class JournalController extends Controller
         $journal = Journal::findOrFail($id);
         $journal->delete();
 
-        return 204;
+        return response()->json(['success' => true], 204);
     }
 
 
