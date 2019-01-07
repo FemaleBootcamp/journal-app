@@ -126,16 +126,17 @@ class JournalController extends Controller
     public function filterByGoalStatus(Request $request){
 
         $goalStatus = $request -> goalStatus;
+
         if($goalStatus)
         {
             $wherePart = [['goal_status', '$goalStatus']];
             $journals = Journal::where($wherePart)-> get();
-            return response()->json($request->all());
+            return $journals;
 
         }
         else{
             $journals = Journal::all();
-             return response()->json($request->all());
+             return $journals;
         }
     }
 
