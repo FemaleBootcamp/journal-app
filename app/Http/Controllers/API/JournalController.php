@@ -47,22 +47,16 @@ class JournalController extends Controller
         }
 
 
-        if($goalStatus)
-        {
-            $wherePart = [['goal_status', $goalStatus]];
-//            $journals = Journal::where($wherePart)->get();
-        }
-       if(!$goalStatus)
+
+       if(!empty($goalStatus))
         {
             $wherePart = [['goal_status', $goalStatus]];
 //          $journals = Journal::where($wherePart)->get();
         }
 
-       if(is_null($goalStatus)) {
-           $journals = Journal::all();
-           return response()->json($journals);
-       }
-        return $journals = Journal::where($wherePart)-> get();
+
+
+       return $journals = Journal::where($wherePart)-> get();
 
 
     }
