@@ -127,14 +127,9 @@ class JournalController extends Controller
     public function update(JournalRequest $request, $id)
     {
         $journal = Journal::findOrFail($id);
-        $journal->update($request->all());
-
+        $journal->update($request->validated());
         return response()->json(['status' => 'success',
             'journal' => $journal ], 200);
-
-
-
-
     }
 
     /**
