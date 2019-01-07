@@ -35,11 +35,11 @@ class JournalController extends Controller
         $wherePart=[];
 
         if(empty($dateFrom) && empty($dateTo)) {
-            $wherePart = [['created_at', '>=', date('Y-m-d', strtotime('first day of this month'))]];
+            $wherePart = [['date', '>=', date('Y-m-d', strtotime('first day of this month'))]];
             $wherePart = [['date', '<=', date('Y-m-d', strtotime('last day of this month'))]];
         } else {
             if(!empty($dateFrom)) {
-                $wherePart = [['created_at', '>=', $dateFrom]];
+                $wherePart = [['date', '>=', $dateFrom]];
             }
             if(!empty($dateTo)) {
                 $wherePart = [['date', '<=', $dateTo]];
