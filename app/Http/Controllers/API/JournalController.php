@@ -12,7 +12,8 @@ class JournalController extends Controller
     public function store(JournalRequest $request)
     {
         Journal::create($request->validated());
-        return response()->json(['status' => 'success'], 201);
+        return response()->json(['status' => 'success'],
+            201);
     }
 
 
@@ -119,7 +120,8 @@ class JournalController extends Controller
         $journal = Journal::findOrFail($id);
         $journal->update($request->validated());
         return response()->json([
-            'status' => 'success', 'journal' => $journal
+            'status' => 'success',
+            'journal' => $journal
              ],
             200
         );
