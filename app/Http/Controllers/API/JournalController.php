@@ -45,26 +45,16 @@ class JournalController extends Controller
                 $wherePart[] = ['date', '<=', $dateTo];
             }
         }
-
-
-
        if(!empty($goalStatus) || !empty(!($goalStatus)))
         {
             $wherePart[] = ['goal_status', $goalStatus];
         }
 
-
-
-
        if(!empty($userId)) {
            $wherePart[] = ['user_id', $userId];
        }
 
-
-
        return $journals = Journal::where($wherePart)-> get();
-
-
     }
 
 
@@ -128,8 +118,11 @@ class JournalController extends Controller
     {
         $journal = Journal::findOrFail($id);
         $journal->update($request->validated());
-        return response()->json(['status' => 'success',
-            'journal' => $journal ], 200);
+        return response()->json([
+            'status' => 'success', 'journal' => $journal
+             ],
+            200
+        );
     }
 
     /**
@@ -142,15 +135,9 @@ class JournalController extends Controller
     {
         $journal = Journal::findOrFail($id);
         $journal->delete();
-
-        return response()->json(['success' => true], 204);
+        return response()->json(
+            ['success' => true
+            ],
+            204);
     }
-
-
-
-
-
-
-
-
 }
