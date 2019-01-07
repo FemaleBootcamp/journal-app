@@ -135,7 +135,10 @@ class JournalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $journal = Journal::findOrFail($id);
+        $journal->delete();
+
+        return 204;
     }
 
 
