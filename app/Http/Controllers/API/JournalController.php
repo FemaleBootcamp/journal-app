@@ -17,7 +17,7 @@ class JournalController extends Controller
 
 
     public function get(Request $request) {
-        return response()->json($request->all());
+         return response()->json($request->all());
     }
     /**
      * Display a listing of the resource.
@@ -125,17 +125,17 @@ class JournalController extends Controller
 
     public function filterByGoalStatus(Request $request){
 
-        $goalStatus = $request -> input('goalStatus');
+        $goalStatus = $request -> goalStatus;
         if($goalStatus)
         {
             $wherePart = [['goal_status', '$goalStatus']];
             $journals = Journal::where($wherePart)-> get();
+            return response()->json($request->all());
 
-            return $journals;
         }
         else{
             $journals = Journal::all();
-            return $journals;
+             return response()->json($request->all());
         }
     }
 
