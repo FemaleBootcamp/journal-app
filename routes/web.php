@@ -17,6 +17,7 @@ Auth::routes();
 
 Route::get('/', 'StaticController@home');
 
-Route::get('/journals/{user_id}/{dateFrom}/{dateTo}/{goalStatus}', 'JournalController@filter');
-
+//Route::get('/journals', 'JournalController@filter');
+Route::get('/journals', 'JournalController@filterByGoalStatus');
+//Route::get('/journals','JournalController@filter');
 
