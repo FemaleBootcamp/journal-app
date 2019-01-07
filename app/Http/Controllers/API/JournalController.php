@@ -20,17 +20,28 @@ class JournalController extends Controller
 
         $goalStatus = $request->goalStatus;
 
-        if($goalStatus || !$goalStatus)
+        $wherePart= [];
+
+        if($goalStatus)
         {
             $wherePart = [['goal_status', $goalStatus]];
-            $journals = Journal::where($wherePart)-> get();
-            return response()->json($journals);
+            $journals = Journal::where($wherePart)->get();
+          //  return response()->json($journals);
+        }
+       if(!$goalStatus)
+        {
+            $wherePart = [['goal_status', $goalStatus]];
+          $journals = Journal::where($wherePart)->get();
+          //return response()->json($journals);
         }
 
-        else{
-            $journals = Journal::all();
-            return response()->json($journals);
-        }
+       if(is_null($goalStatus)) {
+           $journals = Journal::all();
+           return response()->json($journals);
+       }
+        return $journals = Journal::where($wherePart)-> get();
+
+
     }
     /**
      * Display a listing of the resource.
@@ -107,8 +118,7 @@ class JournalController extends Controller
 
     public function filter(Request $request){
 
-        $dateFrom = $request->input('dateFrom');
-        $dateTo = $request -> input('dateTo');
+
 
 //        $journals = Journal::where('user_id','$user_id')->get();
         //   $journalsFiltered = Journal::where('goalStatus', '$goalStatus')->get();
