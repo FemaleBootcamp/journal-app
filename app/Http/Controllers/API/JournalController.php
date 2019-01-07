@@ -112,6 +112,8 @@ class JournalController extends Controller
      */
     public function edit($id)
     {
+
+        //
         //
     }
 
@@ -122,8 +124,16 @@ class JournalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(JournalRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        $journal = Journal::findOrFail($id);
+        $journal->update($request->all());
+
+        return response()->json(['status' => 'success',
+            'journal' => $journal ], 200);
+
+
+        //
 
     }
 
