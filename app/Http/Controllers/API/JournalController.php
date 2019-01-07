@@ -12,7 +12,8 @@ class JournalController extends Controller
     public function store(JournalRequest $request)
     {
         Journal::create($request->validated());
-        return response()->json(['status' => 'success'],
+        return response()->json([
+            'status' => 'success'],
             201);
     }
 
