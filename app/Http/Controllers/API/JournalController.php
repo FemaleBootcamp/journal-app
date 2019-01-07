@@ -26,10 +26,10 @@ class JournalController extends Controller
 
     public function get(Request $request) {
 
-     $goalStatus = $request->goalStatus;
-
+        $goalStatus=$request->goalStatus;
         $dateFrom=$request->dateFrom;
         $dateTo=$request->dateTo;
+        $userId=$request->userId;
 
 
         $wherePart=[];
@@ -53,7 +53,13 @@ class JournalController extends Controller
             $wherePart[] = ['goal_status', $goalStatus];
         }
 
-          return $journals = Journal::where($wherePart)-> get();
+
+       if(!empty($userId)) {
+           $wherePart[] = ['user_id', $userId];
+       }
+
+
+       return $journals = Journal::where($wherePart)-> get();
 
 
     }
