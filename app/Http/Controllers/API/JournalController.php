@@ -68,20 +68,8 @@ class JournalController extends Controller
     }
 
 
-    /**
-     * @param Request $request
-     * Get a record by a given ID.
-     * @return json.
-     */
-    public function getById(Request $request){
 
 
-        $journal_id=$request->id;
-
-        $wherePart=[['id', $journal_id]];
-
-     return $journals=Journal::where($wherePart)->get();
-    }
     /**
      * Display a listing of the resource.
      *
@@ -110,7 +98,10 @@ class JournalController extends Controller
      */
     public function show($id)
     {
-        //
+
+
+
+        return Journal::find($id);
     }
 
     /**
