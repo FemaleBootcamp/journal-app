@@ -1,27 +1,25 @@
 
 <nav class="navbar fixed-top navbar-default" style="background-color:#32CD99">
-    <div>
-        <img alt="logo" class="img-fluid" src="{{ asset('img/Logo.png') }}" style="width: 50px;height:50px">
+    <div class="col-xs-6">
+        <img alt="logo" class="img-fluid" src="{{ asset('img/Logo.png') }}" style="width: 50px;height:45px">
     </div>
 
-
-
-
-    <div class="col-xs-5" style="margin-top: 25px; margin-right: 10px;">
+    <div class="col-xs-6" style=" margin-right: 10px;">
         @if(!isset($user))
-    <div class="col-xs-5" style=" margin-right: 10px;">
-        <ul class="list-inline">
-            <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
-            <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
+    <div>
+        <ul class="inline" style="display:inline;">
+            <li class="list-inline-item"><button class="btn btn-info btn-lg"><a style="text-decoration:none" class="text-white" href="{{ route('register') }}">Register</a></button></li>
+            <li class="list-inline-item"><button class="btn btn-info btn-lg"><a style="text-decoration:none" class="text-white" href="{{ route('login') }}">Login</a></button></li>
         </ul>
         @else
-            {{ $user -> name }}
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-        <a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            {{ __('Logout') }}
-        </a>
+        <div class="row">
+                <h4 class="mt-2 mr-2 text-white">{{ $user -> name }}</h4>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+            <button class="btn btn-info btn-lg"><a style="text-decoration:none;color:white" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <i class="fa fa-power-off"></i></a></button>
+        </div>
     </div>
 
     @endif

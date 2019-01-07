@@ -48,15 +48,18 @@ class JournalController extends Controller
 
 
 
-       if(!empty($goalStatus))
+       if(!empty($goalStatus) || !empty(!($goalStatus)))
         {
             $wherePart[] = ['goal_status', $goalStatus];
         }
 
 
+
+
        if(!empty($userId)) {
            $wherePart[] = ['user_id', $userId];
        }
+
 
 
        return $journals = Journal::where($wherePart)-> get();

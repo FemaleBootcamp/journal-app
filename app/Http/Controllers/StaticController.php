@@ -16,5 +16,11 @@ class StaticController extends Controller
         $user = Auth::user();
         return view('landing',compact('user'));
     }
+    
+    public function dashboard()
+    {
+        $user = Auth::user();
+        return view('dashboard',compact('user'));
+    }
 
 }

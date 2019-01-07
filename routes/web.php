@@ -17,4 +17,7 @@ Auth::routes();
 
 Route::get('/', 'StaticController@home');
 
+Route::get('dashboard', 'StaticController@dashboard')->name('dashboard')->middleware('auth');
+
+
 
