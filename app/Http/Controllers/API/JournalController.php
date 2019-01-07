@@ -16,23 +16,46 @@ class JournalController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * API Endpoint for retrieving records
+     * based on a filter.
+     */
+
     public function get(Request $request) {
 
         $goalStatus = $request->goalStatus;
 
-        $wherePart= [];
+        $dateFrom=$request->dateFrom;
+        $dateTo=$request->dateTo;
+
+
+        $wherePart=[];
+
+        if(empty($dateFrom) && empty($dateTo)) {
+            $wherePart = [['created_at', '>=', date('Y-m-d', strtotime('first day of this month'))]];
+            $wherePart = [['date', '<=', date('Y-m-d', strtotime('last day of this month'))]];
+        } else {
+            if(!empty($dateFrom)) {
+                $wherePart = [['created_at', '>=', $dateFrom]];
+            }
+            if(!empty($dateTo)) {
+                $wherePart = [['date', '<=', $dateTo]];
+            }
+        }
+
 
         if($goalStatus)
         {
             $wherePart = [['goal_status', $goalStatus]];
-            $journals = Journal::where($wherePart)->get();
-          //  return response()->json($journals);
+//            $journals = Journal::where($wherePart)->get();
         }
        if(!$goalStatus)
         {
             $wherePart = [['goal_status', $goalStatus]];
-          $journals = Journal::where($wherePart)->get();
-          //return response()->json($journals);
+//          $journals = Journal::where($wherePart)->get();
         }
 
        if(is_null($goalStatus)) {
@@ -111,40 +134,6 @@ class JournalController extends Controller
     }
 
 
-
-
-    /* API endpoint for filtering all records
-     * */
-
-    public function filter(Request $request){
-
-
-
-//        $journals = Journal::where('user_id','$user_id')->get();
-        //   $journalsFiltered = Journal::where('goalStatus', '$goalStatus')->get();
-
-        $wherePart=[ ['user_id', '$user_id']];
-
-        if(!empty($dateFrom)) {
-            $wherePart = [['dateFrom', '$dateFrom']];
-        }
-        if(!empty($dateTo)){
-            $wherePart = [ ['dateTo', '$dateTo']];
-        }
-        if(empty($dateFrom) || empty($dateTo))
-        {
-            // get the data from the last month
-            $createdAt = Journal::whereMonth(
-                'created_at', '=', \Carbon\Carbon::now()->subMonth()->month
-            );
-
-            $wherePart = [ [ 'createdAt', '$createdAt']];
-        }
-
-
-        $journals = Journal::where($wherePart)->get();
-
-    }
 
 
 
