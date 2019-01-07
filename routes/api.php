@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('journals', 'API\JournalController@store');
 
 Route::get('/journals', 'API\JournalController@get');
+Route::get('/journals/{id}', 'API\JournalController@show');

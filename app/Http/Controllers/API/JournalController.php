@@ -66,6 +66,10 @@ class JournalController extends Controller
 
 
     }
+
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -96,7 +100,8 @@ class JournalController extends Controller
     {
 
 
-        //
+
+        return Journal::find($id);
     }
 
     /**
