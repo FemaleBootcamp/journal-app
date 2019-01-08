@@ -17,7 +17,7 @@
 
 <body>
 
-    <div id="root">
+    <div id="app">
         <div class="container">
             <journals>
 
