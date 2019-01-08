@@ -24,5 +24,13 @@ Vue.component('journals', require('./components/Journals.vue').default);
 
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        results: []
+    },
+    mounted() {
+        axios.get('/api/journals').then(response => {
+            this.results = response.data
+        })
+    }
 });

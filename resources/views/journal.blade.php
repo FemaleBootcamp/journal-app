@@ -17,17 +17,18 @@
 
 <body>
 
-    <div class="root">
-        <h1> Records retrieved based on a filter</h1>
-        <ul>
-            <li v-for="journal in journals" v-text="journal"></li>
+    <div id="root">
+        <div class="container">
+            <journals>
 
-        </ul>
+            </journals>
+        </div>
+
     </div>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="/js/app.js"></script>
+<script src={{ asset('js/app.js') }}></script>
 
 </body>
 
