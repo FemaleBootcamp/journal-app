@@ -76,7 +76,7 @@
     <section>
             <button id="show-modal" @click="showModal = true">Show Modal</button>
         <!-- use the modal component, pass in the prop -->
-            <modal v-if="showModal" @close="showModal = false">
+            <modal v-if="showModal" @close="showModal = false"></modal>
     </section>
 </div>
 
