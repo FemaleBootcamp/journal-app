@@ -5,25 +5,20 @@
 
 <head>
 
-
  <link rel="stylesheet" type="text/css" href="css/app.css">
+ <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
- <!-- jQuery library -->
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- 
 
 </head>
 
 <body>
+    <div id="app">
+        @include('partials.nav-partials')
+        @yield('content')
+        @include('partials.footer-partials')
+    </div>
 
-
-@include('partials.nav-partials')
-
-@yield('content')
-@include('partials.footer-partials')
-@include('partials.footer-fontscripts')
-
- </body>
+    <script src="js/app.js"></script>
+</body>
 
 </html>
