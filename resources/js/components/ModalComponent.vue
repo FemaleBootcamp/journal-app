@@ -19,7 +19,7 @@
           <div class="modal-footer">
             <slot name="footer">
               default footer
-              <button class="modal-default-button" @click="$emit('close')">
+              <button class="btn btn-primary modal-default-button" @click="$emit('close')">
                 OK
               </button>
             </slot>

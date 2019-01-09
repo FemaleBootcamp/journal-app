@@ -37279,7 +37279,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "modal-default-button",
+                    staticClass: "btn btn-primary modal-default-button",
                     on: {
                       click: function($event) {
                         _vm.$emit("close")

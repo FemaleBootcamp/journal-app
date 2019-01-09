@@ -8,6 +8,7 @@
  <link rel="stylesheet" type="text/css" href="css/app.css">
  <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
 </head>
 
 <body>
@@ -16,6 +17,8 @@
         @yield('content')
         @include('partials.footer-partials')
     </div>
+
+    <script src="js/app.js"></script>
 </body>
 
 </html>

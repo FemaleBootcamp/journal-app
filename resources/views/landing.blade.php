@@ -73,13 +73,8 @@
 
     </section>
 
-    <section>
-            <button id="show-modal" @click="showModal = true">Show Modal</button>
-        <!-- use the modal component, pass in the prop -->
-            <modal-component v-if="showModal" @close="showModal = false"></modal-component>
-    </section>
-    
 </div>
 
-@endsection
+@endsection 
+ 
 
