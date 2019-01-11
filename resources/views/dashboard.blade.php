@@ -7,7 +7,6 @@
             <h4 class="mt-5 col-6 text-center text-white"><span><i class="fa fa-filter"></i> Filter</span> </h4>
         </div>
     </section>
-
     <section>
         <journals-list></journals-list>
     </section>
