@@ -18,7 +18,7 @@
         @include('partials.footer-partials')
     </div>
 
-    <script src="js/app.js"></script>
+    <script src="js/app.js?v={{ env('ASSETS_VERSION', 2) }}"></script>
 </body>
 
 </html>
