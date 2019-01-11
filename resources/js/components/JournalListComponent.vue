@@ -11,7 +11,7 @@
         </tr>
         </thead>
         <tbody>
-            <journal v-for="journal in journals" :key="journal.id"></journal>
+            <journal v-for="journal in journals" v-bind="journal" :key="journal.id"></journal>
         </tbody>
     </table>
 </template>
@@ -19,14 +19,26 @@
     export default {
         data() {
             return {
-              journals: [{
-                    id: 2,
+                journals: [{
+                    id: 1,
                     date: '2019-10-01',
                     goalForTomorrow: 'Test Case',
                     grade: 'B'
-                }]
+                },
+                    {
+                        id: 2,
+                        date: '2019-11-01',
+                        goalForTomorrow: 'Finish Homework',
+                        grade: 'C'
+                    },
+                    {
+                        id: 3,
+                        date: '2019-12-02',
+                        goalForTomorrow: 'Write the Graduation Thesis',
+                        grade: 'A'
+                    },
+                ]
             }
         },
-
     }
 </script>
