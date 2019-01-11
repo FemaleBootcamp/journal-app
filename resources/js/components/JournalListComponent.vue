@@ -11,7 +11,22 @@
         </tr>
         </thead>
         <tbody>
-       <journal></journal>
+            <journal v-for="journal in journals" :key="journal.id"></journal>
         </tbody>
     </table>
 </template>
+<script>
+    export default {
+        data() {
+            return {
+              journals: [{
+                    id: 2,
+                    date: '2019-10-01',
+                    goalForTomorrow: 'Test Case',
+                    grade: 'B'
+                }]
+            }
+        },
+
+    }
+</script>

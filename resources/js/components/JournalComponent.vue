@@ -17,3 +17,18 @@
         </td>
     </tr>
 </template>
+<script>
+    export default {
+        data() {
+            return {
+                journal: [{
+                    id: 2,
+                    date: '2019-10-01',
+                    goalForTomorrow: 'Test Case',
+                    grade: 'B'
+                }]
+            }
+        },
+
+    }
+</script>
