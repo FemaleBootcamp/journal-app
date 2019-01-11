@@ -19,6 +19,8 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+
+Vue.component('journal', require('./components/JournalComponent.vue').default);
 Vue.component('journals-list', require('./components/JournalListComponent.vue').default);
 Vue.component('modal-component', require('./components/ModalComponent.vue').default);
 
@@ -31,5 +33,6 @@ const app = new Vue({
     el: '#app',
     data: {
         showModal: false
-    }
+    },
+
 });

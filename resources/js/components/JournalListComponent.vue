@@ -11,24 +11,34 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>21.12.2018</td>
-            <td>Finish work</td>
-            <td><!-- Default unchecked -->
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-                    <label class="custom-control-label" for="defaultUnchecked">Did you achieve?</label>
-                </div>
-            </td>
-            <td>A</td>
-            <td>
-                <button type="button" class="btn btn-light">View Details</button>
-                <button type="button" class="btn btn-primary">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </td>
-
-        </tr>
+            <journal v-for="journal in journals" v-bind="journal" :key="journal.id"></journal>
         </tbody>
     </table>
 </template>
+<script>
+    export default {
+        data() {
+            return {
+                journals: [{
+                    id: 1,
+                    date: '2019-10-01',
+                    goalForTomorrow: 'Test Case',
+                    grade: 'B'
+                },
+                    {
+                        id: 2,
+                        date: '2019-11-01',
+                        goalForTomorrow: 'Finish Homework',
+                        grade: 'C'
+                    },
+                    {
+                        id: 3,
+                        date: '2019-12-02',
+                        goalForTomorrow: 'Write the Graduation Thesis',
+                        grade: 'A'
+                    },
+                ]
+            }
+        },
+    }
+</script>
