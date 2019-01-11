@@ -123,7 +123,7 @@ class JournalController extends Controller
         return response()->json([
             'status' => 'success',
             'journal' => $journal
-             ],
+        ],
             200
         );
     }
