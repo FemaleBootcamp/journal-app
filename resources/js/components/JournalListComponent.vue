@@ -1,5 +1,4 @@
 <template>
-    <div>
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -32,5 +31,4 @@
         </tr>
         </tbody>
     </table>
-    </div>
 </template>
