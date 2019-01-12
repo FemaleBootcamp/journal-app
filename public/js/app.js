@@ -37333,97 +37333,78 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.showJournalCreateModal
-    ? _c(
-        "modal-component",
+  return _c("modal-component", [
+    _c("div", { attrs: { slot: "header" }, slot: "header" }, [
+      _vm._v("Add new record")
+    ]),
+    _vm._v(" "),
+    _c("div", { attrs: { slot: "body" }, slot: "body" }, [
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", placeholder: "Date" }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control mt-2",
+        attrs: { type: "text", placeholder: "Text" }
+      }),
+      _vm._v(" "),
+      _c("textarea", {
+        staticClass: "form-control mt-2",
+        attrs: {
+          id: "exampleFormControlTextarea1",
+          rows: "3",
+          placeholder: "Plan for next day "
+        }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control mt-2",
+        attrs: { type: "text", placeholder: "Goal for tomorrow" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-check mt-2" }, [
+        _c("input", {
+          staticClass: "form-check-input",
+          attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          { staticClass: "form-check-label", attrs: { for: "defaultCheck1" } },
+          [_vm._v("\n            Did you achieve today's goal?\n            ")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
+      _c(
+        "button",
         {
+          staticClass: "btn btn-danger modal-default-button",
           on: {
-            close: function($event) {
-              _vm.showJournalCreateModal = false
+            click: function($event) {
+              _vm.$emit("close")
             }
           }
         },
-        [
-          _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-            _vm._v("Add new recordddddd")
-          ]),
-          _vm._v(" "),
-          _c("div", { attrs: { slot: "body" }, slot: "body" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "text", placeholder: "Date" }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control mt-2",
-              attrs: { type: "text", placeholder: "Text" }
-            }),
-            _vm._v(" "),
-            _c("textarea", {
-              staticClass: "form-control mt-2",
-              attrs: {
-                id: "exampleFormControlTextarea1",
-                rows: "3",
-                placeholder: "Plan for next day "
-              }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control mt-2",
-              attrs: { type: "text", placeholder: "Goal for tomorrow" }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check mt-2" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "defaultCheck1" }
-                },
-                [
-                  _vm._v(
-                    "\n            Did you achieve today's goal?\n            "
-                  )
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary modal-default-button",
-                on: {
-                  click: function($event) {
-                    _vm.$emit("close")
-                  }
-                }
-              },
-              [_vm._v("Save")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-danger modal-default-button",
-                on: {
-                  click: function($event) {
-                    _vm.$emit("close")
-                  }
-                }
-              },
-              [_vm._v("Cancel")]
-            )
-          ])
-        ]
+        [_vm._v("Cancel")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary modal-default-button mr-2",
+          on: {
+            click: function($event) {
+              _vm.$emit("close")
+            }
+          }
+        },
+        [_vm._v("Save")]
       )
-    : _vm._e()
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

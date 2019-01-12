@@ -1,6 +1,6 @@
 <template>
-    <modal-component v-if="showJournalCreateModal" @close="showJournalCreateModal = false">
-        <div slot="header">Add new recordddddd</div>
+    <modal-component>
+        <div slot="header">Add new record</div>
         <div slot="body">   
             <input class="form-control" type="text" placeholder="Date">
             <input class="form-control mt-2" type="text" placeholder="Text">
@@ -14,8 +14,8 @@
             </div>
         </div>
         <div slot="footer">
-            <button class="btn btn-primary modal-default-button" @click="$emit('close')">Save</button>
             <button class="btn btn-danger modal-default-button" @click="$emit('close')">Cancel</button>
+            <button class="btn btn-primary modal-default-button mr-2" @click="$emit('close')">Save</button>
         </div>
     </modal-component>
 </template>
