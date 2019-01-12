@@ -23,6 +23,7 @@ window.Vue = require('vue');
 Vue.component('journal', require('./components/JournalComponent.vue').default);
 Vue.component('journals-list', require('./components/JournalListComponent.vue').default);
 Vue.component('modal-component', require('./components/ModalComponent.vue').default);
+Vue.component('add-journal-modal', require('./components/AddJournalModalComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -34,5 +35,4 @@ const app = new Vue({
     data: {
         showJournalCreateModal: false
     },
-
 });

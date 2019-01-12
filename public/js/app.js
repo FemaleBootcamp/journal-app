@@ -37318,6 +37318,120 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddJournalModalComponent.vue?vue&type=template&id=5176139e&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AddJournalModalComponent.vue?vue&type=template&id=5176139e& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.showJournalCreateModal
+    ? _c(
+        "modal-component",
+        {
+          on: {
+            close: function($event) {
+              _vm.showJournalCreateModal = false
+            }
+          }
+        },
+        [
+          _c("div", { attrs: { slot: "header" }, slot: "header" }, [
+            _vm._v("Add new recordddddd")
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { slot: "body" }, slot: "body" }, [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Date" }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control mt-2",
+              attrs: { type: "text", placeholder: "Text" }
+            }),
+            _vm._v(" "),
+            _c("textarea", {
+              staticClass: "form-control mt-2",
+              attrs: {
+                id: "exampleFormControlTextarea1",
+                rows: "3",
+                placeholder: "Plan for next day "
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control mt-2",
+              attrs: { type: "text", placeholder: "Goal for tomorrow" }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check mt-2" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "defaultCheck1" }
+                },
+                [
+                  _vm._v(
+                    "\n            Did you achieve today's goal?\n            "
+                  )
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary modal-default-button",
+                on: {
+                  click: function($event) {
+                    _vm.$emit("close")
+                  }
+                }
+              },
+              [_vm._v("Save")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger modal-default-button",
+                on: {
+                  click: function($event) {
+                    _vm.$emit("close")
+                  }
+                }
+              },
+              [_vm._v("Cancel")]
+            )
+          ])
+        ]
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/JournalComponent.vue?vue&type=template&id=1dffca1e&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/JournalComponent.vue?vue&type=template&id=1dffca1e& ***!
@@ -37480,91 +37594,11 @@ var render = function() {
     _c("div", { staticClass: "modal-mask" }, [
       _c("div", { staticClass: "modal-wrapper" }, [
         _c("div", { staticClass: "modal-container" }, [
-          _c(
-            "div",
-            { staticClass: "modal-header" },
-            [
-              _vm._t("header", [
-                _vm._v("\n            Add new record\n          ")
-              ])
-            ],
-            2
-          ),
+          _c("div", { staticClass: "modal-header" }, [_vm._t("header")], 2),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "modal-body" },
-            [
-              _vm._t("body", [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "text", placeholder: "Date" }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control mt-2",
-                  attrs: { type: "text", placeholder: "Text" }
-                }),
-                _vm._v(" "),
-                _c("textarea", {
-                  staticClass: "form-control mt-2",
-                  attrs: {
-                    id: "exampleFormControlTextarea1",
-                    rows: "3",
-                    placeholder: "Plan for next day "
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control mt-2",
-                  attrs: { type: "text", placeholder: "Goal for tomorrow" }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-check mt-2" }, [
-                  _c("input", {
-                    staticClass: "form-check-input",
-                    attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "form-check-label",
-                      attrs: { for: "defaultCheck1" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                Did you achieve today's goal?\n              "
-                      )
-                    ]
-                  )
-                ])
-              ])
-            ],
-            2
-          ),
+          _c("div", { staticClass: "modal-body" }, [_vm._t("body")], 2),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "modal-footer" },
-            [
-              _vm._t("footer", [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary modal-default-button",
-                    on: {
-                      click: function($event) {
-                        _vm.$emit("close")
-                      }
-                    }
-                  },
-                  [_vm._v("\n              OK\n            ")]
-                )
-              ])
-            ],
-            2
-          )
+          _c("div", { staticClass: "modal-footer" }, [_vm._t("footer")], 2)
         ])
       ])
     ])
@@ -48867,6 +48901,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.component('journal', __webpack_require__(/*! ./components/JournalComponent.vue */ "./resources/js/components/JournalComponent.vue").default);
 Vue.component('journals-list', __webpack_require__(/*! ./components/JournalListComponent.vue */ "./resources/js/components/JournalListComponent.vue").default);
 Vue.component('modal-component', __webpack_require__(/*! ./components/ModalComponent.vue */ "./resources/js/components/ModalComponent.vue").default);
+Vue.component('add-journal-modal', __webpack_require__(/*! ./components/AddJournalModalComponent.vue */ "./resources/js/components/AddJournalModalComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -48937,6 +48972,59 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/AddJournalModalComponent.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/AddJournalModalComponent.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AddJournalModalComponent_vue_vue_type_template_id_5176139e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddJournalModalComponent.vue?vue&type=template&id=5176139e& */ "./resources/js/components/AddJournalModalComponent.vue?vue&type=template&id=5176139e&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _AddJournalModalComponent_vue_vue_type_template_id_5176139e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddJournalModalComponent_vue_vue_type_template_id_5176139e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AddJournalModalComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/AddJournalModalComponent.vue?vue&type=template&id=5176139e&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/AddJournalModalComponent.vue?vue&type=template&id=5176139e& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddJournalModalComponent_vue_vue_type_template_id_5176139e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AddJournalModalComponent.vue?vue&type=template&id=5176139e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AddJournalModalComponent.vue?vue&type=template&id=5176139e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddJournalModalComponent_vue_vue_type_template_id_5176139e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddJournalModalComponent_vue_vue_type_template_id_5176139e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

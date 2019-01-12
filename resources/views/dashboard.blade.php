@@ -7,7 +7,7 @@
             <h4 class="mt-5 col-6 text-center text-white"><span><i class="fa fa-filter"></i> Filter</span> </h4>
         </div>
         <button class="btn btn-primary mt-3" id="show-journal-create-modal" @click="showJournalCreateModal = true">Add New</button>
-        <modal-component v-if="showJournalCreateModal" @close="showJournalCreateModal = false"></modal-component>
+        <add-journal-modal></add-journal-modal>
     </section>
     <section>
         <journals-list></journals-list>
