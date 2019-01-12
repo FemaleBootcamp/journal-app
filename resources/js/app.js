@@ -32,7 +32,7 @@ Vue.component('modal-component', require('./components/ModalComponent.vue').defa
 const app = new Vue({
     el: '#app',
     data: {
-        showModal: false
+        showJournalCreateModal: false
     },
 
 });

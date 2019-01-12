@@ -6,19 +6,28 @@
 
           <div class="modal-header">
             <slot name="header">
-              default header
+              Add new record
             </slot>
           </div>
 
           <div class="modal-body">
             <slot name="body">
-              default body
+                <input class="form-control" type="text" placeholder="Date">
+                <input class="form-control mt-2" type="text" placeholder="Text">
+                <textarea class="form-control mt-2" id="exampleFormControlTextarea1" rows="3" placeholder="Plan for next day "></textarea>
+                <input class="form-control mt-2" type="text" placeholder="Goal for tomorrow">
+                <div class="form-check mt-2">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Did you achieve today's goal?
+                  </label>
+                </div>
             </slot>
           </div>
 
           <div class="modal-footer">
             <slot name="footer">
-              default footer
+             
               <button class="btn btn-primary modal-default-button" @click="$emit('close')">
                 OK
               </button>
@@ -29,7 +38,6 @@
     </div>
   </transition>
 </template>
-
 <style>
     .modal-mask {
       position: fixed;

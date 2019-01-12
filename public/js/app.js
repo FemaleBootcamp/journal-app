@@ -1814,6 +1814,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37414,19 +37416,21 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("table", { staticClass: "table" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "tbody",
-      _vm._l(_vm.journals, function(journal) {
-        return _c(
-          "journal",
-          _vm._b({ key: journal.id }, "journal", journal, false)
-        )
-      }),
-      1
-    )
+  return _c("div", [
+    _c("table", { staticClass: "table" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.journals, function(journal) {
+          return _c(
+            "journal",
+            _vm._b({ key: journal.id }, "journal", journal, false)
+          )
+        }),
+        1
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -37481,7 +37485,7 @@ var render = function() {
             { staticClass: "modal-header" },
             [
               _vm._t("header", [
-                _vm._v("\n            default header\n          ")
+                _vm._v("\n            Add new record\n          ")
               ])
             ],
             2
@@ -37491,7 +37495,51 @@ var render = function() {
             "div",
             { staticClass: "modal-body" },
             [
-              _vm._t("body", [_vm._v("\n            default body\n          ")])
+              _vm._t("body", [
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Date" }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control mt-2",
+                  attrs: { type: "text", placeholder: "Text" }
+                }),
+                _vm._v(" "),
+                _c("textarea", {
+                  staticClass: "form-control mt-2",
+                  attrs: {
+                    id: "exampleFormControlTextarea1",
+                    rows: "3",
+                    placeholder: "Plan for next day "
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control mt-2",
+                  attrs: { type: "text", placeholder: "Goal for tomorrow" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-check mt-2" }, [
+                  _c("input", {
+                    staticClass: "form-check-input",
+                    attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "form-check-label",
+                      attrs: { for: "defaultCheck1" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                Did you achieve today's goal?\n              "
+                      )
+                    ]
+                  )
+                ])
+              ])
             ],
             2
           ),
@@ -37501,7 +37549,6 @@ var render = function() {
             { staticClass: "modal-footer" },
             [
               _vm._t("footer", [
-                _vm._v("\n            default footer\n            "),
                 _c(
                   "button",
                   {
@@ -48829,7 +48876,7 @@ Vue.component('modal-component', __webpack_require__(/*! ./components/ModalCompo
 var app = new Vue({
   el: '#app',
   data: {
-    showModal: false
+    showJournalCreateModal: false
   }
 });
 
@@ -49120,8 +49167,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\User\Documents\journal-app\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\User\Documents\journal-app\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\codecordia\htdocs\journal-app\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\codecordia\htdocs\journal-app\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
