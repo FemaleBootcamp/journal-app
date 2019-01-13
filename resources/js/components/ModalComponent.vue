@@ -38,7 +38,9 @@
       display: table;
       transition: opacity .3s ease;
     }
-
+     .vdp-datepicker * {
+        border: 0;
+    }
     .modal-wrapper {
       display: table-cell;
       vertical-align: middle;
