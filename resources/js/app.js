@@ -4,9 +4,13 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import Datepicker from 'vuejs-datepicker';
+
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -24,6 +28,7 @@ Vue.component('journal', require('./components/JournalComponent.vue').default);
 Vue.component('journals-list', require('./components/JournalListComponent.vue').default);
 Vue.component('modal-component', require('./components/ModalComponent.vue').default);
 Vue.component('add-journal-modal', require('./components/AddJournalModalComponent.vue').default);
+Vue.component('filter-journal-modal', require('./components/FilterJournalModalComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -33,6 +38,7 @@ Vue.component('add-journal-modal', require('./components/AddJournalModalComponen
 const app = new Vue({
     el: '#app',
     data: {
-        showJournalCreateModal: false
+        showJournalCreateModal: false,
+        showJournalFilterModal: false,
     },
 });
