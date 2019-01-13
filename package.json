@@ -23,7 +23,4 @@
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.5.21"
     },
-    "dependencies": {
-        "vue2-datepicker": "^2.7.0"
-    }
 }
