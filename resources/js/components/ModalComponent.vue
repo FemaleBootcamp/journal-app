@@ -6,22 +6,19 @@
 
           <div class="modal-header">
             <slot name="header">
-              default header
+              
             </slot>
           </div>
 
           <div class="modal-body">
             <slot name="body">
-              default body
+               
             </slot>
           </div>
 
           <div class="modal-footer">
             <slot name="footer">
-              default footer
-              <button class="btn btn-primary modal-default-button" @click="$emit('close')">
-                OK
-              </button>
+             
             </slot>
           </div>
         </div>
@@ -29,7 +26,6 @@
     </div>
   </transition>
 </template>
-
 <style>
     .modal-mask {
       position: fixed;
@@ -42,7 +38,9 @@
       display: table;
       transition: opacity .3s ease;
     }
-
+     .vdp-datepicker * {
+        border: 0;
+    }
     .modal-wrapper {
       display: table-cell;
       vertical-align: middle;

@@ -1,19 +1,21 @@
 <template>
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Date</th>
-            <th scope="col">Goal for tomorrow</th>
-            <th scope="col">Achievment</th>
-            <th scope="col">Grade for the day</th>
-            <th scope="col">Details</th>
-        </tr>
-        </thead>
-        <tbody>
-            <journal v-for="journal in journals" v-bind="journal" :key="journal.id"></journal>
-        </tbody>
-    </table>
+    <div>        
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Goal for tomorrow</th>
+                <th scope="col">Achievment</th>
+                <th scope="col">Grade for the day</th>
+                <th scope="col">Details</th>
+            </tr>
+            </thead>
+            <tbody>
+                <journal v-for="journal in journals" v-bind="journal" :key="journal.id"></journal>
+            </tbody>
+        </table>
+    </div>
 </template>
 <script>
     export default {
