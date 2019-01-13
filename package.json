@@ -24,8 +24,6 @@
         "vue-template-compiler": "^2.5.21"
     },
     "dependencies": {
-        "uiv": "^0.28.0",
-        "vue-date-picker": "^2.0.1",
         "vue2-datepicker": "^2.7.0"
     }
 }

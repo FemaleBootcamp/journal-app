@@ -1,6 +1,6 @@
 @extends('layout.welcome')
 @section('content')
-<div id='app' class="container text-center">
+<divs class="container text-center">
     <section>
         <div class="row">
             <h4 class="mt-5 col-6 text-center text-white">{{ $user -> name }}'s <span>Journal</span> </h4>
