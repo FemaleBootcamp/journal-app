@@ -1,7 +1,9 @@
 
 <nav class="navbar fixed-top navbar-default" style="background-color:#32CD99">
     <div class="col-xs-6">
-        <img alt="logo" class="img-fluid" src="{{ asset('img/Logo.png') }}" style="width: 50px;height:45px">
+        <a href="{{ route('home')}}">
+            <img alt="logo" class="img-fluid" src="{{ asset('img/Logo.png') }}" style="width: 50px;height:45px">
+        </a>
     </div>
 
     <div class="col-xs-6" style=" margin-right: 10px;">
@@ -13,7 +15,9 @@
                 </ul>
         @else
             <div class="row">
-                <h4 class="mt-2 mr-2 text-white">{{ $user -> name }}</h4>
+                <a style="text-decoration:none" href="{{ route('home')}}">
+                    <h4 class="mt-2 mr-2 text-white">{{ $user->name }}</h4>
+                </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>

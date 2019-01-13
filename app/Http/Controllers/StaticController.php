@@ -14,6 +14,9 @@ class StaticController extends Controller
     public function home()
     {
         $user = Auth::user();
+        if ($user !== null) {
+            return redirect(route('dashboard'));
+        }
         return view('landing',compact('user'));
     }
     
