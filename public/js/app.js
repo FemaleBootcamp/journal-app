@@ -37539,8 +37539,93 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("modal-component", { staticStyle: { "margin-left": "200px" } }, [
+    _c("div", { attrs: { slot: "header" }, slot: "header" }, [
+      _vm._v("Filter Journals")
+    ]),
+    _vm._v(" "),
+    _c("div", { attrs: { slot: "body" }, slot: "body" }, [
+      _c(
+        "form",
+        { attrs: { id: "filter-journal-form" } },
+        [
+          _c("span", { staticClass: "label label-default" }, [_vm._v("User:")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control mt-2",
+            attrs: { name: "user_id", type: "text", placeholder: "User" }
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "label label-default" }, [
+            _vm._v("Date Range:")
+          ]),
+          _vm._v(" "),
+          _c("datepicker", {
+            staticClass: "form-control",
+            attrs: {
+              name: "date",
+              format: "yyyy-MM-dd",
+              placeholder: "Date From:"
+            }
+          }),
+          _vm._v(" "),
+          _c("datepicker", {
+            staticClass: "form-control",
+            attrs: {
+              name: "date",
+              format: "yyyy-MM-dd",
+              placeholder: "Date To:"
+            }
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "label label-default" }, [
+            _vm._v("Status Goal:")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control mt-2",
+            attrs: {
+              name: "goalStatus",
+              type: "text",
+              placeholder: "Status Goal"
+            }
+          })
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger modal-default-button",
+          on: {
+            click: function($event) {
+              _vm.$emit("close")
+            }
+          }
+        },
+        [_vm._v("Cancel")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary modal-default-button mr-2",
+          on: { click: _vm.read }
+        },
+        [_vm._v("Apply Filter")]
+      )
+    ])
+  ])
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 

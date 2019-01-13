@@ -26,7 +26,7 @@
     export default {
         props: ['user_id', 'date', 'goalStatus'],
         methods: {
-            read() {
+            read(){
                 window.axios.get('/api/journals').then(({data}) => {
                     data.forEach(journal => {
                         this.journals.push(new Journal(journal));

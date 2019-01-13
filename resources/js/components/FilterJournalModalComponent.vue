@@ -1,6 +1,6 @@
 <template>
     <modal-component>
-        <div slot="header">Filter Journals</div>
+        <div slot="header" >Filter Journals</div>
         <div slot="body">
             <form id="filter-journal-form">
                 <span class="label label-default">User:</span>
@@ -15,7 +15,7 @@
         </div>
         <div slot="footer">
             <button class="btn btn-danger modal-default-button" @click="$emit('close')">Cancel</button>
-            <button class="btn btn-primary modal-default-button mr-2" @click="read()">Apply Filter</button>
+            <button class="btn btn-primary modal-default-button mr-2" @click="read">Apply Filter</button>
         </div>
     </modal-component>
 </template>
@@ -23,7 +23,7 @@
     import Datepicker from 'vuejs-datepicker';
     export default {
         components: {
-            Datepicker
+            Datepicker,
         }
     }
 </script>
