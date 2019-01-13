@@ -10,7 +10,10 @@
         <add-journal-modal  v-if="showJournalCreateModal" @close="showJournalCreateModal = false"></add-journal-modal>
     </section>
     <section>
-        <journals-list></journals-list>
+        <journals-list user_id="{{$user_id}}"></journals-list>
+        <journals-list dateFrom="{{$date}}"></journals-list>
+        <journals-list dateTo="{{$date}}"></journals-list>
+        <journals-list goalStatus="{{$goalStatus}}"></journals-list>
     </section>
 </div>
 @endsection

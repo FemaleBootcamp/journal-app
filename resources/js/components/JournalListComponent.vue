@@ -18,29 +18,26 @@
     </div>
 </template>
 <script>
+    function Journal({id, date}) {
+        this.id = id;
+        this.date = date;
+    }
+
     export default {
-        data() {
-            return {
-                journals: [{
-                    id: 1,
-                    date: '2019-10-01',
-                    goalForTomorrow: 'Test Case',
-                    grade: 'B'
-                },
-                    {
-                        id: 2,
-                        date: '2019-11-01',
-                        goalForTomorrow: 'Finish Homework',
-                        grade: 'C'
-                    },
-                    {
-                        id: 3,
-                        date: '2019-12-02',
-                        goalForTomorrow: 'Write the Graduation Thesis',
-                        grade: 'A'
-                    },
-                ]
-            }
+        props: ['user_id', 'date', 'goalStatus'],
+        methods: {
+            read() {
+                window.axios.get('/api/journals').then(({data}) => {
+                    data.forEach(journal => {
+                        this.journals.push(new Journal(journal));
+                    });
+                }, error => {
+                    console.error(error);
+                });
+            },
         },
+        created() {
+            this.read();
+        }
     }
 </script>
