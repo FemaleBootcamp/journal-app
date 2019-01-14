@@ -24,7 +24,7 @@
     }
 
     export default {
-        props: ['user_id', 'date', 'goalStatus'],
+        props: ['user_id', 'dateFrom','dateTo','goalStatus'],
         methods: {
             read(){
                 window.axios.get('/api/journals').then(({data}) => {
