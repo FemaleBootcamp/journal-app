@@ -1866,7 +1866,7 @@ function Journal(_ref) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user_id', 'date', 'goalStatus'],
+  props: ['user_id', 'dateFrom', 'dateTo', 'goalStatus'],
   methods: {
     read: function read() {
       var _this = this;
