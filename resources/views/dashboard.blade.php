@@ -1,6 +1,7 @@
 @extends('layout.welcome')
 @section('content')
-<div class="container text-center" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<div class="container text-center" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+     xmlns:v-on="http://www.w3.org/1999/xhtml">
     <section>
         <div class="row">
             <h4 class="mt-5 col-6 text-center text-white">{{ $user -> name }}'s <span>Journal</span> </h4>
@@ -22,7 +23,7 @@
                     <input name="goalStatus"  v-bind:goalStatus="goalStatus" class="form-control mt-2" type="text" placeholder="Status Goal">
                 </form>
                 <div slot="footer" style="margin-top: 10px; margin-right:-10px">
-                    <button class="btn btn-primary modal-default-button mr-2" @click="read">Apply Filter</button>
+                    <button @click="read" class="btn btn-primary modal-default-button mr-2">Apply Filter</button>
                 </div>
             </div>
         </div>
@@ -37,6 +38,3 @@
     </section>
 </div>
 @endsection
-<script>
-
-</script>
