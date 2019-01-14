@@ -14,7 +14,7 @@
             <div class="col-lg-5 offset-lg-7">
                 <form id="filter-journal-form">
                 <span class="label label-default">User:</span>
-                <input name="user_id" v-bind:key="user_id" class="form-control mt-2" type="text" placeholder="User" >
+                    <span name="user_id" class="form-control mt-2" type="text" placeholder="User" >{{ $user->id }} </span>
                     <span class="label label-default">Date Range:</span>
                     <datepicker name="dateFrom" v-bind:dateFrom="dateFrom" placeholder="Date From:" v-bind="dateFrom" style="margin-bottom: 10px"></datepicker>
                     <datepicker name="dateTo" v-bind:dateTo="dateTo" placeholder="Date To:" v-bind="dateTo"></datepicker>
@@ -37,3 +37,6 @@
     </section>
 </div>
 @endsection
+<script>
+
+</script>
