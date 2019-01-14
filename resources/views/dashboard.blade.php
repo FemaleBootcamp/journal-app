@@ -22,19 +22,19 @@
                     <span class="label label-default">Status Goal:</span>
                     <input name="goalStatus"  v-bind:goalStatus="goalStatus" class="form-control mt-2" type="text" placeholder="Status Goal">
                 </form>
-                <div slot="footer" style="margin-top: 10px; margin-right:-10px">
-                    <button @click="read" class="btn btn-primary modal-default-button mr-2">Apply Filter</button>
+                <div slot="footer" style="margin-top: 10px; margin-right:-10px; margin-bottom: 60px">
+                    <button @click="read()" class="btn btn-primary modal-default-button mr-2">Apply Filter</button>
                 </div>
             </div>
         </div>
-    </section>
-    <section>
+
         <journals-list
                 user_id="1"
-                dateFrom="2019-10-01"
-                dateTo="2019-10-02"
+                dateFrom="2018-01-01"
+                dateTo="2018-01-31"
                 goalStatus="1"
-       ></journals-list>
+        ></journals-list>
     </section>
 </div>
 @endsection
+
