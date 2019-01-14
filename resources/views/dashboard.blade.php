@@ -10,9 +10,22 @@
         <add-journal-modal  v-if="showJournalCreateModal" @close="showJournalCreateModal = false"></add-journal-modal>
 
 
-        <button class="btn btn-primary mt-3" id="show-journal-filter-modal" @click="showJournalFilterModal = true" style="margin-left: 530px">Filter Journals</button>
-        <filter-journal-modal  v-if="showJournalFilterModal" @close="showJournalFilterModal = false"></filter-journal-modal>
-
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-lg-5 offset-lg-7">
+                <form id="filter-journal-form">
+                <span class="label label-default">User:</span>
+                <input name="user_id" class="form-control mt-2" type="text" placeholder="User" >
+                    <span class="label label-default">Date Range:</span>
+                    <datepicker name="dateFrom" placeholder="Date From:" style="margin-bottom: 10px"></datepicker>
+                    <datepicker name="dateTo" placeholder="Date To:"></datepicker>
+                    <span class="label label-default">Status Goal:</span>
+                    <input name="goalStatus" class="form-control mt-2" type="text" placeholder="Status Goal">
+                </form>
+                <div slot="footer" style="margin-top: 10px; margin-right:-10px">
+                    <button class="btn btn-primary modal-default-button mr-2" @click="read">Apply Filter</button>
+                </div>
+            </div>
+        </div>
     </section>
     <section>
         <journals-list

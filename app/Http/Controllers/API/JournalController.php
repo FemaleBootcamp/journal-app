@@ -90,9 +90,6 @@ class JournalController extends Controller
      */
     public function show($id)
     {
-
-
-
         return Journal::find($id);
     }
 

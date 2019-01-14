@@ -1796,46 +1796,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FilterJournalModalComponent.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FilterJournalModalComponent.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/JournalComponent.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/JournalComponent.vue?vue&type=script&lang=js& ***!
@@ -37528,109 +37488,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FilterJournalModalComponent.vue?vue&type=template&id=123864b4&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FilterJournalModalComponent.vue?vue&type=template&id=123864b4& ***!
-  \******************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("modal-component", { staticStyle: { "margin-left": "200px" } }, [
-    _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-      _vm._v("Filter Journals")
-    ]),
-    _vm._v(" "),
-    _c("div", { attrs: { slot: "body" }, slot: "body" }, [
-      _c(
-        "form",
-        { attrs: { id: "filter-journal-form" } },
-        [
-          _c("span", { staticClass: "label label-default" }, [_vm._v("User:")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mt-2",
-            attrs: { name: "user_id", type: "text", placeholder: "User" }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "label label-default" }, [
-            _vm._v("Date Range:")
-          ]),
-          _vm._v(" "),
-          _c("datepicker", {
-            staticClass: "form-control",
-            attrs: {
-              name: "date",
-              format: "yyyy-MM-dd",
-              placeholder: "Date From:"
-            }
-          }),
-          _vm._v(" "),
-          _c("datepicker", {
-            staticClass: "form-control",
-            attrs: {
-              name: "date",
-              format: "yyyy-MM-dd",
-              placeholder: "Date To:"
-            }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "label label-default" }, [
-            _vm._v("Status Goal:")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mt-2",
-            attrs: {
-              name: "goalStatus",
-              type: "text",
-              placeholder: "Status Goal"
-            }
-          })
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger modal-default-button",
-          on: {
-            click: function($event) {
-              _vm.$emit("close")
-            }
-          }
-        },
-        [_vm._v("Cancel")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary modal-default-button mr-2",
-          on: { click: _vm.read }
-        },
-        [_vm._v("Apply Filter")]
-      )
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/JournalComponent.vue?vue&type=template&id=1dffca1e&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/JournalComponent.vue?vue&type=template&id=1dffca1e& ***!
@@ -50595,7 +50452,6 @@ Vue.component('journal', __webpack_require__(/*! ./components/JournalComponent.v
 Vue.component('journals-list', __webpack_require__(/*! ./components/JournalListComponent.vue */ "./resources/js/components/JournalListComponent.vue").default);
 Vue.component('modal-component', __webpack_require__(/*! ./components/ModalComponent.vue */ "./resources/js/components/ModalComponent.vue").default);
 Vue.component('add-journal-modal', __webpack_require__(/*! ./components/AddJournalModalComponent.vue */ "./resources/js/components/AddJournalModalComponent.vue").default);
-Vue.component('filter-journal-modal', __webpack_require__(/*! ./components/FilterJournalModalComponent.vue */ "./resources/js/components/FilterJournalModalComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -50604,6 +50460,9 @@ Vue.component('filter-journal-modal', __webpack_require__(/*! ./components/Filte
 
 var app = new Vue({
   el: '#app',
+  components: {
+    datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: {
     showJournalCreateModal: false,
     showJournalFilterModal: false
@@ -50734,75 +50593,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddJournalModalComponent_vue_vue_type_template_id_5176139e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddJournalModalComponent_vue_vue_type_template_id_5176139e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/FilterJournalModalComponent.vue":
-/*!*****************************************************************!*\
-  !*** ./resources/js/components/FilterJournalModalComponent.vue ***!
-  \*****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _FilterJournalModalComponent_vue_vue_type_template_id_123864b4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FilterJournalModalComponent.vue?vue&type=template&id=123864b4& */ "./resources/js/components/FilterJournalModalComponent.vue?vue&type=template&id=123864b4&");
-/* harmony import */ var _FilterJournalModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FilterJournalModalComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/FilterJournalModalComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _FilterJournalModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _FilterJournalModalComponent_vue_vue_type_template_id_123864b4___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _FilterJournalModalComponent_vue_vue_type_template_id_123864b4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/FilterJournalModalComponent.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/FilterJournalModalComponent.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/components/FilterJournalModalComponent.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterJournalModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./FilterJournalModalComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FilterJournalModalComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterJournalModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/FilterJournalModalComponent.vue?vue&type=template&id=123864b4&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/components/FilterJournalModalComponent.vue?vue&type=template&id=123864b4& ***!
-  \************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterJournalModalComponent_vue_vue_type_template_id_123864b4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./FilterJournalModalComponent.vue?vue&type=template&id=123864b4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FilterJournalModalComponent.vue?vue&type=template&id=123864b4&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterJournalModalComponent_vue_vue_type_template_id_123864b4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterJournalModalComponent_vue_vue_type_template_id_123864b4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -5,8 +5,8 @@
 
 <head>
 
- <link rel="stylesheet" type="text/css" href="css/app.css">
- <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
 </head>
@@ -19,6 +19,8 @@
     </div>
 
     <script src="js/app.js?v={{ env('ASSETS_VERSION', 2) }}"></script>
+
+
 </body>
 
 </html>

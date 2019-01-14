@@ -4,11 +4,13 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import Datepicker from 'vuejs-datepicker';
+import datepicker from 'vuejs-datepicker';
 
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+
 
 
 
@@ -28,7 +30,6 @@ Vue.component('journal', require('./components/JournalComponent.vue').default);
 Vue.component('journals-list', require('./components/JournalListComponent.vue').default);
 Vue.component('modal-component', require('./components/ModalComponent.vue').default);
 Vue.component('add-journal-modal', require('./components/AddJournalModalComponent.vue').default);
-Vue.component('filter-journal-modal', require('./components/FilterJournalModalComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -37,6 +38,9 @@ Vue.component('filter-journal-modal', require('./components/FilterJournalModalCo
  */
 const app = new Vue({
     el: '#app',
+    components: {
+        datepicker
+    },
     data: {
         showJournalCreateModal: false,
         showJournalFilterModal: false,
