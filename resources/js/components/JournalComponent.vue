@@ -18,9 +18,9 @@
         id="show-journal-delete-modal"
         type="button"
         class="btn btn-danger"
-        @click="showJournalDeleteModal = true"
+        @click="$emit(app.showJournalDeleteModal=true)"
       >Delete</button>
-      <delete-component v-if="showJournalDeleteModal" @close="showJournalDeleteModal = false"></delete-component>
+      
     </td>
   </tr>
 </template>

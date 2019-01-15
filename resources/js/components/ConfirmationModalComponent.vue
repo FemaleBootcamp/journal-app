@@ -7,8 +7,8 @@
       <p>Are you sure you want to delete this journal?</p>
     </div>
     <div slot="footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-danger" @click="deleteJournal(journal,journal._id)">Delete</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="showJournalDeleteModal">Close</button>
+      <button type="button" class="btn btn-danger" @click="deleteJournal(journal,journal.id)">Delete</button>
     </div>
   </modal-component>
 </template>

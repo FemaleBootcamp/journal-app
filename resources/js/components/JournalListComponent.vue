@@ -20,6 +20,7 @@
 <script>
 import axios from "axios";
 export default {
+  template: `<delete-component v-if="{{showJournalDeleteModal}}" @close="{{showJournalDeleteModal}} = false"></delete-component>`,
   data() {
     return {
       journals: [

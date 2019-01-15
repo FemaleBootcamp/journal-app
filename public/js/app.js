@@ -1802,6 +1802,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1884,6 +1888,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  template: "<delete-component v-if=\"{{showJournalDeleteModal}}\" @close=\"{{showJournalDeleteModal}} = false\"></delete-component>",
   data: function data() {
     return {
       journals: [{
@@ -6200,7 +6205,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .3s ease;\n}\n.vdp-datepicker * {\n    border: 0;\n}\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-container {\n  width: 300px;\n  margin: 0px auto;\n  padding: 20px 30px;\n  background-color: #fff;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n  transition: all .3s ease;\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\n  margin-top: 0;\n  color: #42b983;\n}\n.modal-body {\n  margin: 20px 0;\n}\n.modal-default-button {\n  float: right;\n}\n.modal-enter {\n  opacity: 0;\n}\n.modal-leave-active {\n  opacity: 0;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n", ""]);
+exports.push([module.i, "\n.modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.5);\n  display: table;\n  transition: opacity 0.3s ease;\n}\n.vdp-datepicker * {\n  border: 0;\n}\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-container {\n  width: 300px;\n  margin: 0px auto;\n  padding: 20px 30px;\n  background-color: #fff;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\n  transition: all 0.3s ease;\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\n  margin-top: 0;\n  color: #42b983;\n}\n.modal-body {\n  margin: 20px 0;\n}\n.modal-default-button {\n  float: right;\n}\n.modal-enter {\n  opacity: 0;\n}\n.modal-leave-active {\n  opacity: 0;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n", ""]);
 
 // exports
 
@@ -37426,104 +37431,98 @@ var render = function() {
       _vm._v("Add new record")
     ]),
     _vm._v(" "),
-    _c(
-      "form",
-      {
-        attrs: { id: "add-journal-form" },
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.createJournal($event)
+    _c("div", { attrs: { slot: "body" }, slot: "body" }, [
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              _vm.$emit(_vm.createJournal())
+            }
           }
-        }
-      },
-      [
-        _c(
-          "div",
-          { attrs: { slot: "body" }, slot: "body" },
-          [
-            _c("datepicker", {
-              staticClass: "form-control",
-              attrs: { name: "date", format: "yyyy-MM-dd", placeholder: "Date" }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control mt-2",
-              attrs: {
-                name: "database_column",
-                type: "text",
-                placeholder: "Text"
-              }
-            }),
-            _vm._v(" "),
-            _c("textarea", {
-              staticClass: "form-control mt-2",
-              attrs: {
-                name: "plan_next_day",
-                id: "exampleFormControlTextarea1",
-                rows: "3",
-                placeholder: "Plan for next day "
-              }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control mt-2",
-              attrs: {
-                name: "goal_tomorrow",
-                type: "text",
-                placeholder: "Goal for tomorrow"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check mt-2" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  name: "is_achieved",
-                  type: "checkbox",
-                  value: "",
-                  id: "defaultCheck1"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "defaultCheck1" }
-                },
-                [_vm._v("Did you achieve today's goal?")]
-              )
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-danger modal-default-button",
-              on: {
-                click: function($event) {
-                  _vm.$emit("close")
-                }
-              }
-            },
-            [_vm._v("Cancel")]
-          ),
+        },
+        [
+          _c("datepicker", {
+            staticClass: "form-control",
+            attrs: { name: "date", format: "yyyy-MM-dd", placeholder: "Date" }
+          }),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary modal-default-button mr-2",
-              attrs: { type: "submit" }
-            },
-            [_vm._v("Save")]
-          )
-        ])
-      ]
-    )
+          _c("input", {
+            staticClass: "form-control mt-2",
+            attrs: {
+              name: "database_column",
+              type: "text",
+              placeholder: "Text"
+            }
+          }),
+          _vm._v(" "),
+          _c("textarea", {
+            staticClass: "form-control mt-2",
+            attrs: {
+              name: "plan_next_day",
+              id: "exampleFormControlTextarea1",
+              rows: "3",
+              placeholder: "Plan for next day "
+            }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control mt-2",
+            attrs: {
+              name: "goal_tomorrow",
+              type: "text",
+              placeholder: "Goal for tomorrow"
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-check mt-2" }, [
+            _c("input", {
+              staticClass: "form-check-input",
+              attrs: {
+                name: "is_achieved",
+                type: "checkbox",
+                value: "",
+                id: "defaultCheck1"
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "form-check-label",
+                attrs: { for: "defaultCheck1" }
+              },
+              [_vm._v("Did you achieve today's goal?")]
+            )
+          ])
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger modal-default-button",
+          on: {
+            click: function($event) {
+              _vm.$emit("close")
+            }
+          }
+        },
+        [_vm._v("Cancel")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary modal-default-button mr-2",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Save")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -37562,7 +37561,7 @@ var render = function() {
         "button",
         {
           staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
+          attrs: { type: "button", "data-dismiss": "showJournalDeleteModal" }
         },
         [_vm._v("Close")]
       ),
@@ -37574,7 +37573,7 @@ var render = function() {
           attrs: { type: "button" },
           on: {
             click: function($event) {
-              _vm.deleteJournal(_vm.journal, _vm.journal._id)
+              _vm.deleteJournal(_vm.journal, _vm.journal.id)
             }
           }
         },
@@ -37616,47 +37615,33 @@ var render = function() {
     _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.grade))]),
     _vm._v(" "),
-    _c(
-      "td",
-      [
-        _c(
-          "button",
-          { staticClass: "btn btn-light", attrs: { type: "button" } },
-          [_vm._v("View Details")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "button" } },
-          [_vm._v("Edit")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-danger",
-            attrs: { id: "show-journal-delete-modal", type: "button" },
-            on: {
-              click: function($event) {
-                _vm.showJournalDeleteModal = true
-              }
+    _c("td", [
+      _c(
+        "button",
+        { staticClass: "btn btn-light", attrs: { type: "button" } },
+        [_vm._v("View Details")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        [_vm._v("Edit")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { id: "show-journal-delete-modal", type: "button" },
+          on: {
+            click: function($event) {
+              _vm.$emit((_vm.app.showJournalDeleteModal = true))
             }
-          },
-          [_vm._v("Delete")]
-        ),
-        _vm._v(" "),
-        _vm.showJournalDeleteModal
-          ? _c("delete-component", {
-              on: {
-                close: function($event) {
-                  _vm.showJournalDeleteModal = false
-                }
-              }
-            })
-          : _vm._e()
-      ],
-      1
-    )
+          }
+        },
+        [_vm._v("Delete")]
+      )
+    ])
   ])
 }
 var staticRenderFns = [
