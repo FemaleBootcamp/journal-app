@@ -1849,7 +1849,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id", "date", "goalForTomorrow", "grade"]
 });
@@ -1888,7 +1887,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  template: "<delete-component v-if=\"{{showJournalDeleteModal}}\" @close=\"{{showJournalDeleteModal}} = false\"></delete-component>",
   data: function data() {
     return {
       journals: [{
@@ -1910,6 +1908,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    DELETE: function DELETE(journal, id) {
+      $("#confirmationCom").modal("show");
+      this.journals = journal;
+      this.journals.id = id;
+    },
     createJournal: function createJournal() {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/journals", {
         date: "",
@@ -37547,7 +37550,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("modal-component", [
+  return _c("modal-component", { attrs: { id: "confirmationCom" } }, [
     _c("div", { attrs: { slot: "header" }, slot: "header" }, [
       _c("h1", [_vm._v("Are You Sure?")])
     ]),
@@ -37635,7 +37638,7 @@ var render = function() {
           attrs: { id: "show-journal-delete-modal", type: "button" },
           on: {
             click: function($event) {
-              _vm.$emit((_vm.app.showJournalDeleteModal = true))
+              _vm.$emit(_vm.DELETE(this, this.id))
             }
           }
         },

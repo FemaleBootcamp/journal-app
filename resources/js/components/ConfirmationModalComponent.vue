@@ -1,5 +1,5 @@
 <template>
-  <modal-component>
+  <modal-component id="confirmationCom">
     <div slot="header">
       <h1>Are You Sure?</h1>
     </div>

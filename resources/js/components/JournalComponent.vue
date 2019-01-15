@@ -18,11 +18,10 @@
         id="show-journal-delete-modal"
         type="button"
         class="btn btn-danger"
-        @click="$emit(app.showJournalDeleteModal=true)"
+        @click="$emit(DELETE(this,this.id))"
       >Delete</button>
-      
     </td>
-  </tr>
+  </tr>  
 </template>
 <script>
 export default {
