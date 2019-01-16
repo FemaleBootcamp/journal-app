@@ -5,13 +5,13 @@
                 <form id="filter-journal-form">
                     <input id="user_id" name="user_id" type="hidden">
                     <h5 class="mt-5 col-6 text-left text-white" style="alignment: left"><span>Date Range:</span></h5>
-                    <datepicker name="dateFrom" placeholder="Date From:" style="margin-bottom: 10px" v-bind="dateFrom"
-                                v-bind:dateFrom="dateFrom"></datepicker>
-                    <datepicker name="dateTo" placeholder="Date To:" v-bind="dateTo"
-                                v-bind:dateTo="dateTo"></datepicker>
-                    <h5 class="mt-5 col-lg-12 text-left text-white"><span style="alignment: left">Status of the Goal:</span></h5>
+                    <datepicker name="dateFrom" placeholder="Date From:" style="margin-bottom: 10px"
+                                v-model="dateFrom"></datepicker>
+                    <datepicker name="dateTo" placeholder="Date To:" v-model="dateTo"></datepicker>
+                    <h5 class="mt-5 col-lg-12 text-left text-white"><span
+                            style="alignment: left">Status of the Goal:</span></h5>
                     <input class="form-control mt-2" name="goalStatus" placeholder="Status Goal" type="text"
-                           v-bind:goalStatus="goalStatus">
+                           v-model="goalStatus">
                 </form>
                 <div slot="footer" style="margin-top: 10px; margin-right:-10px; margin-bottom: 60px">
                     <button @click="$emit(read)" class="btn btn-primary modal-default-button mr-2">Apply Filter</button>
@@ -49,6 +49,11 @@
     export default {
         components: {
             Datepicker
+        },
+        data() {
+            return {
+                journals: []
+            };
         },
         props: ['user_id', 'dateFrom', 'dateTo', 'goalStatus'],
         methods: {

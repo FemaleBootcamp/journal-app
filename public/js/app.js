@@ -1892,6 +1892,11 @@ function Journal(_ref) {
   components: {
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  data: function data() {
+    return {
+      journals: []
+    };
+  },
   props: ['user_id', 'dateFrom', 'dateTo', 'goalStatus'],
   methods: {
     read: function read() {
@@ -37625,48 +37630,54 @@ var render = function() {
             _vm._v(" "),
             _vm._m(0),
             _vm._v(" "),
-            _c(
-              "datepicker",
-              _vm._b(
-                {
-                  staticStyle: { "margin-bottom": "10px" },
-                  attrs: {
-                    name: "dateFrom",
-                    placeholder: "Date From:",
-                    dateFrom: _vm.dateFrom
-                  }
+            _c("datepicker", {
+              staticStyle: { "margin-bottom": "10px" },
+              attrs: { name: "dateFrom", placeholder: "Date From:" },
+              model: {
+                value: _vm.dateFrom,
+                callback: function($$v) {
+                  _vm.dateFrom = $$v
                 },
-                "datepicker",
-                _vm.dateFrom,
-                false
-              )
-            ),
+                expression: "dateFrom"
+              }
+            }),
             _vm._v(" "),
-            _c(
-              "datepicker",
-              _vm._b(
-                {
-                  attrs: {
-                    name: "dateTo",
-                    placeholder: "Date To:",
-                    dateTo: _vm.dateTo
-                  }
+            _c("datepicker", {
+              attrs: { name: "dateTo", placeholder: "Date To:" },
+              model: {
+                value: _vm.dateTo,
+                callback: function($$v) {
+                  _vm.dateTo = $$v
                 },
-                "datepicker",
-                _vm.dateTo,
-                false
-              )
-            ),
+                expression: "dateTo"
+              }
+            }),
             _vm._v(" "),
             _vm._m(1),
             _vm._v(" "),
             _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.goalStatus,
+                  expression: "goalStatus"
+                }
+              ],
               staticClass: "form-control mt-2",
               attrs: {
                 name: "goalStatus",
                 placeholder: "Status Goal",
-                type: "text",
-                goalStatus: _vm.goalStatus
+                type: "text"
+              },
+              domProps: { value: _vm.goalStatus },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.goalStatus = $event.target.value
+                }
               }
             })
           ],
