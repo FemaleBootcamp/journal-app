@@ -13,7 +13,8 @@ class JournalController extends Controller
     {
         Journal::create($request->validated());
         return response()->json([
-            'status' => 'success'],
+            'status' => 'success'
+        ],
             201);
     }
 
@@ -25,7 +26,6 @@ class JournalController extends Controller
      * API Endpoint for retrieving records
      * based on a filter.
      */
-
     public function get(Request $request) {
 
         $goalStatus=$request->goalStatus;
@@ -36,31 +36,27 @@ class JournalController extends Controller
 
         $wherePart=[];
 
-        if(empty($dateFrom) && empty($dateTo)) {
+        if (empty($dateFrom) && empty($dateTo)) {
             $wherePart[] = ['date', '>=', date('Y-m-d', strtotime('first day of this month'))];
-            $wherePart[]= ['date', '<=', date('Y-m-d', strtotime('last day of this month'))];
+            $wherePart[] = ['date', '<=', date('Y-m-d', strtotime('last day of this month'))];
         } else {
-            if(!empty($dateFrom) ) {
+            if (!empty($dateFrom)) {
                 $wherePart[] = ['date', '>=', $dateFrom];
             }
-            if(!empty($dateTo)) {
+            if (!empty($dateTo)) {
                 $wherePart[] = ['date', '<=', $dateTo];
             }
         }
-       if(!empty($goalStatus) || !empty(!($goalStatus)))
-        {
+        if (isset($goalStatus)) {
             $wherePart[] = ['goal_status', $goalStatus];
         }
 
-       if(!empty($userId)) {
-           $wherePart[] = ['user_id', $userId];
-       }
+        if (!empty($userId)) {
+            $wherePart[] = ['user_id', $userId];
+        }
 
-       return $journals = Journal::where($wherePart)-> get();
+        return $journals = Journal::where($wherePart)->get();
     }
-
-
-
 
     /**
      * Display a listing of the resource.
@@ -136,7 +132,8 @@ class JournalController extends Controller
         $journal = Journal::findOrFail($id);
         $journal->delete();
         return response()->json(
-            ['success' => true
+            [
+                'success' => true
             ],
             204);
     }
