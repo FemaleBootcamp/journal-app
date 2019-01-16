@@ -1897,12 +1897,11 @@ function Journal(_ref) {
       journals: []
     };
   },
-  props: ['user_id', 'dateFrom', 'dateTo', 'goalStatus'],
   methods: {
-    read: function read() {
+    read: function read(dateFrom, dateTo, goalStatus) {
       var _this = this;
 
-      window.axios.get('/api/journals').then(function (_ref2) {
+      window.axios.get('/api/journals' + $('#filter-journal-form').serialize()).then(function (_ref2) {
         var data = _ref2.data;
         data.forEach(function (journal) {
           _this.journals.push(new Journal(journal));
@@ -1910,10 +1909,14 @@ function Journal(_ref) {
       }, function (error) {
         console.error(error);
       });
+    },
+    filter: function filter() {
+      this.journals = [];
+      this.read(dateFrom, dateTo, goalStatus);
     }
   },
   created: function created() {
-    this.read();
+    this.read(dateFrom, dateTo, goalStatus);
   }
 });
 
@@ -37618,7 +37621,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "row", attrs: { n: "" } }, [
+    _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-lg-4 offset-lg-8" }, [
         _c(
           "form",
@@ -37632,7 +37635,11 @@ var render = function() {
             _vm._v(" "),
             _c("datepicker", {
               staticStyle: { "margin-bottom": "10px" },
-              attrs: { name: "dateFrom", placeholder: "Date From:" },
+              attrs: {
+                format: "yyyy-MM-dd",
+                name: "dateFrom",
+                placeholder: "Date From:"
+              },
               model: {
                 value: _vm.dateFrom,
                 callback: function($$v) {
@@ -37643,7 +37650,11 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("datepicker", {
-              attrs: { name: "dateTo", placeholder: "Date To:" },
+              attrs: {
+                format: "yyyy-MM-dd",
+                name: "dateTo",
+                placeholder: "Date To:"
+              },
               model: {
                 value: _vm.dateTo,
                 callback: function($$v) {
@@ -37700,11 +37711,7 @@ var render = function() {
               "button",
               {
                 staticClass: "btn btn-primary modal-default-button mr-2",
-                on: {
-                  click: function($event) {
-                    _vm.$emit(_vm.read)
-                  }
-                }
+                on: { click: _vm.filter }
               },
               [_vm._v("Apply Filter")]
             )

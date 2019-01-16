@@ -12,12 +12,7 @@
 
 
 
-        <journals-list
-                user_id="1"
-                dateFrom="2018-01-01"
-                dateTo="2018-01-31"
-                goalStatus="1"
-        ></journals-list>
+        <journals-list></journals-list>
     </section>
 </div>
 @endsection
