@@ -33,8 +33,4 @@ Vue.component('delete-component', require('./components/ConfirmationModalCompone
  */
 const app = new Vue({
     el: '#app',
-    data: {
-        showJournalCreateModal: false,
-        showJournalDeleteModal: false
-    },
 });

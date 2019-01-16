@@ -1806,10 +1806,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      date: "",
+      text: "",
+      plan_tomorrow: "",
+      goal_tomorrow: "",
+      goal_status: false
+    };
   }
 });
 
@@ -1824,7 +1851,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -1885,10 +1911,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      showJournalCreateModal: false,
       journals: [{
         id: 1,
         date: "2019-10-01",
@@ -1908,21 +1946,26 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    DELETE: function DELETE(journal, id) {
-      $("#confirmationCom").modal("show");
-      this.journals = journal;
-      this.journals.id = id;
-    },
-    createJournal: function createJournal() {
+    // createJournal(date,text,plan_tomorrow,goal_tomorrow,goal_status) {
+    //   console.log(date);
+    //   console.log(text);
+    //   console.log(plan_tomorrow);
+    //   console.log(goal_tomorrow);
+    //   console.log(goal_status)
+    // },
+    createJournal: function createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/journals", {
-        date: "",
-        goalForTomorrow: "",
-        grade: ""
+        date: "2019-10-01",
+        text: text,
+        plan_tomorrow: plan_tomorrow,
+        goal_tomorrow: goal_tomorrow,
+        goal_status: goal_status
       }).then(function (response) {
         console.log(response);
-      }).catch(function (error) {
-        console.log(error);
+      }).then(function (response) {
+        console.log(response.data.errors);
       });
+      this.journals.push();
     },
     deleteJournal: function deleteJournal(journals, id) {
       var _this = this;
@@ -37429,7 +37472,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("modal-component", [
+  return _c("modal-component", { staticStyle: { color: "black" } }, [
     _c("div", { attrs: { slot: "header" }, slot: "header" }, [
       _vm._v("Add new record")
     ]),
@@ -37447,45 +37490,137 @@ var render = function() {
         [
           _c("datepicker", {
             staticClass: "form-control",
-            attrs: { name: "date", format: "yyyy-MM-dd", placeholder: "Date" }
+            attrs: { name: "date", format: "yyyy-MM-dd", placeholder: "Date" },
+            model: {
+              value: _vm.date,
+              callback: function($$v) {
+                _vm.date = $$v
+              },
+              expression: "date"
+            }
           }),
           _vm._v(" "),
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.text,
+                expression: "text"
+              }
+            ],
             staticClass: "form-control mt-2",
             attrs: {
               name: "database_column",
               type: "text",
               placeholder: "Text"
+            },
+            domProps: { value: _vm.text },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.text = $event.target.value
+              }
             }
           }),
           _vm._v(" "),
           _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.plan_tomorrow,
+                expression: "plan_tomorrow"
+              }
+            ],
             staticClass: "form-control mt-2",
             attrs: {
-              name: "plan_next_day",
+              name: "plan_tomorrow",
               id: "exampleFormControlTextarea1",
               rows: "3",
               placeholder: "Plan for next day "
+            },
+            domProps: { value: _vm.plan_tomorrow },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.plan_tomorrow = $event.target.value
+              }
             }
           }),
           _vm._v(" "),
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.goal_tomorrow,
+                expression: "goal_tomorrow"
+              }
+            ],
             staticClass: "form-control mt-2",
             attrs: {
               name: "goal_tomorrow",
               type: "text",
               placeholder: "Goal for tomorrow"
+            },
+            domProps: { value: _vm.goal_tomorrow },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.goal_tomorrow = $event.target.value
+              }
             }
           }),
           _vm._v(" "),
           _c("div", { staticClass: "form-check mt-2" }, [
             _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.goal_status,
+                  expression: "goal_status"
+                }
+              ],
               staticClass: "form-check-input",
               attrs: {
-                name: "is_achieved",
+                name: "goal_status",
                 type: "checkbox",
                 value: "",
                 id: "defaultCheck1"
+              },
+              domProps: {
+                checked: Array.isArray(_vm.goal_status)
+                  ? _vm._i(_vm.goal_status, "") > -1
+                  : _vm.goal_status
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.goal_status,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = "",
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.goal_status = $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        (_vm.goal_status = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.goal_status = $$c
+                  }
+                }
               }
             }),
             _vm._v(" "),
@@ -37521,7 +37656,19 @@ var render = function() {
         "button",
         {
           staticClass: "btn btn-primary modal-default-button mr-2",
-          attrs: { type: "submit" }
+          attrs: { type: "submit" },
+          on: {
+            click: function($event) {
+              _vm.$emit(
+                "createJournal",
+                _vm.date,
+                _vm.text,
+                _vm.plan_tomorrow,
+                _vm.goal_tomorrow,
+                _vm.goal_status
+              )
+            }
+          }
         },
         [_vm._v("Save")]
       )
@@ -37571,15 +37718,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: { type: "button" },
-          on: {
-            click: function($event) {
-              _vm.deleteJournal(_vm.journal, _vm.journal.id)
-            }
-          }
-        },
+        { staticClass: "btn btn-danger", attrs: { type: "button" } },
         [_vm._v("Delete")]
       )
     ])
@@ -37618,33 +37757,7 @@ var render = function() {
     _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.grade))]),
     _vm._v(" "),
-    _c("td", [
-      _c(
-        "button",
-        { staticClass: "btn btn-light", attrs: { type: "button" } },
-        [_vm._v("View Details")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
-        [_vm._v("Edit")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: { id: "show-journal-delete-modal", type: "button" },
-          on: {
-            click: function($event) {
-              _vm.$emit(_vm.DELETE(this, this.id))
-            }
-          }
-        },
-        [_vm._v("Delete")]
-      )
-    ])
+    _vm._m(1)
   ])
 }
 var staticRenderFns = [
@@ -37668,6 +37781,33 @@ var staticRenderFns = [
           [_vm._v("Did you achieve?")]
         )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c(
+        "button",
+        { staticClass: "btn btn-light", attrs: { type: "button" } },
+        [_vm._v("View Details")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        [_vm._v("Edit")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { id: "show-journal-delete-modal", type: "button" }
+        },
+        [_vm._v("Delete")]
+      )
     ])
   }
 ]
@@ -37694,7 +37834,51 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("table", { staticClass: "table" }, [
-      _vm._m(0),
+      _c("thead", { staticClass: "thead-dark" }, [
+        _c("tr", [
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Date")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Goal for tomorrow")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Achievment")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Grade for the day")]),
+          _vm._v(" "),
+          _c(
+            "th",
+            { attrs: { scope: "col" } },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary mt-3",
+                  attrs: { id: "show-journal-create-modal" },
+                  on: {
+                    click: function($event) {
+                      _vm.showJournalCreateModal = true
+                    }
+                  }
+                },
+                [_vm._v("Add New")]
+              ),
+              _vm._v(" "),
+              _vm.showJournalCreateModal
+                ? _c("add-journal-modal", {
+                    on: {
+                      createJournal: _vm.createJournal,
+                      close: function($event) {
+                        _vm.showJournalCreateModal = false
+                      }
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "tbody",
@@ -37709,28 +37893,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "thead-dark" }, [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Date")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Goal for tomorrow")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Achievment")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Grade for the day")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Details")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -50568,11 +50731,7 @@ Vue.component('delete-component', __webpack_require__(/*! ./components/Confirmat
  */
 
 var app = new Vue({
-  el: '#app',
-  data: {
-    showJournalCreateModal: false,
-    showJournalDeleteModal: false
-  }
+  el: '#app'
 });
 
 /***/ }),

@@ -18,7 +18,6 @@
         id="show-journal-delete-modal"
         type="button"
         class="btn btn-danger"
-        @click="$emit(DELETE(this,this.id))"
       >Delete</button>
     </td>
   </tr>  

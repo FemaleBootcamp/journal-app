@@ -8,7 +8,18 @@
           <th scope="col">Goal for tomorrow</th>
           <th scope="col">Achievment</th>
           <th scope="col">Grade for the day</th>
-          <th scope="col">Details</th>
+          <th scope="col">
+            <button
+              class="btn btn-primary mt-3"
+              id="show-journal-create-modal"
+              @click="showJournalCreateModal = true"
+            >Add New</button>
+            <add-journal-modal
+              v-if="showJournalCreateModal"
+              @createJournal="createJournal"
+              @close="showJournalCreateModal = false"
+            ></add-journal-modal>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -22,6 +33,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      showJournalCreateModal: false,
       journals: [
         {
           id: 1,
@@ -45,24 +57,29 @@ export default {
     };
   },
   methods: {
-    DELETE(journal, id) {
-      $("#confirmationCom").modal("show");
-      this.journals = journal;
-      this.journals.id = id;
-    },
-    createJournal() {
+    // createJournal(date,text,plan_tomorrow,goal_tomorrow,goal_status) {
+    //   console.log(date);
+    //   console.log(text);
+    //   console.log(plan_tomorrow);
+    //   console.log(goal_tomorrow);
+    //   console.log(goal_status)
+    // },
+    createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
       axios
-        .post("api/journals", {
-          date: "",
-          goalForTomorrow: "",
-          grade: ""
+        .post("api/journals", {          
+          date: "2019-10-01",
+          text: text,
+          plan_tomorrow: plan_tomorrow,
+          goal_tomorrow: goal_tomorrow,
+          goal_status: goal_status
         })
-        .then(function(response) {
+        .then(response => {
           console.log(response);
         })
-        .catch(function(error) {
-          console.log(error);
+        .then(function(response) {
+          console.log(response.data.errors);
         });
+      this.journals.push();
     },
 
     deleteJournal(journals, id) {
