@@ -11,22 +11,6 @@
         <add-journal-modal  v-if="showJournalCreateModal" @close="showJournalCreateModal = false"></add-journal-modal>
 
 
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-lg-5 offset-lg-7">
-                <form id="filter-journal-form">
-                <span class="label label-default">User:</span>
-                    <span name="user_id" class="form-control mt-2" type="text" placeholder="User" >{{ $user->id }} </span>
-                    <span class="label label-default">Date Range:</span>
-                    <datepicker name="dateFrom" v-bind:dateFrom="dateFrom" placeholder="Date From:" v-bind="dateFrom" style="margin-bottom: 10px"></datepicker>
-                    <datepicker name="dateTo" v-bind:dateTo="dateTo" placeholder="Date To:" v-bind="dateTo"></datepicker>
-                    <span class="label label-default">Status Goal:</span>
-                    <input name="goalStatus"  v-bind:goalStatus="goalStatus" class="form-control mt-2" type="text" placeholder="Status Goal">
-                </form>
-                <div slot="footer" style="margin-top: 10px; margin-right:-10px; margin-bottom: 60px">
-                    <button @click="read()" class="btn btn-primary modal-default-button mr-2">Apply Filter</button>
-                </div>
-            </div>
-        </div>
 
         <journals-list
                 user_id="1"

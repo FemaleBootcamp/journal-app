@@ -1839,6 +1839,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
 //
 //
 //
@@ -1858,6 +1859,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 function Journal(_ref) {
   var id = _ref.id,
       date = _ref.date;
@@ -1866,6 +1889,9 @@ function Journal(_ref) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   props: ['user_id', 'dateFrom', 'dateTo', 'goalStatus'],
   methods: {
     read: function read() {
@@ -37587,8 +37613,97 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("div", { staticClass: "row", attrs: { n: "" } }, [
+      _c("div", { staticClass: "col-lg-4 offset-lg-8" }, [
+        _c(
+          "form",
+          { attrs: { id: "filter-journal-form" } },
+          [
+            _c("input", {
+              attrs: { id: "user_id", name: "user_id", type: "hidden" }
+            }),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "datepicker",
+              _vm._b(
+                {
+                  staticStyle: { "margin-bottom": "10px" },
+                  attrs: {
+                    name: "dateFrom",
+                    placeholder: "Date From:",
+                    dateFrom: _vm.dateFrom
+                  }
+                },
+                "datepicker",
+                _vm.dateFrom,
+                false
+              )
+            ),
+            _vm._v(" "),
+            _c(
+              "datepicker",
+              _vm._b(
+                {
+                  attrs: {
+                    name: "dateTo",
+                    placeholder: "Date To:",
+                    dateTo: _vm.dateTo
+                  }
+                },
+                "datepicker",
+                _vm.dateTo,
+                false
+              )
+            ),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control mt-2",
+              attrs: {
+                name: "goalStatus",
+                placeholder: "Status Goal",
+                type: "text",
+                goalStatus: _vm.goalStatus
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticStyle: {
+              "margin-top": "10px",
+              "margin-right": "-10px",
+              "margin-bottom": "60px"
+            },
+            attrs: { slot: "footer" },
+            slot: "footer"
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary modal-default-button mr-2",
+                on: {
+                  click: function($event) {
+                    _vm.$emit(_vm.read)
+                  }
+                }
+              },
+              [_vm._v("Apply Filter")]
+            )
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
     _c("table", { staticClass: "table" }, [
-      _vm._m(0),
+      _vm._m(2),
       _vm._v(" "),
       _c(
         "tbody",
@@ -37604,6 +37719,29 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h5",
+      {
+        staticClass: "mt-5 col-6 text-left text-white",
+        staticStyle: { alignment: "left" }
+      },
+      [_c("span", [_vm._v("Date Range:")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "mt-5 col-lg-12 text-left text-white" }, [
+      _c("span", { staticStyle: { alignment: "left" } }, [
+        _vm._v("Status of the Goal:")
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
