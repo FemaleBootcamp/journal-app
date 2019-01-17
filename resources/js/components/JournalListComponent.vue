@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-lg-4 offset-lg-8">
                 <form id="filter-journal-form">
-                    <input id="user_id" name="user_id" type="hidden">
+                    <input id="user_id" v-model="userid" name="user_id" type="hidden">
                     <h5 class="mt-5 col-6 text-left text-white" style="alignment: left"><span>Date Range:</span></h5>
-                    <datepicker format="yyyy-MM-dd" name="dateFrom" placeholder="Date From:"
+                    <datepicker name="dateFrom" placeholder="Date From:"
                                 style="margin-bottom: 10px" v-model="dateFrom"></datepicker>
-                    <datepicker format="yyyy-MM-dd" name="dateTo" placeholder="Date To:" v-model="dateTo"></datepicker>
+                    <datepicker name="dateTo" placeholder="Date To:" v-model="dateTo"></datepicker>
                     <h5 class="mt-5 col-lg-12 text-left text-white"><span
                             style="alignment: left">Status of the Goal:</span></h5>
                     <input class="form-control mt-2" name="goalStatus" placeholder="Status Goal" type="text"
@@ -39,6 +39,9 @@
 </template>
 <script>
     import Datepicker from 'vuejs-datepicker';
+    import moment from 'moment';
+
+    Vue.prototype.moment = moment;
 
     function Journal({id, date}) {
         this.id = id;
@@ -50,14 +53,25 @@
         components: {
             Datepicker
         },
+        props: ['userid'],
         data() {
             return {
-                journals: []
+                journals: [],
+                dateFrom: null,
+                dateTo: null,
+                goalStatus: null,
             };
         },
         methods: {
-            read(dateFrom, dateTo, goalStatus) {
-                window.axios.get('/api/journals' + $('#filter-journal-form').serialize()).then(({data}) => {
+            read(userid = null, dateFrom = null, dateTo = null, goalStatus = null) {
+                window.axios.get('/api/journals', {
+                    params: {
+                        userId: userid,
+                        dateFrom: dateFrom,
+                        dateTo: dateTo,
+                        goalStatus: goalStatus,
+                    }
+                }).then(({data}) => {
                     data.forEach(journal => {
                         this.journals.push(new Journal(journal));
                     });
@@ -67,11 +81,15 @@
             },
             filter() {
                 this.journals = [];
-                this.read(dateFrom,dateTo,goalStatus);
+                this.read(
+                    this.userId,
+                    this.dateFrom == null ? null : moment(this.dateFrom).format('YYYY-MM-DD'),
+                    this.dateTo == null ? null : moment(this.dateTo).format('YYYY-MM-DD'),
+                    this.goalStatus);
             }
         },
         created() {
-            this.read(dateFrom,dateTo,goalStatus);
+            this.read(this.userId);
         }
     }
 </script>

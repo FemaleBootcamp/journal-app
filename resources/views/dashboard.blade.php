@@ -9,10 +9,7 @@
         </div>
         <button class="btn btn-primary mt-3" id="show-journal-create-modal" @click="showJournalCreateModal = true">Add New</button>
         <add-journal-modal  v-if="showJournalCreateModal" @close="showJournalCreateModal = false"></add-journal-modal>
-
-
-
-        <journals-list></journals-list>
+        <journals-list userid="{{$user->id}}"></journals-list>
     </section>
 </div>
 @endsection
