@@ -8,7 +8,7 @@
         </div>
     </section>
     <section>
-        <journals-list></journals-list>
+        <journals-list userid="{{$user->id}}"></journals-list>
     </section>
 </div>
 @endsection

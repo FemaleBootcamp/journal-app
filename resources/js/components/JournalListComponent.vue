@@ -30,44 +30,45 @@
 </template>
 <script>
 import axios from "axios";
+import moment from "moment";
+Vue.prototype.moment = moment;
 export default {
+  props: ["user_id"],
   data() {
     return {
       showJournalCreateModal: false,
-      journals: [
-        {
-          id: 1,
-          date: "2019-10-01",
-          goalForTomorrow: "Test Case",
-          grade: "B"
-        },
-        {
-          id: 2,
-          date: "2019-11-01",
-          goalForTomorrow: "Finish Homework",
-          grade: "C"
-        },
-        {
-          id: 3,
-          date: "2019-12-02",
-          goalForTomorrow: "Write the Graduation Thesis",
-          grade: "A"
-        }
-      ]
+      journals: []
     };
   },
   methods: {
-    // createJournal(date,text,plan_tomorrow,goal_tomorrow,goal_status) {
-    //   console.log(date);
-    //   console.log(text);
-    //   console.log(plan_tomorrow);
-    //   console.log(goal_tomorrow);
-    //   console.log(goal_status)
-    // },
-    createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
+    filter() {
+      this.journals = [];
+      this.read(
+        this.userid,
+        this.date == null ? null: moment(this.date).format("YYYY-MM-DD"),
+        this.dateFrom == null
+          ? null
+          : moment(this.dateFrom).format("YYYY-MM-DD"),          
+        this.dateTo == null ? null : moment(this.dateTo).format("YYYY-MM-DD"),
+        this.goalStatus
+      );
+    },
+
+    created() {
+      this.read(this.userid);
+    },
+    createJournal(
+      user_id,
+      date,
+      text,
+      plan_tomorrow,
+      goal_tomorrow,
+      goal_status
+    ) {
       axios
-        .post("api/journals", {          
-          date: "2019-10-01",
+        .post("api/journals", {
+          user_id: 1,
+          date: moment(date).format("YYYY-MM-DD"),
           text: text,
           plan_tomorrow: plan_tomorrow,
           goal_tomorrow: goal_tomorrow,
@@ -77,11 +78,10 @@ export default {
           console.log(response);
         })
         .then(function(response) {
-          console.log(response.data.errors);
+          console.log(response);
         });
-      this.journals.push();
+     this.journals.push();
     },
-
     deleteJournal(journals, id) {
       axios
         .delete("api/journals" + id)

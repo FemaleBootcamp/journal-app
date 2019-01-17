@@ -24,10 +24,8 @@ class JournalRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'=>null,
-            'date'=>'',
-            'created_at'=>'',
-            'updated_at'=>'',
+            'user_id' => 'required',
+            'date' => 'required',
             'text' => 'required|max:500',
             'plan_tomorrow' => 'required',
             'goal_tomorrow' => 'required|max:255',

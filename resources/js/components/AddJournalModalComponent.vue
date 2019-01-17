@@ -4,10 +4,10 @@
 
     <div slot="body">
       <form @submit="$emit(createJournal())">
+        <input id="user_id" v-model="user_id" name="user_id" type="hidden">
         <datepicker
           v-model="date"
           name="date"
-          format="yyyy-MM-dd"
           placeholder="Date"
           class="form-control"
         ></datepicker>
@@ -51,7 +51,7 @@
       <button class="btn btn-danger modal-default-button" @click="$emit('close')">Cancel</button>
       <button
         type="submit"
-        @click="$emit('createJournal', date, text, plan_tomorrow, goal_tomorrow,goal_status)"
+        @click="$emit('createJournal',user_id, date, text, plan_tomorrow, goal_tomorrow,goal_status)"
         class="btn btn-primary modal-default-button mr-2"
       >Save</button>
     </div>
@@ -60,17 +60,25 @@
 
 <script>
 import Datepicker from "vuejs-datepicker";
+import moment from "moment";
+Vue.prototype.moment = moment;
 export default {
   components: {
     Datepicker
   },
+
   data() {
     return {
-      date: "",
-      text: "",
-      plan_tomorrow: "",
-      goal_tomorrow: "",
-      goal_status: false
+      journals: [],
+      dateFrom: null,
+      dateTo: null,
+      goalStatus: null,
+      user_id: null,
+      date: null,
+      text: null,
+      plan_tomorrow: null,
+      goal_tomorrow: null,
+      goal_status: null
     };
   }
 };
