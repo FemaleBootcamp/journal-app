@@ -11,10 +11,11 @@ class JournalController extends Controller
 {
     public function store(JournalRequest $request)
     {
-        Journal::create($request->validated());
-        return response()->json([
-            'status' => 'success'],
-            201);
+        $journal = Journal::create($request->validated());
+        return response()->json(
+            $journal,
+            201
+        );
     }
 
 

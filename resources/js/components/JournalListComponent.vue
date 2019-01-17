@@ -29,11 +29,15 @@
   </div>
 </template>
 <script>
+function Journal({ id, date }) {
+  this.id = id;
+  this.date = date;
+}
 import axios from "axios";
 import moment from "moment";
 Vue.prototype.moment = moment;
 export default {
-  props: ["user_id"],
+  props: ["userid"],
   data() {
     return {
       showJournalCreateModal: false,
@@ -41,46 +45,19 @@ export default {
     };
   },
   methods: {
-    filter() {
-      this.journals = [];
-      this.read(
-        this.userid,
-        this.date == null ? null: moment(this.date).format("YYYY-MM-DD"),
-        this.dateFrom == null
-          ? null
-          : moment(this.dateFrom).format("YYYY-MM-DD"),          
-        this.dateTo == null ? null : moment(this.dateTo).format("YYYY-MM-DD"),
-        this.goalStatus
-      );
-    },
-
-    created() {
-      this.read(this.userid);
-    },
-    createJournal(
-      user_id,
-      date,
-      text,
-      plan_tomorrow,
-      goal_tomorrow,
-      goal_status
-    ) {
+    createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
       axios
         .post("api/journals", {
-          user_id: 1,
+          user_id: this.userid,
           date: moment(date).format("YYYY-MM-DD"),
           text: text,
           plan_tomorrow: plan_tomorrow,
           goal_tomorrow: goal_tomorrow,
           goal_status: goal_status
         })
-        .then(response => {
-          console.log(response);
+          .then(({data}) => {
+              this.journals.push(new Journal(data));
         })
-        .then(function(response) {
-          console.log(response);
-        });
-     this.journals.push();
     },
     deleteJournal(journals, id) {
       axios

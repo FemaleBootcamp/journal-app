@@ -1764,8 +1764,6 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -1827,19 +1825,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-
-Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
+      userid: null,
       journals: [],
-      dateFrom: null,
-      dateTo: null,
-      goalStatus: null,
-      user_id: null,
       date: null,
       text: null,
       plan_tomorrow: null,
@@ -1933,11 +1926,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+function Journal(_ref) {
+  var id = _ref.id,
+      date = _ref.date;
+  this.id = id;
+  this.date = date;
+}
+
 
 
 Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["user_id"],
+  props: ["userid"],
   data: function data() {
     return {
       showJournalCreateModal: false,
@@ -1945,33 +1945,27 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
     };
   },
   methods: {
-    filter: function filter() {
-      this.journals = [];
-      this.read(this.userid, this.date == null ? null : moment__WEBPACK_IMPORTED_MODULE_1___default()(this.date).format("YYYY-MM-DD"), this.dateFrom == null ? null : moment__WEBPACK_IMPORTED_MODULE_1___default()(this.dateFrom).format("YYYY-MM-DD"), this.dateTo == null ? null : moment__WEBPACK_IMPORTED_MODULE_1___default()(this.dateTo).format("YYYY-MM-DD"), this.goalStatus);
-    },
-    created: function created() {
-      this.read(this.userid);
-    },
-    createJournal: function createJournal(user_id, date, text, plan_tomorrow, goal_tomorrow, goal_status) {
+    createJournal: function createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
+      var _this = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/journals", {
-        user_id: 1,
+        user_id: this.userid,
         date: moment__WEBPACK_IMPORTED_MODULE_1___default()(date).format("YYYY-MM-DD"),
         text: text,
         plan_tomorrow: plan_tomorrow,
         goal_tomorrow: goal_tomorrow,
         goal_status: goal_status
-      }).then(function (response) {
-        console.log(response);
-      }).then(function (response) {
-        console.log(response);
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+
+        _this.journals.push(new Journal(data));
       });
-      this.journals.push();
     },
     deleteJournal: function deleteJournal(journals, id) {
-      var _this = this;
+      var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.delete("api/journals" + id).then(function (response) {
-        return _this.journals.splice(index, 1);
+        return _this2.journals.splice(index, 1);
       });
       window.location.reload();
     }
@@ -54760,18 +54754,18 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.user_id,
-                expression: "user_id"
+                value: _vm.userid,
+                expression: "userid"
               }
             ],
             attrs: { id: "user_id", name: "user_id", type: "hidden" },
-            domProps: { value: _vm.user_id },
+            domProps: { value: _vm.userid },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.user_id = $event.target.value
+                _vm.userid = $event.target.value
               }
             }
           }),
@@ -54949,7 +54943,6 @@ var render = function() {
             click: function($event) {
               _vm.$emit(
                 "createJournal",
-                _vm.user_id,
                 _vm.date,
                 _vm.text,
                 _vm.plan_tomorrow,
