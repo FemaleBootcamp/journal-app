@@ -1967,10 +1967,8 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
         var data = _ref2.data;
 
         _this.journals.push(new Journal(data));
-      }).then(function (response) {
-        _this.reset();
 
-        $("#addJournalModal").modal("hide");
+        _this.showJournalCreateModal = false;
       }).catch(function (error) {
         var msgs = _this.messages;
         var errors = error.response.data.errors;
@@ -54754,7 +54752,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("modal-component", { staticStyle: { color: "black" } }, [
+  return _c("modal-component", { staticClass: "black-text-modal" }, [
     _c("div", { attrs: { slot: "header" }, slot: "header" }, [
       _vm._v("Add new record")
     ]),

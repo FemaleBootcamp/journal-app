@@ -71,18 +71,22 @@ export default {
         })
         .then(({ data }) => {
           this.journals.push(new Journal(data));
-          this.showJournalCreateModal = false
+          this.showJournalCreateModal = false;
         })
         .catch(error => {
-          let msgs = this.messages;
-          let errors = error.response.data.errors;
+          if (error.response.status == 422) {
+            let msgs = this.messages;
+            let errors = error.response.data.errors;
 
-          Object.keys(errors).forEach(key => {
-            errors[key].forEach(function(error) {
-              msgs.push(error);
+            Object.keys(errors).forEach(key => {
+              errors[key].forEach(function(error) {
+                msgs.push(error);
+              });
             });
-          });
-          this.messages = msgs;
+            this.messages = msgs;
+          } else {
+            this.messages = ["Server error."];
+          }
         });
     },
     deleteJournal(journals, id) {

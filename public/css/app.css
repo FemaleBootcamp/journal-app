@@ -10593,6 +10593,10 @@ body {
   text-align: center;
 }
 
+.black-text-modal {
+  color: black;
+}
+
 span {
   color: #CD3266;
 }
