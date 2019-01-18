@@ -37,11 +37,9 @@
             id="defaultCheck1"
           >
           <label class="form-check-label" for="defaultCheck1">Did you achieve today's goal?</label>
-          <ul id="example-2">
-            <ul>
-              <li v-for="(message, index) in messages" :key="`message-${index}`"></li>
-            </ul>
-          </ul>
+         
+            <span><p v-for="message in messages" v-bind="message" :key="message">{{ message }}</p></span>
+          
         </div>
       </form>
     </div>
@@ -60,12 +58,13 @@
 <script>
 import Datepicker from "vuejs-datepicker";
 export default {
+  props: ["messages"],
+
   components: {
     Datepicker
   },
   data() {
     return {
-      messages: [],
       journals: [],
       date: null,
       text: null,

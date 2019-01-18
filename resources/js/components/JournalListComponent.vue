@@ -15,6 +15,7 @@
               @click="showJournalCreateModal = true"
             >Add New</button>
             <add-journal-modal
+              :messages="messages"
               id="addJournalModal"
               v-if="showJournalCreateModal"
               @createJournal="createJournal"

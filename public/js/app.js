@@ -1821,16 +1821,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["messages"],
   components: {
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
-      messages: [],
       journals: [],
       date: null,
       text: null,
@@ -1895,6 +1893,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+//
 //
 //
 //
@@ -54916,15 +54915,15 @@ var render = function() {
               [_vm._v("Did you achieve today's goal?")]
             ),
             _vm._v(" "),
-            _c("ul", { attrs: { id: "example-2" } }, [
-              _c(
-                "ul",
-                _vm._l(_vm.messages, function(message, index) {
-                  return _c("li", { key: "message-" + index })
-                }),
-                0
-              )
-            ])
+            _c(
+              "span",
+              _vm._l(_vm.messages, function(message) {
+                return _c("p", _vm._b({ key: message }, "p", message, false), [
+                  _vm._v(_vm._s(message))
+                ])
+              }),
+              0
+            )
           ])
         ],
         1
@@ -55159,7 +55158,7 @@ var render = function() {
               _vm._v(" "),
               _vm.showJournalCreateModal
                 ? _c("add-journal-modal", {
-                    attrs: { id: "addJournalModal" },
+                    attrs: { messages: _vm.messages, id: "addJournalModal" },
                     on: {
                       createJournal: _vm.createJournal,
                       close: function($event) {
