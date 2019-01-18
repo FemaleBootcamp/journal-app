@@ -27,7 +27,7 @@ class JournalController extends Controller
      * based on a filter.
      */
 
-    public function get(Request $request, $id) {
+    public function get(Request $request) {
 
         $goalStatus=$request->goalStatus;
         $dateFrom=$request->dateFrom;

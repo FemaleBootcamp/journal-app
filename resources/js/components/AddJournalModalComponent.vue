@@ -1,5 +1,5 @@
 <template>
-  <modal-component style="color:black">
+  <modal-component class="black-text-modal">
     <div slot="header">Add new record</div>
 
     <div slot="body">

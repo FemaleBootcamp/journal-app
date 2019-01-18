@@ -71,10 +71,7 @@ export default {
         })
         .then(({ data }) => {
           this.journals.push(new Journal(data));
-        })
-        .then(response => {
-          this.reset();
-          $("#addJournalModal").modal("hide");
+          this.showJournalCreateModal = false
         })
         .catch(error => {
           let msgs = this.messages;
