@@ -1823,7 +1823,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1831,7 +1830,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      userid: null,
+      messages: [],
       journals: [],
       date: null,
       text: null,
@@ -1926,11 +1925,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 function Journal(_ref) {
   var id = _ref.id,
-      date = _ref.date;
+      date = _ref.date,
+      text = _ref.text,
+      plan_tomorrow = _ref.plan_tomorrow,
+      goal_tomorrow = _ref.goal_tomorrow,
+      goal_status = _ref.goal_status;
   this.id = id;
   this.date = date;
+  this.text = text;
+  this.plan_tomorrow = plan_tomorrow;
+  this.goal_tomorrow = goal_tomorrow;
+  this.goal_status = goal_status;
 }
 
 
@@ -1941,7 +1949,8 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
   data: function data() {
     return {
       showJournalCreateModal: false,
-      journals: []
+      journals: [],
+      messages: []
     };
   },
   methods: {
@@ -1959,6 +1968,19 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
         var data = _ref2.data;
 
         _this.journals.push(new Journal(data));
+      }).then(function (response) {
+        _this.reset();
+
+        $("#addJournalModal").modal("hide");
+      }).catch(function (error) {
+        var msgs = _this.messages;
+        var errors = error.response.data.errors;
+        Object.keys(errors).forEach(function (key) {
+          errors[key].forEach(function (error) {
+            msgs.push(error);
+          });
+        });
+        _this.messages = msgs;
       });
     },
     deleteJournal: function deleteJournal(journals, id) {
@@ -54749,27 +54771,6 @@ var render = function() {
           }
         },
         [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.userid,
-                expression: "userid"
-              }
-            ],
-            attrs: { id: "user_id", name: "user_id", type: "hidden" },
-            domProps: { value: _vm.userid },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.userid = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
           _c("datepicker", {
             staticClass: "form-control",
             attrs: { name: "date", placeholder: "Date" },
@@ -54913,7 +54914,17 @@ var render = function() {
                 attrs: { for: "defaultCheck1" }
               },
               [_vm._v("Did you achieve today's goal?")]
-            )
+            ),
+            _vm._v(" "),
+            _c("ul", { attrs: { id: "example-2" } }, [
+              _c(
+                "ul",
+                _vm._l(_vm.messages, function(message, index) {
+                  return _c("li", { key: "message-" + index })
+                }),
+                0
+              )
+            ])
           ])
         ],
         1
@@ -55148,6 +55159,7 @@ var render = function() {
               _vm._v(" "),
               _vm.showJournalCreateModal
                 ? _c("add-journal-modal", {
+                    attrs: { id: "addJournalModal" },
                     on: {
                       createJournal: _vm.createJournal,
                       close: function($event) {

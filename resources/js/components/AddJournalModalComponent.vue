@@ -4,13 +4,7 @@
 
     <div slot="body">
       <form @submit="$emit(createJournal())">
-        <input id="user_id" v-model="userid" name="user_id" type="hidden">
-        <datepicker
-          v-model="date"
-          name="date"
-          placeholder="Date"
-          class="form-control"
-        ></datepicker>
+        <datepicker v-model="date" name="date" placeholder="Date" class="form-control"></datepicker>
         <input
           v-model="text"
           name="database_column"
@@ -43,6 +37,11 @@
             id="defaultCheck1"
           >
           <label class="form-check-label" for="defaultCheck1">Did you achieve today's goal?</label>
+          <ul id="example-2">
+            <ul>
+              <li v-for="(message, index) in messages" :key="`message-${index}`"></li>
+            </ul>
+          </ul>
         </div>
       </form>
     </div>
@@ -66,7 +65,7 @@ export default {
   },
   data() {
     return {
-      userid:null,
+      messages: [],
       journals: [],
       date: null,
       text: null,

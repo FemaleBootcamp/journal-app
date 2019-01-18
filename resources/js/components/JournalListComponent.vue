@@ -15,6 +15,7 @@
               @click="showJournalCreateModal = true"
             >Add New</button>
             <add-journal-modal
+              id="addJournalModal"
               v-if="showJournalCreateModal"
               @createJournal="createJournal"
               @close="showJournalCreateModal = false"
@@ -29,9 +30,20 @@
   </div>
 </template>
 <script>
-function Journal({ id, date }) {
+function Journal({
+  id,
+  date,
+  text,
+  plan_tomorrow,
+  goal_tomorrow,
+  goal_status
+}) {
   this.id = id;
   this.date = date;
+  this.text = text;
+  this.plan_tomorrow = plan_tomorrow;
+  this.goal_tomorrow = goal_tomorrow;
+  this.goal_status = goal_status;
 }
 import axios from "axios";
 import moment from "moment";
@@ -41,7 +53,8 @@ export default {
   data() {
     return {
       showJournalCreateModal: false,
-      journals: []
+      journals: [],
+      messages: []
     };
   },
   methods: {
@@ -55,9 +68,24 @@ export default {
           goal_tomorrow: goal_tomorrow,
           goal_status: goal_status
         })
-          .then(({data}) => {
-              this.journals.push(new Journal(data));
+        .then(({ data }) => {
+          this.journals.push(new Journal(data));
         })
+        .then(response => {
+          this.reset();
+          $("#addJournalModal").modal("hide");
+        })
+        .catch(error => {
+          let msgs = this.messages;
+          let errors = error.response.data.errors;
+
+          Object.keys(errors).forEach(key => {
+            errors[key].forEach(function(error) {
+              msgs.push(error);
+            });
+          });
+          this.messages = msgs;
+        });
     },
     deleteJournal(journals, id) {
       axios
