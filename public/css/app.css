@@ -10620,16 +10620,3 @@ ul {
   width: 50%;
 }
 
-.modal-dialog {
-  overflow-y: initial !important;
-}
-
-.modal-body {
-  max-height: calc(100vh - 200px);
-  overflow-y: scroll;
-}
-
-.black-text-modal {
-  color: black;
-}
-

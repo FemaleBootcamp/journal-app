@@ -1787,54 +1787,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["messages"],
   components: {
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  data: function data() {
-    return {
-      journals: [],
-      date: null,
-      text: null,
-      plan_tomorrow: null,
-      goal_tomorrow: null,
-      goal_status: null
-    };
   }
 });
 
@@ -1868,9 +1824,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["id", "date", "goalForTomorrow", "grade"]
+  props: ['id', 'date', 'goalForTomorrow', 'grade']
 });
 
 /***/ }),
@@ -1884,8 +1839,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
 //
@@ -1932,108 +1886,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-function Journal(_ref) {
-  var id = _ref.id,
-      date = _ref.date,
-      text = _ref.text,
-      plan_tomorrow = _ref.plan_tomorrow,
-      goal_tomorrow = _ref.goal_tomorrow,
-      goal_status = _ref.goal_status;
-  this.id = id;
-  this.date = date;
-  this.text = text;
-  this.plan_tomorrow = plan_tomorrow;
-  this.goal_tomorrow = goal_tomorrow;
-  this.goal_status = goal_status;
-}
-
 
 
 Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
+
+function Journal(_ref) {
+  var id = _ref.id,
+      date = _ref.date;
+  this.id = id;
+  this.date = date;
+}
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["userid"],
+  components: {
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: ['userid'],
   data: function data() {
     return {
-      showJournalCreateModal: false,
       journals: [],
-      messages: []
+      dateFrom: null,
+      dateTo: null,
+      goalStatus: null
     };
   },
   methods: {
-    createJournal: function createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
-      var _this = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/journals", {
-        user_id: this.userid,
-        date: moment__WEBPACK_IMPORTED_MODULE_1___default()(date).format("YYYY-MM-DD"),
-        text: text,
-        plan_tomorrow: plan_tomorrow,
-        goal_tomorrow: goal_tomorrow,
-        goal_status: goal_status
-      }).then(function (_ref2) {
-        var data = _ref2.data;
-
-        _this.journals.push(new Journal(data));
-
-        _this.showJournalCreateModal = false;
-      }).catch(function (error) {
-        if (error.response.status == 422) {
-          var msgs = _this.messages;
-          var errors = error.response.data.errors;
-          Object.keys(errors).forEach(function (key) {
-            errors[key].forEach(function (error) {
-              msgs.push(error);
-            });
-          });
-          _this.messages = msgs;
-        } else {
-          _this.messages = ["Server error."];
-        }
-      });
-    },
-    deleteJournal: function deleteJournal(journals, id) {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.delete("api/journals" + id).then(function (response) {
-        return _this2.journals.splice(index, 1);
-      });
-      window.location.reload();
-    },
     read: function read() {
-      var _this3 = this;
+      var _this = this;
 
       var dateFrom = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var dateTo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var goalStatus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      window.axios.get("/api/journals", {
+      window.axios.get('/api/journals', {
         params: {
           userId: this.userid,
           dateFrom: dateFrom,
           dateTo: dateTo,
           goalStatus: goalStatus
         }
-      }).then(function (_ref3) {
-        var data = _ref3.data;
+      }).then(function (_ref2) {
+        var data = _ref2.data;
         data.forEach(function (journal) {
-          _this3.journals.push(new Journal(journal));
+          _this.journals.push(new Journal(journal));
         });
       }, function (error) {
         console.error(error);
@@ -2041,7 +1935,7 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
     },
     filter: function filter() {
       this.journals = [];
-      this.read(this.dateFrom == null ? null : moment__WEBPACK_IMPORTED_MODULE_1___default()(this.dateFrom).format("YYYY-MM-DD"), this.dateTo == null ? null : moment__WEBPACK_IMPORTED_MODULE_1___default()(this.dateTo).format("YYYY-MM-DD"), this.goalStatus);
+      this.read(this.dateFrom == null ? null : moment__WEBPACK_IMPORTED_MODULE_1___default()(this.dateFrom).format('YYYY-MM-DD'), this.dateTo == null ? null : moment__WEBPACK_IMPORTED_MODULE_1___default()(this.dateTo).format('YYYY-MM-DD'), this.goalStatus);
     }
   },
   created: function created() {
@@ -6322,7 +6216,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.5);\n  display: table;\n  transition: opacity 0.3s ease;\n}\n.vdp-datepicker * {\n  border: 0;\n}\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-container {\n  width: 300px;\n  margin: 0px auto;\n  padding: 20px 30px;\n  background-color: #fff;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\n  transition: all 0.3s ease;\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\n  margin-top: 0;\n  color: #42b983;\n}\n.modal-body {\n  margin: 20px 0;\n}\n.modal-default-button {\n  float: right;\n}\n.modal-enter {\n  opacity: 0;\n}\n.modal-leave-active {\n  opacity: 0;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n", ""]);
+exports.push([module.i, "\n.modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .3s ease;\n}\n.vdp-datepicker * {\n    border: 0;\n}\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-container {\n  width: 300px;\n  margin: 0px auto;\n  padding: 20px 30px;\n  background-color: #fff;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n  transition: all .3s ease;\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\n  margin-top: 0;\n  color: #42b983;\n}\n.modal-body {\n  margin: 20px 0;\n}\n.modal-default-button {\n  float: right;\n}\n.modal-enter {\n  opacity: 0;\n}\n.modal-leave-active {\n  opacity: 0;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n", ""]);
 
 // exports
 
@@ -54810,7 +54704,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("modal-component", { staticClass: "black-text-modal" }, [
+  return _c("modal-component", [
     _c("div", { attrs: { slot: "header" }, slot: "header" }, [
       _vm._v("Add new record")
     ]),
@@ -54818,147 +54712,49 @@ var render = function() {
     _c("div", { attrs: { slot: "body" }, slot: "body" }, [
       _c(
         "form",
-        {
-          on: {
-            submit: function($event) {
-              _vm.$emit(_vm.createJournal())
-            }
-          }
-        },
+        { attrs: { id: "add-journal-form" } },
         [
           _c("datepicker", {
             staticClass: "form-control",
-            attrs: { name: "date", placeholder: "Date" },
-            model: {
-              value: _vm.date,
-              callback: function($$v) {
-                _vm.date = $$v
-              },
-              expression: "date"
-            }
+            attrs: { name: "date", format: "yyyy-MM-dd", placeholder: "Date" }
           }),
           _vm._v(" "),
           _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.text,
-                expression: "text"
-              }
-            ],
             staticClass: "form-control mt-2",
             attrs: {
               name: "database_column",
               type: "text",
               placeholder: "Text"
-            },
-            domProps: { value: _vm.text },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.text = $event.target.value
-              }
             }
           }),
           _vm._v(" "),
           _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.plan_tomorrow,
-                expression: "plan_tomorrow"
-              }
-            ],
             staticClass: "form-control mt-2",
             attrs: {
-              name: "plan_tomorrow",
+              name: "plan_next_day",
               id: "exampleFormControlTextarea1",
               rows: "3",
               placeholder: "Plan for next day "
-            },
-            domProps: { value: _vm.plan_tomorrow },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.plan_tomorrow = $event.target.value
-              }
             }
           }),
           _vm._v(" "),
           _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.goal_tomorrow,
-                expression: "goal_tomorrow"
-              }
-            ],
             staticClass: "form-control mt-2",
             attrs: {
               name: "goal_tomorrow",
               type: "text",
               placeholder: "Goal for tomorrow"
-            },
-            domProps: { value: _vm.goal_tomorrow },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.goal_tomorrow = $event.target.value
-              }
             }
           }),
           _vm._v(" "),
           _c("div", { staticClass: "form-check mt-2" }, [
             _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.goal_status,
-                  expression: "goal_status"
-                }
-              ],
               staticClass: "form-check-input",
               attrs: {
-                name: "goal_status",
+                name: "is_achieved",
                 type: "checkbox",
                 value: "",
                 id: "defaultCheck1"
-              },
-              domProps: {
-                checked: Array.isArray(_vm.goal_status)
-                  ? _vm._i(_vm.goal_status, "") > -1
-                  : _vm.goal_status
-              },
-              on: {
-                change: function($event) {
-                  var $$a = _vm.goal_status,
-                    $$el = $event.target,
-                    $$c = $$el.checked ? true : false
-                  if (Array.isArray($$a)) {
-                    var $$v = "",
-                      $$i = _vm._i($$a, $$v)
-                    if ($$el.checked) {
-                      $$i < 0 && (_vm.goal_status = $$a.concat([$$v]))
-                    } else {
-                      $$i > -1 &&
-                        (_vm.goal_status = $$a
-                          .slice(0, $$i)
-                          .concat($$a.slice($$i + 1)))
-                    }
-                  } else {
-                    _vm.goal_status = $$c
-                  }
-                }
               }
             }),
             _vm._v(" "),
@@ -54968,17 +54764,11 @@ var render = function() {
                 staticClass: "form-check-label",
                 attrs: { for: "defaultCheck1" }
               },
-              [_vm._v("Did you achieve today's goal?")]
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              _vm._l(_vm.messages, function(message) {
-                return _c("p", _vm._b({ key: message }, "p", message, false), [
-                  _vm._v(_vm._s(message))
-                ])
-              }),
-              0
+              [
+                _vm._v(
+                  "\n                Did you achieve today's goal?\n                "
+                )
+              ]
             )
           ])
         ],
@@ -55004,71 +54794,13 @@ var render = function() {
         "button",
         {
           staticClass: "btn btn-primary modal-default-button mr-2",
-          attrs: { type: "submit" },
           on: {
             click: function($event) {
-              _vm.$emit(
-                "createJournal",
-                _vm.date,
-                _vm.text,
-                _vm.plan_tomorrow,
-                _vm.goal_tomorrow,
-                _vm.goal_status
-              )
+              _vm.$emit("close")
             }
           }
         },
         [_vm._v("Save")]
-      )
-    ]),
-    _vm._v("F\n")
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ConfirmationModalComponent.vue?vue&type=template&id=5befb890&":
-/*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ConfirmationModalComponent.vue?vue&type=template&id=5befb890& ***!
-  \*****************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("modal-component", { attrs: { id: "confirmationCom" } }, [
-    _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-      _c("h1", [_vm._v("Are You Sure?")])
-    ]),
-    _vm._v(" "),
-    _c("div", { attrs: { slot: "body" }, slot: "body" }, [
-      _c("p", [_vm._v("Are you sure you want to delete this journal?")])
-    ]),
-    _vm._v(" "),
-    _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "showJournalDeleteModal" }
-        },
-        [_vm._v("Close")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-danger", attrs: { type: "button" } },
-        [_vm._v("Delete")]
       )
     ])
   ])
@@ -55096,15 +54828,15 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("tr", [
-    _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.id))]),
+    _c("th", { attrs: { scope: "row" } }, [_vm._v(" " + _vm._s(_vm.id))]),
     _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.date))]),
+    _c("td", [_vm._v(" " + _vm._s(_vm.date))]),
     _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.goalForTomorrow))]),
+    _c("td", [_vm._v(" " + _vm._s(_vm.goalForTomorrow))]),
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.grade))]),
+    _c("td", [_vm._v(" " + _vm._s(_vm.grade))]),
     _vm._v(" "),
     _vm._m(1)
   ])
@@ -55151,10 +54883,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c(
         "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: { id: "show-journal-delete-modal", type: "button" }
-        },
+        { staticClass: "btn btn-danger", attrs: { type: "button" } },
         [_vm._v("Delete")]
       )
     ])
@@ -55242,41 +54971,35 @@ var render = function() {
         _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
+          _c("select", { staticClass: "form-control", attrs: { id: "sel1" } }, [
+            _c(
+              "option",
+              {
+                model: {
                   value: _vm.goalStatus,
+                  callback: function($$v) {
+                    _vm.goalStatus = $$v
+                  },
                   expression: "goalStatus"
                 }
-              ],
-              staticClass: "form-control",
-              attrs: { id: "sel1" },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.goalStatus = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
+              },
+              [_vm._v("Achieved")]
+            ),
+            _vm._v(" "),
+            _c(
+              "option",
+              {
+                model: {
+                  value: _vm.goalStatus,
+                  callback: function($$v) {
+                    _vm.goalStatus = $$v
+                  },
+                  expression: "goalStatus"
                 }
-              }
-            },
-            [
-              _c("option", [_vm._v("Achieved")]),
-              _vm._v(" "),
-              _c("option", [_vm._v("Not-Achieved")])
-            ]
-          )
+              },
+              [_vm._v("Not-Achieved")]
+            )
+          ])
         ]),
         _vm._v(" "),
         _c(
@@ -55291,52 +55014,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("table", { staticClass: "table" }, [
-      _c("thead", { staticClass: "thead-dark" }, [
-        _c("tr", [
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Date")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Goal for tomorrow")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Achievment")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Grade for the day")]),
-          _vm._v(" "),
-          _c(
-            "th",
-            { attrs: { scope: "col" } },
-            [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary mt-3",
-                  attrs: { id: "show-journal-create-modal" },
-                  on: {
-                    click: function($event) {
-                      _vm.showJournalCreateModal = true
-                    }
-                  }
-                },
-                [_vm._v("Add New")]
-              ),
-              _vm._v(" "),
-              _vm.showJournalCreateModal
-                ? _c("add-journal-modal", {
-                    attrs: { messages: _vm.messages, id: "addJournalModal" },
-                    on: {
-                      createJournal: _vm.createJournal,
-                      close: function($event) {
-                        _vm.showJournalCreateModal = false
-                      }
-                    }
-                  })
-                : _vm._e()
-            ],
-            1
-          )
-        ])
-      ]),
+      _vm._m(2),
       _vm._v(" "),
       _c(
         "tbody",
@@ -55372,6 +55050,26 @@ var staticRenderFns = [
     return _c("h5", { staticClass: "mt-5 text-left text-white" }, [
       _c("span", { staticStyle: { alignment: "left" } }, [
         _vm._v("Status of the Goal:")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Date")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Goal for tomorrow")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Achievment")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Grade for the day")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Details")])
       ])
     ])
   }
@@ -68210,7 +67908,6 @@ Vue.component('journal', __webpack_require__(/*! ./components/JournalComponent.v
 Vue.component('journals-list', __webpack_require__(/*! ./components/JournalListComponent.vue */ "./resources/js/components/JournalListComponent.vue").default);
 Vue.component('modal-component', __webpack_require__(/*! ./components/ModalComponent.vue */ "./resources/js/components/ModalComponent.vue").default);
 Vue.component('add-journal-modal', __webpack_require__(/*! ./components/AddJournalModalComponent.vue */ "./resources/js/components/AddJournalModalComponent.vue").default);
-Vue.component('delete-component', __webpack_require__(/*! ./components/ConfirmationModalComponent.vue */ "./resources/js/components/ConfirmationModalComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -68218,7 +67915,14 @@ Vue.component('delete-component', __webpack_require__(/*! ./components/Confirmat
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  components: {
+    datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: {
+    showJournalCreateModal: false,
+    showJournalFilterModal: false
+  }
 });
 
 /***/ }),
@@ -68345,59 +68049,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddJournalModalComponent_vue_vue_type_template_id_5176139e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddJournalModalComponent_vue_vue_type_template_id_5176139e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/ConfirmationModalComponent.vue":
-/*!****************************************************************!*\
-  !*** ./resources/js/components/ConfirmationModalComponent.vue ***!
-  \****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ConfirmationModalComponent_vue_vue_type_template_id_5befb890___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConfirmationModalComponent.vue?vue&type=template&id=5befb890& */ "./resources/js/components/ConfirmationModalComponent.vue?vue&type=template&id=5befb890&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _ConfirmationModalComponent_vue_vue_type_template_id_5befb890___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ConfirmationModalComponent_vue_vue_type_template_id_5befb890___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/ConfirmationModalComponent.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/ConfirmationModalComponent.vue?vue&type=template&id=5befb890&":
-/*!***********************************************************************************************!*\
-  !*** ./resources/js/components/ConfirmationModalComponent.vue?vue&type=template&id=5befb890& ***!
-  \***********************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConfirmationModalComponent_vue_vue_type_template_id_5befb890___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ConfirmationModalComponent.vue?vue&type=template&id=5befb890& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ConfirmationModalComponent.vue?vue&type=template&id=5befb890&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConfirmationModalComponent_vue_vue_type_template_id_5befb890___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConfirmationModalComponent_vue_vue_type_template_id_5befb890___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
