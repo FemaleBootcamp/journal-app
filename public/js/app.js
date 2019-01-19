@@ -1954,6 +1954,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -55293,7 +55296,7 @@ var render = function() {
             staticStyle: { "margin-top": "30px", "margin-left": "60px" },
             on: { click: _vm.filter }
           },
-          [_vm._v("Apply Filter")]
+          [_vm._v("Apply Filter\n            ")]
         )
       ])
     ]),
@@ -55326,17 +55329,17 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Add New")]
+                [_vm._v("Add New\n                ")]
               ),
               _vm._v(" "),
               _vm.showJournalCreateModal
                 ? _c("add-journal-modal", {
                     attrs: { messages: _vm.messages, id: "addJournalModal" },
                     on: {
-                      createJournal: _vm.createJournal,
                       close: function($event) {
                         _vm.showJournalCreateModal = false
-                      }
+                      },
+                      createJournal: _vm.createJournal
                     }
                   })
                 : _vm._e()
