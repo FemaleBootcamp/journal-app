@@ -1889,10 +1889,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -1957,7 +1958,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
-Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
+
+Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_2___default.a;
 
 function Journal(_ref) {
   var id = _ref.id,
@@ -1976,19 +1978,61 @@ function Journal(_ref) {
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Datepicker: Datepicker
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: ["userid"],
   data: function data() {
     return {
       showJournalCreateModal: false,
       journals: [],
-      messages: []
+      messages: [],
+      dateFrom: null,
+      dateTo: null,
+      goalStatus: null
     };
   },
   methods: {
-    read: function read() {
+    createJournal: function createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
       var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/journals", {
+        user_id: this.userid,
+        date: moment__WEBPACK_IMPORTED_MODULE_2___default()(date).format("YYYY-MM-DD"),
+        text: text,
+        plan_tomorrow: plan_tomorrow,
+        goal_tomorrow: goal_tomorrow,
+        goal_status: goal_status
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+
+        _this.journals.push(new Journal(data));
+
+        _this.showJournalCreateModal = false;
+      }).catch(function (error) {
+        if (error.response.status == 422) {
+          var msgs = _this.messages;
+          var errors = error.response.data.errors;
+          Object.keys(errors).forEach(function (key) {
+            errors[key].forEach(function (error) {
+              msgs.push(error);
+            });
+          });
+          _this.messages = msgs;
+        } else {
+          _this.messages = ["Server error."];
+        }
+      });
+    },
+    deleteJournal: function deleteJournal(journals, id) {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete("api/journals" + id).then(function (response) {
+        return _this2.journals.splice(index, 1);
+      });
+      window.location.reload();
+    },
+    read: function read() {
+      var _this3 = this;
 
       var dateFrom = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var dateTo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -2000,10 +2044,10 @@ function Journal(_ref) {
           dateTo: dateTo,
           goalStatus: goalStatus
         }
-      }).then(function (_ref2) {
-        var data = _ref2.data;
+      }).then(function (_ref3) {
+        var data = _ref3.data;
         data.forEach(function (journal) {
-          _this.journals.push(new Journal(journal));
+          _this3.journals.push(new Journal(journal));
         });
       }, function (error) {
         console.error(error);
@@ -2011,50 +2055,11 @@ function Journal(_ref) {
     },
     filter: function filter() {
       this.journals = [];
-      this.read(this.dateFrom == null ? null : moment__WEBPACK_IMPORTED_MODULE_1___default()(this.dateFrom).format("YYYY-MM-DD"), this.dateTo == null ? null : moment__WEBPACK_IMPORTED_MODULE_1___default()(this.dateTo).format("YYYY-MM-DD"), this.goalStatus);
+      this.read(this.dateFrom == null ? null : moment__WEBPACK_IMPORTED_MODULE_2___default()(this.dateFrom).format("YYYY-MM-DD"), this.dateTo == null ? null : moment__WEBPACK_IMPORTED_MODULE_2___default()(this.dateTo).format("YYYY-MM-DD"), this.goalStatus);
     }
   },
   created: function created() {
     this.read();
-  },
-  createJournal: function createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
-    var _this2 = this;
-
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("api/journals", {
-      user_id: this.userid,
-      date: moment__WEBPACK_IMPORTED_MODULE_1___default()(date).format("YYYY-MM-DD"),
-      text: text,
-      plan_tomorrow: plan_tomorrow,
-      goal_tomorrow: goal_tomorrow,
-      goal_status: goal_status
-    }).then(function (_ref3) {
-      var data = _ref3.data;
-
-      _this2.journals.push(new Journal(data));
-
-      _this2.showJournalCreateModal = false;
-    }).catch(function (error) {
-      if (error.response.status == 422) {
-        var msgs = _this2.messages;
-        var errors = error.response.data.errors;
-        Object.keys(errors).forEach(function (key) {
-          errors[key].forEach(function (error) {
-            msgs.push(error);
-          });
-        });
-        _this2.messages = msgs;
-      } else {
-        _this2.messages = ["Server error."];
-      }
-    });
-  },
-  deleteJournal: function deleteJournal(journals, id) {
-    var _this3 = this;
-
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.delete("api/journals" + id).then(function (response) {
-      return _this3.journals.splice(index, 1);
-    });
-    window.location.reload();
   }
 });
 
@@ -54983,9 +54988,7 @@ var render = function() {
             _c(
               "span",
               _vm._l(_vm.messages, function(message) {
-                return _c("p", _vm._b({ key: message }, "p", message, false), [
-                  _vm._v(_vm._s(message))
-                ])
+                return _c("p", { key: message }, [_vm._v(_vm._s(message))])
               }),
               0
             )
@@ -55290,7 +55293,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-primary modal-default-button mr-2",
+            staticClass: "mb-5 btn btn-primary modal-default-button mr-2",
             on: { click: _vm.filter }
           },
           [_vm._v("Apply Filter")]
@@ -55367,7 +55370,7 @@ var staticRenderFns = [
     return _c(
       "h5",
       {
-        staticClass: "mt-5 text-left text-white",
+        staticClass: "text-left text-white",
         staticStyle: { alignment: "left" }
       },
       [_c("span", [_vm._v("Date Range:")])]
@@ -55377,7 +55380,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "mt-5 text-left text-white" }, [
+    return _c("h5", { staticClass: "text-left text-white" }, [
       _c("span", { staticStyle: { alignment: "left" } }, [
         _vm._v("Status of the Goal:")
       ])

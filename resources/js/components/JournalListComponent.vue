@@ -4,7 +4,7 @@
       <div class="col-lg-3 d-lg-inline">
         <form id="filter-journal-form">
           <input id="user_id" v-model="userid" name="user_id" type="hidden">
-          <h5 class="mt-5 text-left text-white" style="alignment: left">
+          <h5 class="text-left text-white" style="alignment: left">
             <span>Date Range:</span>
           </h5>
           <datepicker
@@ -17,7 +17,7 @@
         </form>
       </div>
       <div class="col-lg-4 offset-1">
-        <h5 class="mt-5 text-left text-white">
+        <h5 class="text-left text-white">
           <span style="alignment: left">Status of the Goal:</span>
         </h5>
         <div class="form-group">
@@ -26,7 +26,7 @@
             <option>Not-Achieved</option>
           </select>
         </div>
-        <button @click="filter" class="btn btn-primary modal-default-button mr-2">Apply Filter</button>
+        <button @click="filter" class="mb-5 btn btn-primary modal-default-button mr-2">Apply Filter</button>
       </div>
     </div>
 
@@ -61,6 +61,7 @@
   </div>
 </template>
 <script>
+import Datepicker from "vuejs-datepicker";
 import axios from "axios";
 import moment from "moment";
 Vue.prototype.moment = moment;
@@ -90,10 +91,49 @@ export default {
     return {
       showJournalCreateModal: false,
       journals: [],
-      messages: []
+      messages: [],
+      dateFrom: null,
+      dateTo: null,
+      goalStatus: null
     };
   },
   methods: {
+    createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
+      axios
+        .post("api/journals", {
+          user_id: this.userid,
+          date: moment(date).format("YYYY-MM-DD"),
+          text: text,
+          plan_tomorrow: plan_tomorrow,
+          goal_tomorrow: goal_tomorrow,
+          goal_status: goal_status
+        })
+        .then(({ data }) => {
+          this.journals.push(new Journal(data));
+          this.showJournalCreateModal = false;
+        })
+        .catch(error => {
+          if (error.response.status == 422) {
+            let msgs = this.messages;
+            let errors = error.response.data.errors;
+
+            Object.keys(errors).forEach(key => {
+              errors[key].forEach(function(error) {
+                msgs.push(error);
+              });
+            });
+            this.messages = msgs;
+          } else {
+            this.messages = ["Server error."];
+          }
+        });
+    },
+    deleteJournal(journals, id) {
+      axios
+        .delete("api/journals" + id)
+        .then(response => this.journals.splice(index, 1));
+      window.location.reload();
+    },
     read(dateFrom = null, dateTo = null, goalStatus = null) {
       window.axios
         .get("/api/journals", {
@@ -128,42 +168,6 @@ export default {
   },
   created() {
     this.read();
-  },
-  createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
-    axios
-      .post("api/journals", {
-        user_id: this.userid,
-        date: moment(date).format("YYYY-MM-DD"),
-        text: text,
-        plan_tomorrow: plan_tomorrow,
-        goal_tomorrow: goal_tomorrow,
-        goal_status: goal_status
-      })
-      .then(({ data }) => {
-        this.journals.push(new Journal(data));
-        this.showJournalCreateModal = false;
-      })
-      .catch(error => {
-        if (error.response.status == 422) {
-          let msgs = this.messages;
-          let errors = error.response.data.errors;
-
-          Object.keys(errors).forEach(key => {
-            errors[key].forEach(function(error) {
-              msgs.push(error);
-            });
-          });
-          this.messages = msgs;
-        } else {
-          this.messages = ["Server error."];
-        }
-      });
-  },
-  deleteJournal(journals, id) {
-    axios
-      .delete("api/journals" + id)
-      .then(response => this.journals.splice(index, 1));
-    window.location.reload();
   }
 };
 </script>
