@@ -1,32 +1,30 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-lg-3 d-lg-inline">
-        <form id="filter-journal-form">
+      <div class="col-lg-3" style="margin-bottom: 5px">
           <input id="user_id" v-model="userid" name="user_id" type="hidden">
           <h5 class="text-left text-white" style="alignment: left">
             <span>Date Range:</span>
           </h5>
           <datepicker
-            name="dateFrom"
-            placeholder="Date From:"
-            style="margin-bottom: 10px"
-            v-model="dateFrom"
+                  name="dateFrom"
+                  placeholder="Date From:"
+                  style="margin-bottom: 10px"
+                  v-model="dateFrom"
           ></datepicker>
           <datepicker name="dateTo" placeholder="Date To:" v-model="dateTo"></datepicker>
-        </form>
-      </div>
+        </div>
       <div class="col-lg-4 offset-1">
         <h5 class="text-left text-white">
           <span style="alignment: left">Status of the Goal:</span>
         </h5>
-        <div class="form-group">
           <select v-model="goalStatus" class="form-control" id="sel1">
             <option>Achieved</option>
             <option>Not-Achieved</option>
           </select>
-        </div>
-        <button @click="filter" class="mb-5 btn btn-primary modal-default-button mr-2">Apply Filter</button>
+      </div>
+      <div class="col-lg-auto offset-2">
+          <button @click="filter" class="btn btn-group-lg btn-primary" style="margin-top: 30px; margin-left: 60px;" >Apply Filter</button>
       </div>
     </div>
 
