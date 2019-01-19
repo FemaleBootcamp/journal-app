@@ -10593,6 +10593,10 @@ body {
   text-align: center;
 }
 
+.black-text-modal {
+  color: black;
+}
+
 span {
   color: #CD3266;
 }
@@ -10618,5 +10622,14 @@ ul {
 
 #people {
   width: 50%;
+}
+
+.modal-dialog {
+  overflow-y: initial !important;
+}
+
+.modal-body {
+  max-height: calc(100vh - 200px);
+  overflow-y: scroll;
 }
 

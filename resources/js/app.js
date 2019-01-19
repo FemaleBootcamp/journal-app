@@ -30,6 +30,7 @@ Vue.component('journal', require('./components/JournalComponent.vue').default);
 Vue.component('journals-list', require('./components/JournalListComponent.vue').default);
 Vue.component('modal-component', require('./components/ModalComponent.vue').default);
 Vue.component('add-journal-modal', require('./components/AddJournalModalComponent.vue').default);
+Vue.component('delete-component', require('./components/ConfirmationModalComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -38,11 +39,4 @@ Vue.component('add-journal-modal', require('./components/AddJournalModalComponen
  */
 const app = new Vue({
     el: '#app',
-    components: {
-        datepicker
-    },
-    data: {
-        showJournalCreateModal: false,
-        showJournalFilterModal: false,
-    },
 });
