@@ -1816,11 +1816,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["messages"],
@@ -1874,8 +1869,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["id", "date", "goalForTomorrow", "grade"]
+  props: ["id", "date", "goalForTomorrow", "grade"],
+  data: function data() {
+    return {
+      showJournalDeleteModal: false
+    };
+  },
+  methods: {
+    deleteJournal: function deleteJournal(journal, id) {
+      var _this = this;
+
+      axios.delete("api/journals" + id).then(function (response) {
+        return _this.journals.splice(journal, 1);
+      });
+      window.location.reload();
+    }
+  }
 });
 
 /***/ }),
@@ -1893,7 +1908,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
-//
 //
 //
 //
@@ -1970,23 +1984,19 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
 
         _this.showJournalCreateModal = false;
       }).catch(function (error) {
-        var msgs = _this.messages;
-        var errors = error.response.data.errors;
-        Object.keys(errors).forEach(function (key) {
-          errors[key].forEach(function (error) {
-            msgs.push(error);
+        if (error.response.status == 422) {
+          var msgs = _this.messages;
+          var errors = error.response.data.errors;
+          Object.keys(errors).forEach(function (key) {
+            errors[key].forEach(function (error) {
+              msgs.push(error);
+            });
           });
-        });
-        _this.messages = msgs;
+          _this.messages = msgs;
+        } else {
+          _this.messages = ["Server error."];
+        }
       });
-    },
-    deleteJournal: function deleteJournal(journals, id) {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.delete("api/journals" + id).then(function (response) {
-        return _this2.journals.splice(index, 1);
-      });
-      window.location.reload();
     }
   }
 });
@@ -54790,11 +54800,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control mt-2",
-            attrs: {
-              name: "database_column",
-              type: "text",
-              placeholder: "Text"
-            },
+            attrs: { name: "text", type: "text", placeholder: "Text" },
             domProps: { value: _vm.text },
             on: {
               input: function($event) {
@@ -55001,14 +55007,27 @@ var render = function() {
         "button",
         {
           staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "showJournalDeleteModal" }
+          attrs: { type: "button", "data-dismiss": "showJournalDeleteModal" },
+          on: {
+            click: function($event) {
+              _vm.$emit("close")
+            }
+          }
         },
         [_vm._v("Close")]
       ),
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-danger", attrs: { type: "button" } },
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              _vm.$emit("deleteJournal", this.journal, this.id)
+            }
+          }
+        },
         [_vm._v("Delete")]
       )
     ])
@@ -55037,17 +55056,56 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("tr", [
-    _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.id))]),
-    _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.date))]),
     _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.goalForTomorrow))]),
+    _c("td", [_vm._v(_vm._s(_vm.goal_tomorrow))]),
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.grade))]),
+    _c("td", [_vm._v(_vm._s(_vm.plan_tomorrow))]),
     _vm._v(" "),
-    _vm._m(1)
+    _c(
+      "td",
+      [
+        _c(
+          "button",
+          { staticClass: "btn btn-light", attrs: { type: "button" } },
+          [_vm._v("View Details")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "button" } },
+          [_vm._v("Edit")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-danger",
+            attrs: { id: "show-journal-delete-modal", type: "button" },
+            on: {
+              click: function($event) {
+                _vm.showJournalDeleteModal = true
+              }
+            }
+          },
+          [_vm._v("Delete")]
+        ),
+        _vm._v(" "),
+        _vm.showJournalDeleteModal
+          ? _c("delete-component", {
+              on: {
+                deleteJournal: _vm.deleteJournal,
+                close: function($event) {
+                  _vm.showJournalDeleteModal = false
+                }
+              }
+            })
+          : _vm._e()
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -55071,33 +55129,6 @@ var staticRenderFns = [
           [_vm._v("Did you achieve?")]
         )
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "button",
-        { staticClass: "btn btn-light", attrs: { type: "button" } },
-        [_vm._v("View Details")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
-        [_vm._v("Edit")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: { id: "show-journal-delete-modal", type: "button" }
-        },
-        [_vm._v("Delete")]
-      )
     ])
   }
 ]
@@ -55126,15 +55157,13 @@ var render = function() {
     _c("table", { staticClass: "table" }, [
       _c("thead", { staticClass: "thead-dark" }, [
         _c("tr", [
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-          _vm._v(" "),
           _c("th", { attrs: { scope: "col" } }, [_vm._v("Date")]),
           _vm._v(" "),
           _c("th", { attrs: { scope: "col" } }, [_vm._v("Goal for tomorrow")]),
           _vm._v(" "),
           _c("th", { attrs: { scope: "col" } }, [_vm._v("Achievment")]),
           _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Grade for the day")]),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Plan for tomorrow")]),
           _vm._v(" "),
           _c(
             "th",

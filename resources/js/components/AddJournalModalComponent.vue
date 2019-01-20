@@ -5,13 +5,7 @@
     <div slot="body">
       <form @submit="$emit(createJournal())">
         <datepicker v-model="date" name="date" placeholder="Date" class="form-control"></datepicker>
-        <input
-          v-model="text"
-          name="database_column"
-          class="form-control mt-2"
-          type="text"
-          placeholder="Text"
-        >
+        <input v-model="text" name="text" class="form-control mt-2" type="text" placeholder="Text">
         <textarea
           v-model="plan_tomorrow"
           name="plan_tomorrow"
@@ -37,9 +31,10 @@
             id="defaultCheck1"
           >
           <label class="form-check-label" for="defaultCheck1">Did you achieve today's goal?</label>
-         
-            <span><p v-for="message in messages" v-bind="message" :key="message">{{ message }}</p></span>
           
+          <span>
+            <p v-for="message in messages" v-bind="message" :key="message">{{ message }}</p>
+          </span>
         </div>
       </form>
     </div>
@@ -48,7 +43,7 @@
       <button class="btn btn-danger modal-default-button" @click="$emit('close')">Cancel</button>
       <button
         type="submit"
-        @click="$emit('createJournal', date, text, plan_tomorrow, goal_tomorrow,goal_status)"
+        @click="$emit('createJournal', date, text, plan_tomorrow, goal_tomorrow, goal_status)"
         class="btn btn-primary modal-default-button mr-2"
       >Save</button>
     </div>

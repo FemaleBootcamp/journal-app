@@ -7,8 +7,17 @@
       <p>Are you sure you want to delete this journal?</p>
     </div>
     <div slot="footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="showJournalDeleteModal">Close</button>
-      <button type="button" class="btn btn-danger" >Delete</button>
+      <button
+        @click="$emit('close')"
+        type="button"
+        class="btn btn-secondary"
+        data-dismiss="showJournalDeleteModal"
+      >Close</button>
+      <button
+        @click="$emit('deleteJournal',this.journal,this.id)"
+        type="button"
+        class="btn btn-danger"
+      >Delete</button>
     </div>
   </modal-component>
 </template>

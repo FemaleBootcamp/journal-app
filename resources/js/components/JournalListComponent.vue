@@ -3,11 +3,10 @@
     <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Date</th>
           <th scope="col">Goal for tomorrow</th>
           <th scope="col">Achievment</th>
-          <th scope="col">Grade for the day</th>
+          <th scope="col">Plan for tomorrow</th>
           <th scope="col">
             <button
               class="btn btn-primary mt-3"
@@ -88,12 +87,6 @@ export default {
             this.messages = ["Server error."];
           }
         });
-    },
-    deleteJournal(journals, id) {
-      axios
-        .delete("api/journals" + id)
-        .then(response => this.journals.splice(index, 1));
-      window.location.reload();
     }
   }
 };
