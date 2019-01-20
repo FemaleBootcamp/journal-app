@@ -1,68 +1,68 @@
 <template>
-  <div>
-    <div class="row">
-      <div class="col-lg-3">
-        <input id="user_id" name="user_id" type="hidden" v-model="userid">
-        <h5 class="text-left text-white">
-          <span>Date Range:</span>
-        </h5>
-        <datepicker class="form-control"
-                    name="dateFrom"
-                    placeholder="Date From:"
-                    v-model="dateFrom"
-        ></datepicker>
-        <datepicker class="form-control"
-                    name="dateTo"
-                    placeholder="Date To:"
-                    v-model="dateTo"
-        ></datepicker>
-      </div>
-      <div class="col-lg-4 offset-1">
-        <h5 class="text-left text-white">
-          <span>Status of the Goal:</span>
-        </h5>
-        <select class="form-control" id="sel1" v-model="goalStatus">
-          <option>Achieved</option>
-          <option>Not-Achieved</option>
-        </select>
-      </div>
-      <div class="col-lg-auto offset-2">
-        <button @click="filter" class="btn btn-group-lg btn-primary"
-        >Apply Filter
-        </button>
-      </div>
-    </div>
+    <div>
+        <div class="row">
+            <div class="col-lg-3">
+                <input id="user_id" name="user_id" type="hidden" v-model="userid">
+                <h5 class="text-left text-white">
+                    <span>Date Range:</span>
+                </h5>
+                <datepicker class="form-control"
+                            name="dateFrom"
+                            placeholder="Date From:"
+                            v-model="dateFrom"
+                ></datepicker>
+                <datepicker class="form-control"
+                            name="dateTo"
+                            placeholder="Date To:"
+                            v-model="dateTo"
+                ></datepicker>
+            </div>
+            <div class="col-lg-4 offset-1">
+                <h5 class="text-left text-white">
+                    <span>Status of the Goal:</span>
+                </h5>
+                <select class="form-control" id="sel1" v-model="goalStatus">
+                    <option>Achieved</option>
+                    <option>Not-Achieved</option>
+                </select>
+            </div>
+            <div class="col-lg-auto offset-2">
+                <button @click="filter" class="btn btn-group-lg btn-primary"
+                >Apply Filter
+                </button>
+            </div>
+        </div>
 
-    <table class="table">
-      <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Date</th>
-        <th scope="col">Goal for tomorrow</th>
-        <th scope="col">Achievment</th>
-        <th scope="col">Grade for the day</th>
-        <th scope="col">
-          <button
-                  @click="showJournalCreateModal = true"
-                  class="btn btn-primary mt-3"
-                  id="show-journal-create-modal"
-          >Add New
-          </button>
-          <add-journal-modal
-                  :messages="messages"
-                  @close="showJournalCreateModal = false"
-                  @createJournal="createJournal"
-                  id="addJournalModal"
-                  v-if="showJournalCreateModal"
-          ></add-journal-modal>
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <journal :key="journal.id" v-bind="journal" v-for="journal in journals"></journal>
-      </tbody>
-    </table>
-  </div>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Goal for tomorrow</th>
+                <th scope="col">Achievment</th>
+                <th scope="col">Grade for the day</th>
+                <th scope="col">
+                    <button
+                            @click="showJournalCreateModal = true"
+                            class="btn btn-primary mt-3"
+                            id="show-journal-create-modal"
+                    >Add New
+                    </button>
+                    <add-journal-modal
+                            :messages="messages"
+                            @close="showJournalCreateModal = false"
+                            @createJournal="createJournal"
+                            id="addJournalModal"
+                            v-if="showJournalCreateModal"
+                    ></add-journal-modal>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <journal :key="journal.id" v-bind="journal" v-for="journal in journals"></journal>
+            </tbody>
+        </table>
+    </div>
 </template>
 <script>
     import Datepicker from "vuejs-datepicker";
