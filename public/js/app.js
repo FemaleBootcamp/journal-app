@@ -1957,6 +1957,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -55197,7 +55200,7 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c(
         "div",
-        { staticClass: "col-lg-3", staticStyle: { "margin-bottom": "5px" } },
+        { staticClass: "col-lg-3" },
         [
           _c("input", {
             directives: [
@@ -55223,7 +55226,7 @@ var render = function() {
           _vm._m(0),
           _vm._v(" "),
           _c("datepicker", {
-            staticStyle: { "margin-bottom": "10px" },
+            staticClass: "form-control",
             attrs: { name: "dateFrom", placeholder: "Date From:" },
             model: {
               value: _vm.dateFrom,
@@ -55235,6 +55238,7 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("datepicker", {
+            staticClass: "form-control",
             attrs: { name: "dateTo", placeholder: "Date To:" },
             model: {
               value: _vm.dateTo,
@@ -55293,10 +55297,9 @@ var render = function() {
           "button",
           {
             staticClass: "btn btn-group-lg btn-primary",
-            staticStyle: { "margin-top": "30px", "margin-left": "60px" },
             on: { click: _vm.filter }
           },
-          [_vm._v("Apply Filter\n            ")]
+          [_vm._v("Apply Filter\n      ")]
         )
       ])
     ]),
@@ -55329,7 +55332,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Add New\n                ")]
+                [_vm._v("Add New\n        ")]
               ),
               _vm._v(" "),
               _vm.showJournalCreateModal
@@ -55367,23 +55370,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "h5",
-      {
-        staticClass: "text-left text-white",
-        staticStyle: { alignment: "left" }
-      },
-      [_c("span", [_vm._v("Date Range:")])]
-    )
+    return _c("h5", { staticClass: "text-left text-white" }, [
+      _c("span", [_vm._v("Date Range:")])
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "text-left text-white" }, [
-      _c("span", { staticStyle: { alignment: "left" } }, [
-        _vm._v("Status of the Goal:")
-      ])
+      _c("span", [_vm._v("Status of the Goal:")])
     ])
   }
 ]
