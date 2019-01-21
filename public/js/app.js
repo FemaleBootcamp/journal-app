@@ -1868,10 +1868,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id", "date", "goalForTomorrow", "grade"],
   data: function data() {
     return {
+      text: null,
       goal_tomorrow: null,
       plan_tomorrow: null
     };
@@ -1893,6 +1895,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+//
 //
 //
 //
@@ -55064,6 +55067,8 @@ var render = function() {
   return _c("tr", [
     _c("td", [_vm._v(_vm._s(_vm.date))]),
     _vm._v(" "),
+    _c("td", [_vm._v(_vm._s(_vm.text))]),
+    _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.plan_tomorrow))]),
     _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.goal_tomorrow))]),
@@ -55151,6 +55156,8 @@ var render = function() {
         _c("thead", { staticClass: "thead-dark" }, [
           _c("tr", [
             _c("th", { attrs: { scope: "col" } }, [_vm._v("Date")]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("Text")]),
             _vm._v(" "),
             _c("th", { attrs: { scope: "col" } }, [
               _vm._v("Plan for tomorrow")

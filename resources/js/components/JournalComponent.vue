@@ -1,6 +1,7 @@
 <template>
   <tr>
     <td>{{ date }}</td>
+    <td>{{ text }}</td>
     <td>{{ plan_tomorrow }}</td>
     <td>{{ goal_tomorrow }}</td>
     <td>
@@ -26,6 +27,7 @@ export default {
   props: ["id", "date", "goalForTomorrow", "grade"],
   data() {
     return {
+      text: null,
       goal_tomorrow: null,
       plan_tomorrow: null
     };

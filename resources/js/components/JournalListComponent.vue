@@ -4,6 +4,7 @@
       <thead class="thead-dark">
         <tr>
           <th scope="col">Date</th>
+          <th scope="col">Text</th>
           <th scope="col">Plan for tomorrow</th>
           <th scope="col">Goal for tomorrow</th>
           <th scope="col">Achievment</th>
