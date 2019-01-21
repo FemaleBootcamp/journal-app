@@ -1868,28 +1868,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id", "date", "goalForTomorrow", "grade"],
   data: function data() {
     return {
-      showJournalDeleteModal: false
+      goal_tomorrow: null,
+      plan_tomorrow: null
     };
-  },
-  methods: {
-    deleteJournal: function deleteJournal(journal, id) {
-      var _this = this;
-
-      axios.delete("api/journals" + id).then(function (response) {
-        return _this.journals.splice(journal, 1);
-      });
-      window.location.reload();
-    }
   }
 });
 
@@ -1908,6 +1893,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1958,9 +1948,10 @@ function Journal(_ref) {
 
 Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["userid"],
+  props: ["userid", "journal_id"],
   data: function data() {
     return {
+      showJournalDeleteModal: false,
       showJournalCreateModal: false,
       journals: [],
       messages: []
@@ -1995,6 +1986,21 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_1___default.a;
           _this.messages = msgs;
         } else {
           _this.messages = ["Server error."];
+        }
+      });
+    },
+    deleteJournal: function deleteJournal(journal, id) {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.delete("api/journals/" + id).then(function (response) {
+        var index = _this2.journals.findIndex(function (journal) {
+          return journal.id === id;
+        });
+
+        _this2.journals.splice(index, 1);
+      }).catch(function (error) {
+        if (error.response.status) {
+          alert("Server Error");
         }
       });
     }
@@ -55024,7 +55030,7 @@ var render = function() {
           attrs: { type: "button" },
           on: {
             click: function($event) {
-              _vm.$emit("deleteJournal", this.journal, this.id)
+              _vm.$emit("deleteJournal", _vm.journal, _vm.journal_id)
             }
           }
         },
@@ -55058,54 +55064,39 @@ var render = function() {
   return _c("tr", [
     _c("td", [_vm._v(_vm._s(_vm.date))]),
     _vm._v(" "),
+    _c("td", [_vm._v(_vm._s(_vm.plan_tomorrow))]),
+    _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.goal_tomorrow))]),
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.plan_tomorrow))]),
-    _vm._v(" "),
-    _c(
-      "td",
-      [
-        _c(
-          "button",
-          { staticClass: "btn btn-light", attrs: { type: "button" } },
-          [_vm._v("View Details")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "button" } },
-          [_vm._v("Edit")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-danger",
-            attrs: { id: "show-journal-delete-modal", type: "button" },
-            on: {
-              click: function($event) {
-                _vm.showJournalDeleteModal = true
-              }
+    _c("td", [
+      _c(
+        "button",
+        { staticClass: "btn btn-light", attrs: { type: "button" } },
+        [_vm._v("View Details")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        [_vm._v("Edit")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { id: "show-journal-delete-modal", type: "button" },
+          on: {
+            click: function($event) {
+              _vm.$emit((_vm.showJournalDeleteModal = true))
             }
-          },
-          [_vm._v("Delete")]
-        ),
-        _vm._v(" "),
-        _vm.showJournalDeleteModal
-          ? _c("delete-component", {
-              on: {
-                deleteJournal: _vm.deleteJournal,
-                close: function($event) {
-                  _vm.showJournalDeleteModal = false
-                }
-              }
-            })
-          : _vm._e()
-      ],
-      1
-    )
+          }
+        },
+        [_vm._v("Delete")]
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -55153,65 +55144,84 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("table", { staticClass: "table" }, [
-      _c("thead", { staticClass: "thead-dark" }, [
-        _c("tr", [
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Date")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Goal for tomorrow")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Achievment")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Plan for tomorrow")]),
-          _vm._v(" "),
-          _c(
-            "th",
-            { attrs: { scope: "col" } },
-            [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary mt-3",
-                  attrs: { id: "show-journal-create-modal" },
-                  on: {
-                    click: function($event) {
-                      _vm.showJournalCreateModal = true
-                    }
-                  }
-                },
-                [_vm._v("Add New")]
-              ),
-              _vm._v(" "),
-              _vm.showJournalCreateModal
-                ? _c("add-journal-modal", {
-                    attrs: { messages: _vm.messages, id: "addJournalModal" },
+  return _c(
+    "div",
+    [
+      _c("table", { staticClass: "table" }, [
+        _c("thead", { staticClass: "thead-dark" }, [
+          _c("tr", [
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("Date")]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [
+              _vm._v("Plan for tomorrow")
+            ]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [
+              _vm._v("Goal for tomorrow")
+            ]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("Achievment")]),
+            _vm._v(" "),
+            _c(
+              "th",
+              { attrs: { scope: "col" } },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary mt-3",
+                    attrs: { id: "show-journal-create-modal" },
                     on: {
-                      createJournal: _vm.createJournal,
-                      close: function($event) {
-                        _vm.showJournalCreateModal = false
+                      click: function($event) {
+                        _vm.showJournalCreateModal = true
                       }
                     }
-                  })
-                : _vm._e()
-            ],
-            1
-          )
-        ])
+                  },
+                  [_vm._v("Add New")]
+                ),
+                _vm._v(" "),
+                _vm.showJournalCreateModal
+                  ? _c("add-journal-modal", {
+                      attrs: { messages: _vm.messages, id: "addJournalModal" },
+                      on: {
+                        createJournal: _vm.createJournal,
+                        close: function($event) {
+                          _vm.showJournalCreateModal = false
+                        }
+                      }
+                    })
+                  : _vm._e()
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.journals, function(journal) {
+            return _c(
+              "journal",
+              _vm._b({ key: journal.id }, "journal", journal, false)
+            )
+          }),
+          1
+        )
       ]),
       _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.journals, function(journal) {
-          return _c(
-            "journal",
-            _vm._b({ key: journal.id }, "journal", journal, false)
-          )
-        }),
-        1
-      )
-    ])
-  ])
+      _vm.showJournalDeleteModal
+        ? _c("delete-component", {
+            on: {
+              deleteJournal: _vm.deleteJournal,
+              close: function($event) {
+                _vm.showJournalDeleteModal = false
+              }
+            }
+          })
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

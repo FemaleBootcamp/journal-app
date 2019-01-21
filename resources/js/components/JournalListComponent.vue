@@ -4,9 +4,9 @@
       <thead class="thead-dark">
         <tr>
           <th scope="col">Date</th>
+          <th scope="col">Plan for tomorrow</th>
           <th scope="col">Goal for tomorrow</th>
           <th scope="col">Achievment</th>
-          <th scope="col">Plan for tomorrow</th>
           <th scope="col">
             <button
               class="btn btn-primary mt-3"
@@ -27,6 +27,11 @@
         <journal v-for="journal in journals" v-bind="journal" :key="journal.id"></journal>
       </tbody>
     </table>
+    <delete-component
+      v-if="showJournalDeleteModal"
+      @deleteJournal="deleteJournal"
+      @close="showJournalDeleteModal = false"
+    ></delete-component>
   </div>
 </template>
 <script>
@@ -49,9 +54,10 @@ import axios from "axios";
 import moment from "moment";
 Vue.prototype.moment = moment;
 export default {
-  props: ["userid"],
+  props: ["userid", "journal_id"],
   data() {
     return {
+      showJournalDeleteModal: false,
       showJournalCreateModal: false,
       journals: [],
       messages: []
@@ -85,6 +91,19 @@ export default {
             this.messages = msgs;
           } else {
             this.messages = ["Server error."];
+          }
+        });
+    },
+    deleteJournal(journal, id) {
+      axios
+        .delete("api/journals/" + id)
+        .then(response => {
+          let index = this.journals.findIndex(journal => journal.id === id);
+          this.journals.splice(index, 1);
+        })
+        .catch(error => {
+          if (error.response.status) {
+            alert("Server Error");
           }
         });
     }

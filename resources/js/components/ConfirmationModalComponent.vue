@@ -14,7 +14,7 @@
         data-dismiss="showJournalDeleteModal"
       >Close</button>
       <button
-        @click="$emit('deleteJournal',this.journal,this.id)"
+        @click="$emit('deleteJournal',journal,journal_id)"
         type="button"
         class="btn btn-danger"
       >Delete</button>
