@@ -38,7 +38,7 @@
           >
           <label class="form-check-label" for="defaultCheck1">Did you achieve today's goal?</label>
          
-            <span><p v-for="message in messages" v-bind="message" :key="message">{{ message }}</p></span>
+            <span><p v-for="message in messages" :key="message">{{ message }}</p></span>
           
         </div>
       </form>

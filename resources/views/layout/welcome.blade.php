@@ -18,6 +18,8 @@
     </div>
 
     <script src="js/app.js?v={{ env('ASSETS_VERSION', 2) }}"></script>
+
+
 </body>
 
 </html>

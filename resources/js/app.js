@@ -4,9 +4,15 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import datepicker from 'vuejs-datepicker';
+
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+
+
+
 
 /**
  * The following block of code may be used to automatically register your
