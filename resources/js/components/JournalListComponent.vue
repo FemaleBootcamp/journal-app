@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row">
-            <div class="col-lg-3">
+            <div class="date-range-container col-lg-3">
                 <input id="user_id" name="user_id" type="hidden" v-model="userid">
                 <h5 class="text-left text-white">
                     <span>Date Range:</span>
@@ -17,7 +17,7 @@
                             v-model="dateTo"
                 ></datepicker>
             </div>
-            <div class="col-lg-4 offset-1">
+            <div class="status-goal-container col-lg-4 offset-1">
                 <h5 class="text-left text-white">
                     <span>Status of the Goal:</span>
                 </h5>
@@ -27,7 +27,7 @@
                 </select>
             </div>
             <div class="col-lg-auto offset-2">
-                <button @click="filter" class="btn btn-group-lg btn-primary"
+                <button @click="filter" class=" btn-filter btn btn-group-lg btn-primary"
                 >Apply Filter
                 </button>
             </div>
@@ -176,3 +176,22 @@
         }
     };
 </script>
+<style>
+    .date-range-container {
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        margin-bottom: 10px;
+    }
+
+    .text-left {
+        alignment: left;
+    }
+
+    .btn-filter {
+        margin-top: 30px;
+        margin-left: 60px;
+    }
+</style>
+
