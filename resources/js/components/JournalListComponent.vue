@@ -54,9 +54,20 @@
         </tr>
       </thead>
       <tbody>
-        <journal :key="journal.id" v-bind="journal" v-for="journal in journals"></journal>
+        <journal
+          @showDeleteModal="showDeleteModal"
+          :key="journal.id"
+          v-bind="journal"
+          v-for="journal in journals"
+        ></journal>
       </tbody>
     </table>
+    <delete-component
+      :id="deleteJournalId"
+      @delete="deleteJournal"
+      v-if="showConfirmationModal"
+      @close="showConfirmationModal = false"
+    ></delete-component>
   </div>
 </template>
 <script>
@@ -89,15 +100,21 @@ export default {
   props: ["userid"],
   data() {
     return {
+      showConfirmationModal: false,
       showJournalCreateModal: false,
       journals: [],
       messages: [],
       dateFrom: null,
       dateTo: null,
-      goalStatus: null
+      goalStatus: null,
+      deleteJournalId: null
     };
   },
   methods: {
+    showDeleteModal(id) {
+      this.showConfirmationModal = true;
+      this.deleteJournalId = id;
+    },
     createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
       axios
         .post("api/journals", {
@@ -128,15 +145,23 @@ export default {
           }
         });
     },
-    deleteJournal(journals, id) {
+    deleteJournal(id) {
       axios
-        .delete("api/journals" + id)
-        .then(response => this.journals.splice(index, 1));
-      window.location.reload();
+        .delete("api/journals/" + id)
+        .then(response => {
+          let index = this.journals.findIndex(journal => journal.id === id);
+          this.journals.splice(index, 1);
+          this.showConfirmationModal = false;
+        })
+        .catch(error => {
+          if (error.response.status) {
+            alert("Server Error");
+          }
+        });
     },
     read(dateFrom = null, dateTo = null, goalStatus = null) {
       window.axios
-        .get("/api/journals", {
+        .get("api/journals", {
           params: {
             userId: this.userid,
             dateFrom: dateFrom,
