@@ -1871,11 +1871,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["id", "date", "goalForTomorrow", "grade"]
+  props: ["id", "date", "text", "plan_tomorrow", "goal_tomorrow", "grade"]
 });
 
 /***/ }),
@@ -1894,11 +1891,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
-//
-//
-//
-//
-//
 //
 //
 //
@@ -6340,7 +6332,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.date-range-container {\n    margin-bottom: 5px;\n}\n.form-control {\n    margin-bottom: 10px;\n}\n.text-left {\n    alignment: left;\n}\n.btn-filter {\n    margin-top: 30px;\n    margin-left: 60px;\n}\n", ""]);
+exports.push([module.i, "\n.date-range-container {\r\n  margin-bottom: 5px;\n}\n.form-control {\r\n  margin-bottom: 10px;\n}\n.text-left {\r\n  alignment: left;\n}\n.btn-filter {\r\n  margin-top: 30px;\r\n  margin-left: 60px;\n}\r\n", ""]);
 
 // exports
 
@@ -6359,7 +6351,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-mask {\r\n  position: fixed;\r\n  z-index: 9998;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: rgba(0, 0, 0, 0.5);\r\n  display: table;\r\n  transition: opacity 0.3s ease;\n}\n.vdp-datepicker * {\r\n  border: 0;\n}\n.modal-wrapper {\r\n  display: table-cell;\r\n  vertical-align: middle;\n}\n.modal-container {\r\n  width: 300px;\r\n  margin: 0px auto;\r\n  padding: 20px 30px;\r\n  background-color: #fff;\r\n  border-radius: 2px;\r\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\r\n  transition: all 0.3s ease;\r\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\r\n  margin-top: 0;\r\n  color: #42b983;\n}\n.modal-body {\r\n  margin: 20px 0;\n}\n.modal-default-button {\r\n  float: right;\n}\n.modal-enter {\r\n  opacity: 0;\n}\n.modal-leave-active {\r\n  opacity: 0;\n}\n.modal-enter .modal-container,\r\n.modal-leave-active .modal-container {\r\n  -webkit-transform: scale(1.1);\r\n  transform: scale(1.1);\n}\r\n", ""]);
+exports.push([module.i, "\n.modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.5);\n  display: table;\n  transition: opacity 0.3s ease;\n}\n.vdp-datepicker * {\n  border: 0;\n}\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-container {\n  width: 300px;\n  margin: 0px auto;\n  padding: 20px 30px;\n  background-color: #fff;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\n  transition: all 0.3s ease;\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\n  margin-top: 0;\n  color: #42b983;\n}\n.modal-body {\n  margin: 20px 0;\n}\n.modal-default-button {\n  float: right;\n}\n.modal-enter {\n  opacity: 0;\n}\n.modal-leave-active {\n  opacity: 0;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n", ""]);
 
 // exports
 
@@ -55160,15 +55152,15 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("tr", [
-    _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.id))]),
-    _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.date))]),
     _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.goalForTomorrow))]),
+    _c("td", [_vm._v(_vm._s(_vm.text))]),
+    _vm._v(" "),
+    _c("td", [_vm._v(_vm._s(_vm.plan_tomorrow))]),
+    _vm._v(" "),
+    _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.goal_tomorrow))]),
     _vm._v(" "),
     _vm._m(0),
-    _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.grade))]),
     _vm._v(" "),
     _vm._m(1)
   ])
@@ -55345,10 +55337,10 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: " btn-filter btn btn-group-lg btn-primary",
+            staticClass: "btn-filter btn btn-group-lg btn-primary",
             on: { click: _vm.filter }
           },
-          [_vm._v("Apply Filter\n            ")]
+          [_vm._v("Apply Filter")]
         )
       ])
     ]),
@@ -55356,15 +55348,15 @@ var render = function() {
     _c("table", { staticClass: "table" }, [
       _c("thead", { staticClass: "thead-dark" }, [
         _c("tr", [
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-          _vm._v(" "),
           _c("th", { attrs: { scope: "col" } }, [_vm._v("Date")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Text")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Plan for tomorrow")]),
           _vm._v(" "),
           _c("th", { attrs: { scope: "col" } }, [_vm._v("Goal for tomorrow")]),
           _vm._v(" "),
           _c("th", { attrs: { scope: "col" } }, [_vm._v("Achievment")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Grade for the day")]),
           _vm._v(" "),
           _c(
             "th",
@@ -55381,7 +55373,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Add New\n                ")]
+                [_vm._v("Add New")]
               ),
               _vm._v(" "),
               _vm.showJournalCreateModal
@@ -55590,8 +55582,8 @@ function normalizeComponent (
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.5.22
- * (c) 2014-2019 Evan You
+ * Vue.js v2.5.21
+ * (c) 2014-2018 Evan You
  * Released under the MIT License.
  */
 
@@ -56220,7 +56212,7 @@ if (true) {
       ? vm.options
       : vm._isVue
         ? vm.$options || vm.constructor.options
-        : vm;
+        : vm || {};
     var name = options.name || options._componentTag;
     var file = options.__file;
     if (!name && file) {
@@ -56315,9 +56307,9 @@ Dep.prototype.notify = function notify () {
   }
 };
 
-// The current target watcher being evaluated.
-// This is globally unique because only one watcher
-// can be evaluated at a time.
+// the current target watcher being evaluated.
+// this is globally unique because there could be only one
+// watcher being evaluated at any time.
 Dep.target = null;
 var targetStack = [];
 
@@ -56845,26 +56837,13 @@ function mergeHook (
   parentVal,
   childVal
 ) {
-  var res = childVal
+  return childVal
     ? parentVal
       ? parentVal.concat(childVal)
       : Array.isArray(childVal)
         ? childVal
         : [childVal]
-    : parentVal;
-  return res
-    ? dedupeHooks(res)
-    : res
-}
-
-function dedupeHooks (hooks) {
-  var res = [];
-  for (var i = 0; i < hooks.length; i++) {
-    if (res.indexOf(hooks[i]) === -1) {
-      res.push(hooks[i]);
-    }
-  }
-  return res
+    : parentVal
 }
 
 LIFECYCLE_HOOKS.forEach(function (hook) {
@@ -57100,7 +57079,7 @@ function mergeOptions (
   normalizeProps(child, vm);
   normalizeInject(child, vm);
   normalizeDirectives(child);
-
+  
   // Apply extends and mixins on the child options,
   // but only if it is a raw options object that isn't
   // the result of another mergeOptions call.
@@ -58033,8 +58012,6 @@ function resolveAsyncComponent (
       // (async resolves are shimmed as synchronous during SSR)
       if (!sync) {
         forceRender(true);
-      } else {
-        contexts.length = 0;
       }
     });
 
@@ -58202,8 +58179,8 @@ function eventsMixin (Vue) {
     }
     // array of events
     if (Array.isArray(event)) {
-      for (var i$1 = 0, l = event.length; i$1 < l; i$1++) {
-        vm.$off(event[i$1], fn);
+      for (var i = 0, l = event.length; i < l; i++) {
+        vm.$off(event[i], fn);
       }
       return vm
     }
@@ -58216,14 +58193,16 @@ function eventsMixin (Vue) {
       vm._events[event] = null;
       return vm
     }
-    // specific handler
-    var cb;
-    var i = cbs.length;
-    while (i--) {
-      cb = cbs[i];
-      if (cb === fn || cb.fn === fn) {
-        cbs.splice(i, 1);
-        break
+    if (fn) {
+      // specific handler
+      var cb;
+      var i$1 = cbs.length;
+      while (i$1--) {
+        cb = cbs[i$1];
+        if (cb === fn || cb.fn === fn) {
+          cbs.splice(i$1, 1);
+          break
+        }
       }
     }
     return vm
@@ -60384,14 +60363,34 @@ function resolveConstructorOptions (Ctor) {
 function resolveModifiedOptions (Ctor) {
   var modified;
   var latest = Ctor.options;
+  var extended = Ctor.extendOptions;
   var sealed = Ctor.sealedOptions;
   for (var key in latest) {
     if (latest[key] !== sealed[key]) {
       if (!modified) { modified = {}; }
-      modified[key] = latest[key];
+      modified[key] = dedupe(latest[key], extended[key], sealed[key]);
     }
   }
   return modified
+}
+
+function dedupe (latest, extended, sealed) {
+  // compare latest and sealed to ensure lifecycle hooks won't be duplicated
+  // between merges
+  if (Array.isArray(latest)) {
+    var res = [];
+    sealed = Array.isArray(sealed) ? sealed : [sealed];
+    extended = Array.isArray(extended) ? extended : [extended];
+    for (var i = 0; i < latest.length; i++) {
+      // push original options and not sealed options to exclude duplicated options
+      if (extended.indexOf(latest[i]) >= 0 || sealed.indexOf(latest[i]) < 0) {
+        res.push(latest[i]);
+      }
+    }
+    return res
+  } else {
+    return latest
+  }
 }
 
 function Vue (options) {
@@ -60762,7 +60761,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.5.22';
+Vue.version = '2.5.21';
 
 /*  */
 
@@ -68697,8 +68696,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\User\Documents\journal-app\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\User\Documents\journal-app\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\codecordia\htdocs\journal-app\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\codecordia\htdocs\journal-app\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
