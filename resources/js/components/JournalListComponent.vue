@@ -56,10 +56,12 @@
       <tbody>
         <journal
           @showDeleteModal="showDeleteModal"
+          @showEditModal="showEditModal"
           :key="journal.id"
           v-bind="journal"
           v-for="journal in journals"
         ></journal>
+
       </tbody>
     </table>
     <delete-component
@@ -68,6 +70,10 @@
       v-if="showConfirmationModal"
       @close="showConfirmationModal = false"
     ></delete-component>
+    <edit-component
+      v-if="showJournalEditModal"
+      @close="showJournalEditModal = false"
+    ></edit-component>
   </div>
 </template>
 <script>
@@ -102,6 +108,7 @@ export default {
     return {
       showConfirmationModal: false,
       showJournalCreateModal: false,
+      showJournalEditModal: false,
       journals: [],
       messages: [],
       dateFrom: null,
@@ -111,6 +118,9 @@ export default {
     };
   },
   methods: {
+    showEditModal(id) {
+      this.showJournalEditModal = true;
+    },
     showDeleteModal(id) {
       this.showConfirmationModal = true;
       this.deleteJournalId = id;

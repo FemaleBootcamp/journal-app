@@ -7,25 +7,31 @@
     <td>
       <!-- Default unchecked -->
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+        <input class="custom-control-input" id="defaultUnchecked" type="checkbox">
         <label class="custom-control-label" for="defaultUnchecked">Did you achieve?</label>
       </div>
     </td>
 
     <td>
-      <button type="button" class="btn btn-light">View Details</button>
-      <button type="button" class="btn btn-primary">Edit</button>
+      <button class="btn btn-light" type="button">View Details</button>
       <button
-        id="show-journal-delete-modal"
+        @click="$emit('showEditModal', id)"
+        class="btn btn-primary"
+        id="show-journal-edit-modal" type="button"
+      >Edit
+      </button>
+      <button
         @click="$emit('showDeleteModal', id)"
-        type="button"
         class="btn btn-danger"
-      >Delete</button>
+        id="show-journal-delete-modal"
+        type="button"
+      >Delete
+      </button>
     </td>
   </tr>
 </template>
 <script>
-export default {
-  props: ["id", "date", "text", "plan_tomorrow", "goal_tomorrow", "grade"]
-};
+  export default {
+    props: ["id", "date", "text", "plan_tomorrow", "goal_tomorrow", "grade"]
+  };
 </script>
