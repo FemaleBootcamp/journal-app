@@ -58,6 +58,7 @@
       <journal
         :key="journal.id"
         @showDeleteModal="showDeleteModal"
+        @showDetailsModal="showDetailsModal"
         @showEditModal="showEditModal"
         v-bind="journal"
         v-for="journal in journals"
@@ -74,8 +75,15 @@
       :id="editJournalId"
       :journal="editJournal"
       @close="showJournalEditModal = false"
+      @edit="edit"
       v-if="showJournalEditModal"
     ></edit-component>
+    <view-details-component
+      :id="editJournalId"
+      :journal="editJournal"
+      @close="showJournalDetailsModal = false"
+      v-if="showJournalDetailsModal"
+    ></view-details-component>
   </div>
 </template>
 <script>
@@ -111,6 +119,7 @@
         showConfirmationModal: false,
         showJournalCreateModal: false,
         showJournalEditModal: false,
+        showJournalDetailsModal: false,
         journals: [],
         messages: [],
         dateFrom: null,
@@ -124,6 +133,19 @@
     methods: {
       showEditModal(id) {
         this.showJournalEditModal = true;
+        this.editJournalId = id;
+        axios.get("api/journals/" + id)
+          .then(response => {
+            this.editJournal = response.data;
+          })
+          .catch(error => {
+            if (error.response.status) {
+              alert("Server Error");
+            }
+          });
+      },
+      showDetailsModal(id) {
+        this.showJournalDetailsModal = true;
         this.editJournalId = id;
         axios.get("api/journals/" + id)
           .then(response => {
@@ -183,7 +205,25 @@
             }
           });
       },
-
+      edit(date, text, plan_tomorrow, goal_tomorrow, goal_status, id) {
+        axios.put("api/journals/" + id, {
+          date: moment(date).format("YYYY-MM-DD"),
+          text: text,
+          plan_tomorrow: plan_tomorrow,
+          goal_tomorrow: goal_tomorrow,
+          goal_status: goal_status
+        })
+          .then(response => {
+            this.journals.update(Journal(data));
+            alert("Success");
+            this.showJournalEditModal = false;
+          })
+          .catch(error => {
+            if (error.response.status) {
+              alert("Server Error");
+            }
+          });
+      },
       read(dateFrom = null, dateTo = null, goalStatus = null) {
         window.axios
           .get("api/journals", {

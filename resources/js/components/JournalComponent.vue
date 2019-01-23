@@ -13,11 +13,17 @@
     </td>
 
     <td>
-      <button class="btn btn-light" type="button">View Details</button>
+      <button
+        @click="$emit('showDetailsModal', id)"
+        class="btn btn-light"
+        type="button"
+        id="show-journal-details-modal"
+      >View Details</button>
       <button
         @click="$emit('showEditModal', id)"
         class="btn btn-primary"
-        id="show-journal-edit-modal" type="button"
+        id="show-journal-edit-modal"
+        type="button"
       >Edit
       </button>
       <button

@@ -1941,6 +1941,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -1972,6 +1973,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2104,6 +2111,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2134,6 +2149,7 @@ function Journal(_ref) {
       showConfirmationModal: false,
       showJournalCreateModal: false,
       showJournalEditModal: false,
+      showJournalDetailsModal: false,
       journals: [],
       messages: [],
       dateFrom: null,
@@ -2158,12 +2174,25 @@ function Journal(_ref) {
         }
       });
     },
+    showDetailsModal: function showDetailsModal(id) {
+      var _this2 = this;
+
+      this.showJournalDetailsModal = true;
+      this.editJournalId = id;
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("api/journals/" + id).then(function (response) {
+        _this2.editJournal = response.data;
+      }).catch(function (error) {
+        if (error.response.status) {
+          alert("Server Error");
+        }
+      });
+    },
     showDeleteModal: function showDeleteModal(id) {
       this.showConfirmationModal = true;
       this.deleteJournalId = id;
     },
     createJournal: function createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/journals", {
         user_id: this.userid,
@@ -2175,35 +2204,55 @@ function Journal(_ref) {
       }).then(function (_ref2) {
         var data = _ref2.data;
 
-        _this2.journals.push(new Journal(data));
+        _this3.journals.push(new Journal(data));
 
-        _this2.showJournalCreateModal = false;
+        _this3.showJournalCreateModal = false;
       }).catch(function (error) {
         if (error.response.status == 422) {
-          var msgs = _this2.messages;
+          var msgs = _this3.messages;
           var errors = error.response.data.errors;
           Object.keys(errors).forEach(function (key) {
             errors[key].forEach(function (error) {
               msgs.push(error);
             });
           });
-          _this2.messages = msgs;
+          _this3.messages = msgs;
         } else {
-          _this2.messages = ["Server error."];
+          _this3.messages = ["Server error."];
         }
       });
     },
     deleteJournal: function deleteJournal(id) {
-      var _this3 = this;
+      var _this4 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete("api/journals/" + id).then(function (response) {
-        var index = _this3.journals.findIndex(function (journal) {
+        var index = _this4.journals.findIndex(function (journal) {
           return journal.id === id;
         });
 
-        _this3.journals.splice(index, 1);
+        _this4.journals.splice(index, 1);
 
-        _this3.showConfirmationModal = false;
+        _this4.showConfirmationModal = false;
+      }).catch(function (error) {
+        if (error.response.status) {
+          alert("Server Error");
+        }
+      });
+    },
+    edit: function edit(date, text, plan_tomorrow, goal_tomorrow, goal_status, id) {
+      var _this5 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("api/journals/" + id, {
+        date: moment__WEBPACK_IMPORTED_MODULE_2___default()(date).format("YYYY-MM-DD"),
+        text: text,
+        plan_tomorrow: plan_tomorrow,
+        goal_tomorrow: goal_tomorrow,
+        goal_status: goal_status
+      }).then(function (response) {
+        _this5.journals.update(Journal(data));
+
+        alert("Success");
+        _this5.showJournalEditModal = false;
       }).catch(function (error) {
         if (error.response.status) {
           alert("Server Error");
@@ -2211,7 +2260,7 @@ function Journal(_ref) {
       });
     },
     read: function read() {
-      var _this4 = this;
+      var _this6 = this;
 
       var dateFrom = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var dateTo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -2226,7 +2275,7 @@ function Journal(_ref) {
       }).then(function (_ref3) {
         var data = _ref3.data;
         data.forEach(function (journal) {
-          _this4.journals.push(new Journal(journal));
+          _this6.journals.push(new Journal(journal));
         });
       }, function (error) {
         console.error(error);
@@ -2239,6 +2288,63 @@ function Journal(_ref) {
   },
   created: function created() {
     this.read();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    journal: Object
+  },
+  components: {
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      journals: [],
+      date: null,
+      text: null,
+      plan_tomorrow: null,
+      goal_tomorrow: null,
+      goal_status: null
+    };
   }
 });
 
@@ -55358,7 +55464,7 @@ var render = function() {
         {
           on: {
             submit: function($event) {
-              _vm.$emit(_vm.createJournal())
+              _vm.$emit(_vm.edit())
             }
           }
         },
@@ -55529,7 +55635,20 @@ var render = function() {
         "button",
         {
           staticClass: "btn btn-primary modal-default-button mr-2",
-          attrs: { type: "submit" }
+          attrs: { type: "submit" },
+          on: {
+            click: function($event) {
+              _vm.$emit(
+                "edit",
+                _vm.journal.date,
+                _vm.journal.text,
+                _vm.journal.plan_tomorrow,
+                _vm.journal.goal_tomorrow,
+                _vm.journal.goal_status,
+                _vm.journal.id
+              )
+            }
+          }
         },
         [_vm._v("Save\n    ")]
       )
@@ -55572,7 +55691,15 @@ var render = function() {
     _c("td", [
       _c(
         "button",
-        { staticClass: "btn btn-light", attrs: { type: "button" } },
+        {
+          staticClass: "btn btn-light",
+          attrs: { type: "button", id: "show-journal-details-modal" },
+          on: {
+            click: function($event) {
+              _vm.$emit("showDetailsModal", _vm.id)
+            }
+          }
+        },
         [_vm._v("View Details")]
       ),
       _vm._v(" "),
@@ -55823,6 +55950,7 @@ var render = function() {
                   key: journal.id,
                   on: {
                     showDeleteModal: _vm.showDeleteModal,
+                    showDetailsModal: _vm.showDetailsModal,
                     showEditModal: _vm.showEditModal
                   }
                 },
@@ -55854,6 +55982,18 @@ var render = function() {
             on: {
               close: function($event) {
                 _vm.showJournalEditModal = false
+              },
+              edit: _vm.edit
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showJournalDetailsModal
+        ? _c("view-details-component", {
+            attrs: { id: _vm.editJournalId, journal: _vm.editJournal },
+            on: {
+              close: function($event) {
+                _vm.showJournalDetailsModal = false
               }
             }
           })
@@ -55910,6 +56050,71 @@ var render = function() {
           _c("div", { staticClass: "modal-body" }, [_vm._t("body")], 2),
           _vm._v(" "),
           _c("div", { staticClass: "modal-footer" }, [_vm._t("footer")], 2)
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("modal-component", { staticClass: "black-text-modal" }, [
+    _c("div", { attrs: { slot: "header" }, slot: "header" }, [
+      _vm._v("Journal's Details")
+    ]),
+    _vm._v(" "),
+    _c("div", { attrs: { slot: "body" }, slot: "body" }, [
+      _c("form", [
+        _c("label", [_vm._v("Date:" + _vm._s(_vm.journal.date))]),
+        _vm._v(" "),
+        _c("label", [_vm._v("Text: " + _vm._s(_vm.journal.text))]),
+        _vm._v(" "),
+        _c("label", [
+          _vm._v("Plan for tomorrow:" + _vm._s(_vm.journal.plan_tomorrow))
+        ]),
+        _vm._v(" "),
+        _c("label", [
+          _vm._v("Goal for tomorrow: " + _vm._s(_vm.journal.goal_tomorrow))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check mt-2" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: {
+              id: "defaultCheck1",
+              name: "goal_status",
+              type: "checkbox",
+              "aria-readonly": _vm.journal.goal_status
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "form-check-label",
+              attrs: { for: "defaultCheck1" }
+            },
+            [_vm._v("Did you achieve today's goal?")]
+          )
         ])
       ])
     ])
@@ -68709,6 +68914,7 @@ Vue.component('modal-component', __webpack_require__(/*! ./components/ModalCompo
 Vue.component('add-journal-modal', __webpack_require__(/*! ./components/AddJournalModalComponent.vue */ "./resources/js/components/AddJournalModalComponent.vue").default);
 Vue.component('delete-component', __webpack_require__(/*! ./components/ConfirmationModalComponent.vue */ "./resources/js/components/ConfirmationModalComponent.vue").default);
 Vue.component('edit-component', __webpack_require__(/*! ./components/EditJournalModalComponent.vue */ "./resources/js/components/EditJournalModalComponent.vue").default);
+Vue.component('view-details-component', __webpack_require__(/*! ./components/ViewJournalDetailsModalComponent.vue */ "./resources/js/components/ViewJournalDetailsModalComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -69208,6 +69414,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalComponent_vue_vue_type_template_id_4b2d100a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalComponent_vue_vue_type_template_id_4b2d100a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ViewJournalDetailsModalComponent.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/ViewJournalDetailsModalComponent.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ViewJournalDetailsModalComponent_vue_vue_type_template_id_5cc85b2a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a& */ "./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a&");
+/* harmony import */ var _ViewJournalDetailsModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ViewJournalDetailsModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ViewJournalDetailsModalComponent_vue_vue_type_template_id_5cc85b2a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ViewJournalDetailsModalComponent_vue_vue_type_template_id_5cc85b2a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ViewJournalDetailsModalComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_template_id_5cc85b2a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_template_id_5cc85b2a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_template_id_5cc85b2a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

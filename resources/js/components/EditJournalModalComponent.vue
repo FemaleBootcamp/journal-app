@@ -3,7 +3,7 @@
     <div slot="header">Edit Journal</div>
 
     <div slot="body">
-      <form @submit="$emit(createJournal())">
+      <form @submit="$emit(edit())">
         <datepicker class="form-control"
                     name="date"
                     placeholder="Date"
@@ -49,6 +49,7 @@
       <button
         class="btn btn-primary modal-default-button mr-2"
         type="submit"
+        @click="$emit('edit', journal.date, journal.text, journal.plan_tomorrow, journal.goal_tomorrow,journal.goal_status, journal.id)"
       >Save
       </button>
     </div>
