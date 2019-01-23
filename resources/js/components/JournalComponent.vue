@@ -15,7 +15,12 @@
     <td>
       <button type="button" class="btn btn-light">View Details</button>
       <button type="button" class="btn btn-primary">Edit</button>
-      <button id="show-journal-delete-modal" type="button" class="btn btn-danger">Delete</button>
+      <button
+        id="show-journal-delete-modal"
+        @click="$emit('showDeleteModal', id)"
+        type="button"
+        class="btn btn-danger"
+      >Delete</button>
     </td>
   </tr>
 </template>

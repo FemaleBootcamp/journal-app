@@ -1841,6 +1841,40 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ConfirmationModalComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ConfirmationModalComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["id"]
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/JournalComponent.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/JournalComponent.vue?vue&type=script&lang=js& ***!
@@ -1850,6 +1884,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1952,6 +1991,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1979,15 +2029,21 @@ function Journal(_ref) {
   props: ["userid"],
   data: function data() {
     return {
+      showConfirmationModal: false,
       showJournalCreateModal: false,
       journals: [],
       messages: [],
       dateFrom: null,
       dateTo: null,
-      goalStatus: null
+      goalStatus: null,
+      deleteJournalId: null
     };
   },
   methods: {
+    showDeleteModal: function showDeleteModal(id) {
+      this.showConfirmationModal = true;
+      this.deleteJournalId = id;
+    },
     createJournal: function createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
       var _this = this;
 
@@ -2019,13 +2075,22 @@ function Journal(_ref) {
         }
       });
     },
-    deleteJournal: function deleteJournal(journals, id) {
+    deleteJournal: function deleteJournal(id) {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete("api/journals" + id).then(function (response) {
-        return _this2.journals.splice(index, 1);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete("api/journals/" + id).then(function (response) {
+        var index = _this2.journals.findIndex(function (journal) {
+          return journal.id === id;
+        });
+
+        _this2.journals.splice(index, 1);
+
+        console.log(journals);
+      }).catch(function (error) {
+        if (error.response.status) {
+          alert("Server Error");
+        }
       });
-      window.location.reload();
     },
     read: function read() {
       var _this3 = this;
@@ -2033,7 +2098,7 @@ function Journal(_ref) {
       var dateFrom = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var dateTo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var goalStatus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      window.axios.get("/api/journals", {
+      window.axios.get("api/journals", {
         params: {
           userId: this.userid,
           dateFrom: dateFrom,
@@ -55116,14 +55181,27 @@ var render = function() {
         "button",
         {
           staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "showJournalDeleteModal" }
+          attrs: { type: "button", "data-dismiss": "showConfirmationModal" },
+          on: {
+            click: function($event) {
+              _vm.$emit("close")
+            }
+          }
         },
         [_vm._v("Close")]
       ),
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-danger", attrs: { type: "button" } },
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              _vm.$emit("delete", _vm.id)
+            }
+          }
+        },
         [_vm._v("Delete")]
       )
     ])
@@ -55162,7 +55240,33 @@ var render = function() {
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
-    _vm._m(1)
+    _c("td", [
+      _c(
+        "button",
+        { staticClass: "btn btn-light", attrs: { type: "button" } },
+        [_vm._v("View Details")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        [_vm._v("Edit")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { id: "show-journal-delete-modal", type: "button" },
+          on: {
+            click: function($event) {
+              _vm.$emit("showDeleteModal", _vm.id)
+            }
+          }
+        },
+        [_vm._v("Delete")]
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -55187,33 +55291,6 @@ var staticRenderFns = [
         )
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "button",
-        { staticClass: "btn btn-light", attrs: { type: "button" } },
-        [_vm._v("View Details")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
-        [_vm._v("Edit")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: { id: "show-journal-delete-modal", type: "button" }
-        },
-        [_vm._v("Delete")]
-      )
-    ])
   }
 ]
 render._withStripped = true
@@ -55237,174 +55314,202 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "date-range-container col-lg-3" },
-        [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.userid,
-                expression: "userid"
-              }
-            ],
-            attrs: { id: "user_id", name: "user_id", type: "hidden" },
-            domProps: { value: _vm.userid },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.userid = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c("datepicker", {
-            staticClass: "form-control",
-            attrs: { name: "dateFrom", placeholder: "Date From:" },
-            model: {
-              value: _vm.dateFrom,
-              callback: function($$v) {
-                _vm.dateFrom = $$v
-              },
-              expression: "dateFrom"
-            }
-          }),
-          _vm._v(" "),
-          _c("datepicker", {
-            staticClass: "form-control",
-            attrs: { name: "dateTo", placeholder: "Date To:" },
-            model: {
-              value: _vm.dateTo,
-              callback: function($$v) {
-                _vm.dateTo = $$v
-              },
-              expression: "dateTo"
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "status-goal-container col-lg-4 offset-1" }, [
-        _vm._m(1),
-        _vm._v(" "),
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "row" }, [
         _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.goalStatus,
-                expression: "goalStatus"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { id: "sel1" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.goalStatus = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
-          },
+          "div",
+          { staticClass: "date-range-container col-lg-3" },
           [
-            _c("option", [_vm._v("Achieved")]),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.userid,
+                  expression: "userid"
+                }
+              ],
+              attrs: { id: "user_id", name: "user_id", type: "hidden" },
+              domProps: { value: _vm.userid },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.userid = $event.target.value
+                }
+              }
+            }),
             _vm._v(" "),
-            _c("option", [_vm._v("Not-Achieved")])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-auto offset-2" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn-filter btn btn-group-lg btn-primary",
-            on: { click: _vm.filter }
-          },
-          [_vm._v("Apply Filter")]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("table", { staticClass: "table" }, [
-      _c("thead", { staticClass: "thead-dark" }, [
-        _c("tr", [
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Date")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Text")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Plan for tomorrow")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Goal for tomorrow")]),
-          _vm._v(" "),
-          _c("th", { attrs: { scope: "col" } }, [_vm._v("Achievment")]),
+            _vm._m(0),
+            _vm._v(" "),
+            _c("datepicker", {
+              staticClass: "form-control",
+              attrs: { name: "dateFrom", placeholder: "Date From:" },
+              model: {
+                value: _vm.dateFrom,
+                callback: function($$v) {
+                  _vm.dateFrom = $$v
+                },
+                expression: "dateFrom"
+              }
+            }),
+            _vm._v(" "),
+            _c("datepicker", {
+              staticClass: "form-control",
+              attrs: { name: "dateTo", placeholder: "Date To:" },
+              model: {
+                value: _vm.dateTo,
+                callback: function($$v) {
+                  _vm.dateTo = $$v
+                },
+                expression: "dateTo"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "status-goal-container col-lg-4 offset-1" }, [
+          _vm._m(1),
           _vm._v(" "),
           _c(
-            "th",
-            { attrs: { scope: "col" } },
-            [
-              _c(
-                "button",
+            "select",
+            {
+              directives: [
                 {
-                  staticClass: "btn btn-primary mt-3",
-                  attrs: { id: "show-journal-create-modal" },
-                  on: {
-                    click: function($event) {
-                      _vm.showJournalCreateModal = true
-                    }
-                  }
-                },
-                [_vm._v("Add New")]
-              ),
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.goalStatus,
+                  expression: "goalStatus"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { id: "sel1" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.goalStatus = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", [_vm._v("Achieved")]),
               _vm._v(" "),
-              _vm.showJournalCreateModal
-                ? _c("add-journal-modal", {
-                    attrs: { messages: _vm.messages, id: "addJournalModal" },
-                    on: {
-                      close: function($event) {
-                        _vm.showJournalCreateModal = false
-                      },
-                      createJournal: _vm.createJournal
-                    }
-                  })
-                : _vm._e()
-            ],
-            1
+              _c("option", [_vm._v("Not-Achieved")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-auto offset-2" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn-filter btn btn-group-lg btn-primary",
+              on: { click: _vm.filter }
+            },
+            [_vm._v("Apply Filter")]
           )
         ])
       ]),
       _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.journals, function(journal) {
-          return _c(
-            "journal",
-            _vm._b({ key: journal.id }, "journal", journal, false)
-          )
-        }),
-        1
-      )
-    ])
-  ])
+      _c("table", { staticClass: "table" }, [
+        _c("thead", { staticClass: "thead-dark" }, [
+          _c("tr", [
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("Date")]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("Text")]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [
+              _vm._v("Plan for tomorrow")
+            ]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [
+              _vm._v("Goal for tomorrow")
+            ]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("Achievment")]),
+            _vm._v(" "),
+            _c(
+              "th",
+              { attrs: { scope: "col" } },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary mt-3",
+                    attrs: { id: "show-journal-create-modal" },
+                    on: {
+                      click: function($event) {
+                        _vm.showJournalCreateModal = true
+                      }
+                    }
+                  },
+                  [_vm._v("Add New")]
+                ),
+                _vm._v(" "),
+                _vm.showJournalCreateModal
+                  ? _c("add-journal-modal", {
+                      attrs: { messages: _vm.messages, id: "addJournalModal" },
+                      on: {
+                        close: function($event) {
+                          _vm.showJournalCreateModal = false
+                        },
+                        createJournal: _vm.createJournal
+                      }
+                    })
+                  : _vm._e()
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.journals, function(journal) {
+            return _c(
+              "journal",
+              _vm._b(
+                {
+                  key: journal.id,
+                  on: { showDeleteModal: _vm.showDeleteModal }
+                },
+                "journal",
+                journal,
+                false
+              )
+            )
+          }),
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _vm.showConfirmationModal
+        ? _c("delete-component", {
+            attrs: { id: { deleteJournalId: _vm.deleteJournalId } },
+            on: {
+              delete: _vm.deleteJournal,
+              close: function($event) {
+                _vm.showConfirmationModal = false
+              }
+            }
+          })
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -68402,21 +68507,24 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************************!*\
   !*** ./resources/js/components/ConfirmationModalComponent.vue ***!
   \****************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ConfirmationModalComponent_vue_vue_type_template_id_5befb890___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ConfirmationModalComponent.vue?vue&type=template&id=5befb890& */ "./resources/js/components/ConfirmationModalComponent.vue?vue&type=template&id=5befb890&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _ConfirmationModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConfirmationModalComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ConfirmationModalComponent.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ConfirmationModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ConfirmationModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ConfirmationModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _ConfirmationModalComponent_vue_vue_type_template_id_5befb890___WEBPACK_IMPORTED_MODULE_0__["render"],
   _ConfirmationModalComponent_vue_vue_type_template_id_5befb890___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -68430,6 +68538,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/ConfirmationModalComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ConfirmationModalComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/ConfirmationModalComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ConfirmationModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ConfirmationModalComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ConfirmationModalComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ConfirmationModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
