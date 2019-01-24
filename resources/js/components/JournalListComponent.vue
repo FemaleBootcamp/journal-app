@@ -72,15 +72,15 @@
       v-if="showConfirmationModal"
     ></delete-component>
     <edit-component
-      :id="editJournalId"
-      :journal="editJournal"
+      :editJournalId="editJournalId"
+      v-bind="editJournal"
       @close="showJournalEditModal = false"
       @edit="edit"
       v-if="showJournalEditModal"
     ></edit-component>
     <view-details-component
-      :id="editJournalId"
-      :journal="editJournal"
+      :editJournalId="editJournalId"
+      v-bind="editJournal"
       @close="showJournalDetailsModal = false"
       v-if="showJournalDetailsModal"
     ></view-details-component>
@@ -128,6 +128,7 @@
         deleteJournalId: null,
         editJournalId: null,
         editJournal: null,
+        id: null
       };
     },
     methods: {
@@ -205,8 +206,10 @@
             }
           });
       },
-      edit(date, text, plan_tomorrow, goal_tomorrow, goal_status, id) {
-        axios.put("api/journals/" + id, {
+      edit(editJournalId,date, text, plan_tomorrow, goal_tomorrow, goal_status) {
+        console.log(editJournalId,date,text,plan_tomorrow,goal_tomorrow,goal_status)
+        axios.put("api/journals/" + editJournalId, {
+          user_id: this.userid,
           date: moment(date).format("YYYY-MM-DD"),
           text: text,
           plan_tomorrow: plan_tomorrow,
@@ -214,7 +217,6 @@
           goal_status: goal_status
         })
           .then(response => {
-            this.journals.update(Journal(data));
             alert("Success");
             this.showJournalEditModal = false;
           })

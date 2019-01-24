@@ -7,27 +7,27 @@
         <datepicker class="form-control"
                     name="date"
                     placeholder="Date"
-                    v-model="journal.date">
+                    v-model="date">
         </datepicker>
         <input
           class="form-control mt-2"
           name="database_column"
           placeholder="Text"
           type="text"
-          v-model="journal.text"
+          v-model="text"
         ><textarea
         class="form-control mt-2"
         id="exampleFormControlTextarea1"
         name="plan_tomorrow"
         placeholder="Plan for next day "
         rows="3"
-        v-model="journal.plan_tomorrow"
+        v-model="plan_tomorrow"
       ></textarea>
         <input
           class="form-control mt-2"
           name="goal_tomorrow"
           type="text"
-          v-model="journal.goal_tomorrow"
+          v-model="goal_tomorrow"
         >
         <div class="form-check mt-2">
           <input
@@ -35,7 +35,7 @@
             id="defaultCheck1"
             name="goal_status"
             type="checkbox"
-            v-model="journal.goal_status"
+            v-model="goal_status"
             value
           >
           <label class="form-check-label" for="defaultCheck1">Did you achieve today's goal?</label>
@@ -49,7 +49,7 @@
       <button
         class="btn btn-primary modal-default-button mr-2"
         type="submit"
-        @click="$emit('edit', journal.date, journal.text, journal.plan_tomorrow, journal.goal_tomorrow,journal.goal_status, journal.id)"
+        @click="$emit('edit', editJournalId,date, text, plan_tomorrow, goal_tomorrow, goal_status)"
       >Save
       </button>
     </div>
@@ -59,20 +59,14 @@
   import Datepicker from "vuejs-datepicker";
 
   export default {
-    props: {
-      journal: Object
-    },
+      props: ["editJournalId","user_id", "date", "text", "plan_tomorrow", "goal_tomorrow", "goal_status"],
     components: {
       Datepicker
     },
     data() {
       return {
         journals: [],
-        date: null,
-        text: null,
-        plan_tomorrow: null,
-        goal_tomorrow: null,
-        goal_status: null
+        id:null
       };
     }
   };
