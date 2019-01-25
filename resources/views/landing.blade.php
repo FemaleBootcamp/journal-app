@@ -52,13 +52,10 @@
     </section>
 
     <section id='qs' class='text-center'>
-        <h1>So, what are you waiting for?!</h1>
-        <br><br>
+        <h1 class="mb-5">So, what are you waiting for?!</h1>
         <a style="text-decoration:none" class="text-white" href="{{ route('register') }}"><button
                 href="{{ route('register') }}" class="btn btn-info btn-lg text-white">Start Your FREE Journal
                 NOW!</button></a>
-        <br><br><br>
-
     </section>
 
 </div>
