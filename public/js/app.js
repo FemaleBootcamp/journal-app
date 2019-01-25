@@ -1821,6 +1821,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["messages"],
@@ -1910,8 +1911,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["id", "date", "text", "plan_tomorrow", "goal_tomorrow", "grade"]
+  props: ["id", "date", "text", "plan_tomorrow", "goal_tomorrow", "goal_status"]
 });
 
 /***/ }),
@@ -1930,6 +1938,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+//
 //
 //
 //
@@ -6397,7 +6406,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.date-range-container {\r\n  margin-bottom: 5px;\n}\n.form-control {\r\n  margin-bottom: 10px;\n}\n.text-left {\r\n  alignment: left;\n}\n.btn-filter {\r\n  margin-top: 30px;\r\n  margin-left: 60px;\n}\r\n", ""]);
+exports.push([module.i, "\n.date-range-container {\r\n  margin-bottom: 5px;\n}\n.form-control {\r\n  margin-bottom: 10px;\n}\r\n\r\n/* .text-left {\r\n  /* alignment: left; \r\n} */\n.btn-filter {\r\n  margin-top: 30px;\r\n  margin-left: 60px;\n}\r\n", ""]);
 
 // exports
 
@@ -55055,12 +55064,12 @@ var render = function() {
               attrs: {
                 name: "goal_status",
                 type: "checkbox",
-                value: "",
                 id: "defaultCheck1"
               },
               domProps: {
+                value: _vm.goal_status,
                 checked: Array.isArray(_vm.goal_status)
-                  ? _vm._i(_vm.goal_status, "") > -1
+                  ? _vm._i(_vm.goal_status, _vm.goal_status) > -1
                   : _vm.goal_status
               },
               on: {
@@ -55069,7 +55078,7 @@ var render = function() {
                     $$el = $event.target,
                     $$c = $$el.checked ? true : false
                   if (Array.isArray($$a)) {
-                    var $$v = "",
+                    var $$v = _vm.goal_status,
                       $$i = _vm._i($$a, $$v)
                     if ($$el.checked) {
                       $$i < 0 && (_vm.goal_status = $$a.concat([$$v]))
@@ -55236,9 +55245,26 @@ var render = function() {
     _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.plan_tomorrow))]),
     _vm._v(" "),
-    _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.goal_tomorrow))]),
+    _c("td", [_vm._v(_vm._s(_vm.goal_tomorrow))]),
     _vm._v(" "),
-    _vm._m(0),
+    _c("td", [
+      _c("div", { staticClass: "custom-control custom-checkbox" }, [
+        _c("input", {
+          staticClass: "custom-control-input",
+          attrs: { type: "checkbox", id: "defaultUnchecked" },
+          domProps: { value: _vm.goal_status }
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          {
+            staticClass: "custom-control-label",
+            attrs: { for: "defaultUnchecked" }
+          },
+          [_vm._v("Did you achieve?")]
+        )
+      ])
+    ]),
     _vm._v(" "),
     _c("td", [
       _c(
@@ -55249,7 +55275,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        { staticClass: "btn btn-info text-white", attrs: { type: "button" } },
         [_vm._v("Edit")]
       ),
       _vm._v(" "),
@@ -55264,35 +55290,12 @@ var render = function() {
             }
           }
         },
-        [_vm._v("Delete")]
+        [_c("i", { staticClass: "fa fa-trash" })]
       )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "custom-control custom-checkbox" }, [
-        _c("input", {
-          staticClass: "custom-control-input",
-          attrs: { type: "checkbox", id: "defaultUnchecked" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "custom-control-label",
-            attrs: { for: "defaultUnchecked" }
-          },
-          [_vm._v("Did you achieve?")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -55412,14 +55415,20 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-lg-auto offset-2" }, [
+        _c("div", { staticClass: "col-lg-4" }, [
           _c(
             "button",
             {
-              staticClass: "btn-filter btn btn-group-lg btn-primary",
+              staticClass: "text-white btn-filter btn btn-group-lg btn-info",
               on: { click: _vm.filter }
             },
             [_vm._v("Apply Filter")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "text-white btn-filter btn btn-group-lg btn-info" },
+            [_vm._v("Reset Filter")]
           )
         ])
       ]),
@@ -55439,7 +55448,7 @@ var render = function() {
               _vm._v("Goal for tomorrow")
             ]),
             _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Achievment")]),
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("Achievement")]),
             _vm._v(" "),
             _c(
               "th",
@@ -55448,7 +55457,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-primary mt-3",
+                    staticClass: "text-white btn btn-info",
                     attrs: { id: "show-journal-create-modal" },
                     on: {
                       click: function($event) {

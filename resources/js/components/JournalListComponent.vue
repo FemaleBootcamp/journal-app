@@ -23,8 +23,9 @@
           <option>Not-Achieved</option>
         </select>
       </div>
-      <div class="col-lg-auto offset-2">
-        <button @click="filter" class="btn-filter btn btn-group-lg btn-primary">Apply Filter</button>
+      <div class="col-lg-4">
+        <button @click="filter" class="text-white btn-filter btn btn-group-lg btn-info">Apply Filter</button>
+        <button class="text-white btn-filter btn btn-group-lg btn-info">Reset Filter</button>
       </div>
     </div>
 
@@ -35,12 +36,12 @@
           <th scope="col">Text</th>
           <th scope="col">Plan for tomorrow</th>
           <th scope="col">Goal for tomorrow</th>
-          <th scope="col">Achievment</th>
+          <th scope="col">Achievement</th>
 
           <th scope="col">
             <button
               @click="showJournalCreateModal = true"
-              class="btn btn-primary mt-3"
+              class="text-white btn btn-info"
               id="show-journal-create-modal"
             >Add New</button>
             <add-journal-modal
@@ -205,9 +206,9 @@ export default {
   margin-bottom: 10px;
 }
 
-.text-left {
-  alignment: left;
-}
+/* .text-left {
+  /* alignment: left; 
+} */
 
 .btn-filter {
   margin-top: 30px;

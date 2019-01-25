@@ -65,3 +65,8 @@ ul {
     max-height: calc(100vh - 200px);
     overflow-y: scroll;
 }
+
+.datepicker {
+    position: absolute!important;
+    top: 100%
+}
