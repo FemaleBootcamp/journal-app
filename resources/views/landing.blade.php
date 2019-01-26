@@ -22,7 +22,7 @@
     <section class="row">
         <div id="qs" class="col-6 mb-auto mt-auto">
             <h2>Who is it for?</h2>
-            <h5>Students, teacher, engineers <span>Who Cares! Basically Anyone!</span></h5>
+            <h5>Students, teachers, engineers <span>Who Cares! Basically Anyone!</span></h5>
         </div>
         <img style="width:50%;height:45%" class="col-6" src="{{ asset('img/people.png') }}" alt="No-image">
     </section>
