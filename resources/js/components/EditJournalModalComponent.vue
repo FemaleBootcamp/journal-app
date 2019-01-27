@@ -47,9 +47,9 @@
     <div slot="footer">
       <button @click="$emit('close')" class="btn btn-danger modal-default-button">Cancel</button>
       <button
+        @click="$emit('edit', editJournalId,date, text, plan_tomorrow, goal_tomorrow, goal_status)"
         class="btn btn-primary modal-default-button mr-2"
         type="submit"
-        @click="$emit('edit', editJournalId,date, text, plan_tomorrow, goal_tomorrow, goal_status)"
       >Save
       </button>
     </div>
@@ -59,15 +59,9 @@
   import Datepicker from "vuejs-datepicker";
 
   export default {
-      props: ["editJournalId","user_id", "date", "text", "plan_tomorrow", "goal_tomorrow", "goal_status"],
+    props: ["editJournalId", "user_id", "date", "text", "plan_tomorrow", "goal_tomorrow", "goal_status"],
     components: {
       Datepicker
     },
-    data() {
-      return {
-        journals: [],
-        id:null
-      };
-    }
   };
 </script>

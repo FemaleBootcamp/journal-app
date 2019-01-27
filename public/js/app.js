@@ -1947,12 +1947,6 @@ __webpack_require__.r(__webpack_exports__);
   props: ["editJournalId", "user_id", "date", "text", "plan_tomorrow", "goal_tomorrow", "goal_status"],
   components: {
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  data: function data() {
-    return {
-      journals: [],
-      id: null
-    };
   }
 });
 
@@ -2324,22 +2318,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["editJournalId", "user_id", "date", "text", "plan_tomorrow", "goal_tomorrow", "goal_status"],
   components: {
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  data: function data() {
-    return {
-      journals: [],
-      id: null
-    };
   }
 });
 
@@ -6654,7 +6637,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.btn {\n  alignment: left;\n}\n", ""]);
+exports.push([module.i, "\n.close-btn {\n  alignment: left;\n}\n", ""]);
 
 // exports
 
@@ -56139,16 +56122,20 @@ var render = function() {
       _vm._v("Journal Details")
     ]),
     _vm._v(" "),
-    _c("div", { attrs: { slot: "body" }, slot: "body" }, [
-      _c("p", [_vm._v("Date: " + _vm._s(_vm.date))]),
+    _c("div", { staticClass: "form", attrs: { slot: "body" }, slot: "body" }, [
+      _c("h5", [_c("span", [_vm._v("Date:")]), _vm._v(" " + _vm._s(_vm.date))]),
       _vm._v(" "),
-      _c("p", [_vm._v("Text: " + _vm._s(_vm.text))]),
+      _c("h5", [_c("span", [_vm._v("Text:")]), _vm._v(" " + _vm._s(_vm.text))]),
       _vm._v(" "),
-      _c("p", [_vm._v("Date: " + _vm._s(_vm.date))]),
+      _c("h5", [
+        _c("span", [_vm._v("Plan for Tomorrow: ")]),
+        _vm._v(_vm._s(_vm.plan_tomorrow))
+      ]),
       _vm._v(" "),
-      _c("p", [_vm._v("Plan for Tomorrow: " + _vm._s(_vm.plan_tomorrow))]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Goal for Tomorrow: " + _vm._s(_vm.goal_tomorrow))]),
+      _c("h5", [
+        _c("span", [_vm._v("Goal for Tomorrow: ")]),
+        _vm._v(_vm._s(_vm.goal_tomorrow))
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check mt-2" }, [
         _c("input", {
@@ -56196,7 +56183,7 @@ var render = function() {
         }),
         _vm._v(" "),
         _c(
-          "label",
+          "span",
           { staticClass: "form-check-label", attrs: { for: "defaultCheck1" } },
           [_vm._v("Did you achieve today's goal?")]
         )
@@ -56207,7 +56194,7 @@ var render = function() {
       _c(
         "button",
         {
-          staticClass: "btn btn-danger modal-default-button",
+          staticClass: "close-btn btn btn-danger modal-default-button",
           on: {
             click: function($event) {
               _vm.$emit("close")

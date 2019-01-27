@@ -1,14 +1,11 @@
 <template>
   <modal-component class="black-text-modal">
     <div slot="header">Journal Details</div>
-
-
-    <div slot="body">
-      <p>Date: {{date}}</p>
-      <p>Text: {{text}}</p>
-      <p>Date: {{date}}</p>
-      <p>Plan for Tomorrow: {{plan_tomorrow}}</p>
-      <p>Goal for Tomorrow: {{goal_tomorrow}}</p>
+    <div class="form" slot="body">
+      <h5><span>Date:</span> {{date}}</h5>
+      <h5><span>Text:</span> {{text}}</h5>
+      <h5><span>Plan for Tomorrow: </span>{{plan_tomorrow}}</h5>
+      <h5><span>Goal for Tomorrow: </span>{{goal_tomorrow}}</h5>
 
       <div class="form-check mt-2">
         <input
@@ -19,13 +16,11 @@
           v-model="goal_status"
           value
         >
-        <label class="form-check-label" for="defaultCheck1">Did you achieve today's goal?</label>
-
+        <span class="form-check-label" for="defaultCheck1">Did you achieve today's goal?</span>
       </div>
     </div>
-
     <div slot="footer">
-      <button @click="$emit('close')" class="btn btn-danger modal-default-button">Close</button>
+      <button @click="$emit('close')" class="close-btn btn btn-danger modal-default-button">Close</button>
     </div>
   </modal-component>
 </template>
@@ -37,16 +32,10 @@
     components: {
       Datepicker
     },
-    data() {
-      return {
-        journals: [],
-        id: null
-      };
-    }
   };
 </script>
 <style>
-  .btn {
+  .close-btn {
     alignment: left;
   }
 </style>
