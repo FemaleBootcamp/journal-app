@@ -10633,3 +10633,12 @@ ul {
   overflow-y: scroll;
 }
 
+.team {
+  font-size: 20px;
+  font-style: bold;
+}
+
+.footer-bottom {
+  margin-bottom: 60px;
+}
+
