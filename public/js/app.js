@@ -2245,7 +2245,7 @@ function Journal(_ref) {
         });
 
         Vue.set(_this5.journals, index, new Journal({
-          editJournalId: editJournalId,
+          index: index,
           date: date,
           text: text,
           plan_tomorrow: plan_tomorrow,
@@ -2253,11 +2253,11 @@ function Journal(_ref) {
           goal_status: goal_status
         }));
         _this5.showJournalEditModal = false;
-      }); // .catch(error => {
-      //   if (error.response.status) {
-      //     alert("Server Error");
-      //   }
-      // });
+      }).catch(function (error) {
+        if (error.response.status) {
+          alert("Server Error");
+        }
+      });
     },
     read: function read() {
       var _this6 = this;
