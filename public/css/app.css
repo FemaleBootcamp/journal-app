@@ -10633,8 +10633,8 @@ ul {
   overflow-y: scroll;
 }
 
-.datepicker {
-  position: absolute !important;
-  top: 100%;
+.team {
+  font-size: 20px;
+  font-style: bold;
 }
 

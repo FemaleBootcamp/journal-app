@@ -1,4 +1,4 @@
-<section id="footer" style="background-color:#32CD99">
+<section id="footer" style="background-color:#32CD99" class="fixed-bottom">
     <div class="container">
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6 text-white">
@@ -11,7 +11,9 @@
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 text-right">
                 <a href="{{route('team')}}">
-                    <h2><span>Meet The Team</span></h2>
+                    <span>
+                        <p class="team">Meet The Team</p>
+                    </span>
                 </a>
             </div>
 

@@ -206,10 +206,6 @@ export default {
   margin-bottom: 10px;
 }
 
-/* .text-left {
-  /* alignment: left; 
-} */
-
 .btn-filter {
   margin-top: 30px;
   margin-left: 60px;

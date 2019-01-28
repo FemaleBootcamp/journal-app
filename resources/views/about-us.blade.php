@@ -1,49 +1,40 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/Logo.png') }}" />
-    <link rel="stylesheet" type="text/css" href="css/app.css">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Motus</title>
-</head>
-
-<body>
-    <div id="app">
-        @include('partials.nav-partials')
-        <div id="footer" class="container">
-            <br><br><br>
-            <div class="row text-center text-white text-xs-center text-sm-left text-md-left mt-5">
-                <div class="col-xs-10 offset-5">
-                    <h4 class="mb-4"><span><strong>Meet The Team</strong></span></h4>
-                    <hr>
-                    <ul class="list-unstyled quick-links">
-                        <li><a target="_blank" href="https://www.linkedin.com/in/nikola-gjorgjievski/"><span><i
-                                        class="fa fa-linkedin"></span></i>Project Manager: <span><strong>Nikola
-                                        Gjorgjievski</strong></span></a></li>
-                        <li><a target="_blank" href="https://www.linkedin.com/in/stankovskatamara/"><span><i
-                                        class="fa fa-linkedin"></span></i>Team
-                                Member: <span><strong>Tamara
-                                        Stankovska</strong></span></a>
-                        </li>
-                        <li><a target="_blank" href="https://www.linkedin.com/in/ketimitrovska/"><span><i
-                                        class="fa fa-linkedin"></span></i>Team
-                                Member: <span><strong>Keti
-                                        Mitrovska</strong></span></a>
-                        </li>
-                    </ul>
+@extends('layout.welcome')
+@section('content')
+<section>
+    <div class="container">
+        <h4 class="m-5 text-center"><span><strong>Meet The Team</strong></span></h4>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Project Manager</h5>
+                        <p class="card-text">Nikola Gjorgjievski</p>
+                        <a target="_blank" href="https://www.linkedin.com/in/nikola-gjorgjievski/"
+                            class="text-white btn btn-info"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Team Member</h5>
+                        <p class="card-text">Tamara Stankovska</p>
+                        <a target="_blank" href="https://www.linkedin.com/in/stankovskatamara/"
+                            class="text-white btn btn-info"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Team Member</h5>
+                        <p class="card-text">Keti Mitrovska</p>
+                        <a target="_blank" href="https://www.linkedin.com/in/ketimitrovska/"
+                            class="text-white btn btn-info"><i class="fa fa-linkedin"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="fixed-bottom">
-            @include('partials.footer-partials')
-        </div>
     </div>
-
-    <script src="js/app.js?v={{ env('ASSETS_VERSION', 2) }}"></script>
-
-
-</body>
-
-</html>
+</section>
+@endsection
