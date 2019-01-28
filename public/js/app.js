@@ -2229,9 +2229,9 @@ function Journal(_ref) {
       });
     },
     edit: function edit(editJournalId, date, text, plan_tomorrow, goal_tomorrow, goal_status) {
-      var _this5 = this;
-
       console.log(editJournalId, date, text, plan_tomorrow, goal_tomorrow, goal_status);
+      var journalsArray = this.journals;
+      var showJournalEditM = this.showJournalEditModal;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("api/journals/" + editJournalId, {
         user_id: this.userid,
         date: moment__WEBPACK_IMPORTED_MODULE_2___default()(date).format("YYYY-MM-DD"),
@@ -2239,17 +2239,20 @@ function Journal(_ref) {
         plan_tomorrow: plan_tomorrow,
         goal_tomorrow: goal_tomorrow,
         goal_status: goal_status
-      }).then(function (response) {
-        alert("Success");
-        _this5.showJournalEditModal = false;
-      }).catch(function (error) {
-        if (error.response.status) {
-          alert("Server Error");
-        }
-      });
+      }).then(function (value) {
+        var index = journalsArray.findIndex(function (journal) {
+          return journal.id === editJournalId;
+        });
+        journalsArray.$set(index, value);
+        showJournalEditM = false;
+      }); // .catch(error => {
+      //   if (error.response.status) {
+      //     alert("Server Error");
+      //   }
+      // });
     },
     read: function read() {
-      var _this6 = this;
+      var _this5 = this;
 
       var dateFrom = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var dateTo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -2264,7 +2267,7 @@ function Journal(_ref) {
       }).then(function (_ref3) {
         var data = _ref3.data;
         data.forEach(function (journal) {
-          _this6.journals.push(new Journal(journal));
+          _this5.journals.push(new Journal(journal));
         });
       }, function (error) {
         console.error(error);

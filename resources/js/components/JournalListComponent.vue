@@ -208,6 +208,8 @@
       },
       edit(editJournalId,date, text, plan_tomorrow, goal_tomorrow, goal_status) {
         console.log(editJournalId,date,text,plan_tomorrow,goal_tomorrow,goal_status)
+        let journalsArray=this.journals;
+        let showJournalEditM = this.showJournalEditModal;
         axios.put("api/journals/" + editJournalId, {
           user_id: this.userid,
           date: moment(date).format("YYYY-MM-DD"),
@@ -216,15 +218,16 @@
           goal_tomorrow: goal_tomorrow,
           goal_status: goal_status
         })
-          .then(response => {
-            alert("Success");
-            this.showJournalEditModal = false;
+          .then(function(value) {
+            let index = journalsArray.findIndex(journal => journal.id === editJournalId);
+            journalsArray.$set(index,value);
+            showJournalEditM = false;
           })
-          .catch(error => {
-            if (error.response.status) {
-              alert("Server Error");
-            }
-          });
+          // .catch(error => {
+          //   if (error.response.status) {
+          //     alert("Server Error");
+          //   }
+          // });
       },
       read(dateFrom = null, dateTo = null, goalStatus = null) {
         window.axios
