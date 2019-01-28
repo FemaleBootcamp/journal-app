@@ -73,15 +73,15 @@
     ></delete-component>
     <edit-component
       :editJournalId="editJournalId"
-      v-bind="editJournal"
       @close="showJournalEditModal = false"
       @edit="edit"
+      v-bind="editJournal"
       v-if="showJournalEditModal"
     ></edit-component>
     <view-details-component
       :editJournalId="editJournalId"
-      v-bind="editJournal"
       @close="showJournalDetailsModal = false"
+      v-bind="editJournal"
       v-if="showJournalDetailsModal"
     ></view-details-component>
   </div>
@@ -111,7 +111,7 @@
 
   export default {
     components: {
-      Datepicker
+      Datepicker,
     },
     props: ["userid"],
     data() {
@@ -206,10 +206,8 @@
             }
           });
       },
-      edit(editJournalId,date, text, plan_tomorrow, goal_tomorrow, goal_status) {
-        console.log(editJournalId,date,text,plan_tomorrow,goal_tomorrow,goal_status)
-        let journalsArray=this.journals;
-        let showJournalEditM = this.showJournalEditModal;
+      edit(editJournalId, date, text, plan_tomorrow, goal_tomorrow, goal_status) {
+        console.log(editJournalId, date, text, plan_tomorrow, goal_tomorrow, goal_status)
         axios.put("api/journals/" + editJournalId, {
           user_id: this.userid,
           date: moment(date).format("YYYY-MM-DD"),
@@ -218,16 +216,21 @@
           goal_tomorrow: goal_tomorrow,
           goal_status: goal_status
         })
-          .then(function(value) {
-            let index = journalsArray.findIndex(journal => journal.id === editJournalId);
-            journalsArray.$set(index,value);
-            showJournalEditM = false;
+          .then(response => {
+            let index = this.journals.findIndex(journal => journal.id === editJournalId);
+            Vue.set(
+              this.journals,
+              index,
+              new Journal({editJournalId, date, text, plan_tomorrow, goal_tomorrow, goal_status})
+            );
+
+            this.showJournalEditModal = false;
           })
-          // .catch(error => {
-          //   if (error.response.status) {
-          //     alert("Server Error");
-          //   }
-          // });
+          .catch(error => {
+            if (error.response.status) {
+              alert("Server Error");
+            }
+          });
       },
       read(dateFrom = null, dateTo = null, goalStatus = null) {
         window.axios
