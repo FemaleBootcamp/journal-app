@@ -1,6 +1,6 @@
 @extends('layout.welcome')
 @section('content')
-<section>
+<section class="footer-bottom">
     <div class="container">
         <h4 class="m-5 text-center"><span><strong>Meet The Team</strong></span></h4>
         <div class="row">

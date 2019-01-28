@@ -1,4 +1,4 @@
-<section id="footer" style="background-color:#32CD99" class="fixed-bottom">
+<section id="footer" style="background-color:#32CD99">
     <div class="container">
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6 text-white">
