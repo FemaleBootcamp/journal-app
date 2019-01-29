@@ -72,6 +72,7 @@
       v-if="showConfirmationModal"
     ></delete-component>
     <edit-component
+      :messages="messages"
       :editJournalId="editJournalId"
       @close="showJournalEditModal = false"
       @edit="edit"

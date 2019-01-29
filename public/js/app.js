@@ -1944,7 +1944,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["editJournalId", "user_id", "date", "text", "plan_tomorrow", "goal_tomorrow", "goal_status"],
+  props: ["editJournalId", "user_id", "date", "text", "plan_tomorrow", "goal_tomorrow", "goal_status", "messages"],
   components: {
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -2019,6 +2019,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+//
 //
 //
 //
@@ -55653,6 +55654,14 @@ var render = function() {
                 attrs: { for: "defaultCheck1" }
               },
               [_vm._v("Did you achieve today's goal?")]
+            ),
+            _vm._v(" "),
+            _c(
+              "span",
+              _vm._l(_vm.messages, function(message) {
+                return _c("p", { key: message }, [_vm._v(_vm._s(message))])
+              }),
+              0
             )
           ])
         ],
@@ -56024,7 +56033,10 @@ var render = function() {
             "edit-component",
             _vm._b(
               {
-                attrs: { editJournalId: _vm.editJournalId },
+                attrs: {
+                  messages: _vm.messages,
+                  editJournalId: _vm.editJournalId
+                },
                 on: {
                   close: function($event) {
                     _vm.showJournalEditModal = false

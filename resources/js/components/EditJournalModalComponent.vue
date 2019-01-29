@@ -39,7 +39,7 @@
             value
           >
           <label class="form-check-label" for="defaultCheck1">Did you achieve today's goal?</label>
-
+          <span><p v-for="message in messages" :key="message">{{ message }}</p></span>
         </div>
       </form>
     </div>
@@ -59,7 +59,7 @@
   import Datepicker from "vuejs-datepicker";
 
   export default {
-    props: ["editJournalId", "user_id", "date", "text", "plan_tomorrow", "goal_tomorrow", "goal_status"],
+    props: ["editJournalId", "user_id", "date", "text", "plan_tomorrow", "goal_tomorrow", "goal_status", "messages"],
     components: {
       Datepicker
     },
