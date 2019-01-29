@@ -107,8 +107,7 @@ abbr[data-original-title] {
           text-decoration: underline dotted;
   cursor: help;
   border-bottom: 0;
-  -webkit-text-decoration-skip-ink: none;
-          text-decoration-skip-ink: none;
+  text-decoration-skip-ink: none;
 }
 
 address {
@@ -10641,5 +10640,25 @@ ul {
 
 .footer-bottom {
   margin-bottom: 60px;
+}
+
+.loading-screen {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.loading-image {
+  width: 10%;
+  height: 20%;
+  display: block;
+  margin-top: 20%;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 

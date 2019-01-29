@@ -2115,6 +2115,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2154,7 +2157,8 @@ function Journal(_ref) {
       deleteJournalId: null,
       editJournalId: null,
       editJournal: null,
-      id: null
+      id: null,
+      loading: false
     };
   },
   methods: {
@@ -2163,11 +2167,14 @@ function Journal(_ref) {
 
       this.showJournalEditModal = true;
       this.editJournalId = id;
+      this.loading = true;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("api/journals/" + id).then(function (response) {
         _this.editJournal = response.data;
+        _this.loading = false;
       }).catch(function (error) {
         if (error.response.status) {
           alert("Server Error");
+          _this.loading = false;
         }
       });
     },
@@ -2176,11 +2183,14 @@ function Journal(_ref) {
 
       this.showJournalDetailsModal = true;
       this.editJournalId = id;
+      this.loading = true;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("api/journals/" + id).then(function (response) {
         _this2.editJournal = response.data;
+        _this2.loading = false;
       }).catch(function (error) {
         if (error.response.status) {
           alert("Server Error");
+          _this2.loading = false;
         }
       });
     },
@@ -2192,6 +2202,7 @@ function Journal(_ref) {
       var _this3 = this;
 
       this.messages = [];
+      this.loading = true;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/journals", {
         user_id: this.userid,
         date: moment__WEBPACK_IMPORTED_MODULE_2___default()(date).format("YYYY-MM-DD"),
@@ -2205,10 +2216,12 @@ function Journal(_ref) {
         _this3.journals.push(new Journal(data));
 
         _this3.showJournalCreateModal = false;
+        _this3.loading = false;
       }).catch(function (error) {
         if (error.response.status == 422) {
           var msgs = _this3.messages;
           var errors = error.response.data.errors;
+          _this3.loading = false;
           Object.keys(errors).forEach(function (key) {
             errors[key].forEach(function (error) {
               msgs.push(error);
@@ -2216,12 +2229,14 @@ function Journal(_ref) {
           });
         } else {
           _this3.messages = ["Server error."];
+          _this3.loading = false;
         }
       });
     },
     deleteJournal: function deleteJournal(id) {
       var _this4 = this;
 
+      this.loading = true;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete("api/journals/" + id).then(function (response) {
         var index = _this4.journals.findIndex(function (journal) {
           return journal.id === id;
@@ -2230,9 +2245,11 @@ function Journal(_ref) {
         _this4.journals.splice(index, 1);
 
         _this4.showConfirmationModal = false;
+        _this4.loading = false;
       }).catch(function (error) {
         if (error.response.status) {
           alert("Server Error");
+          _this4.loading = false;
         }
       });
     },
@@ -2240,6 +2257,7 @@ function Journal(_ref) {
       var _this5 = this;
 
       this.messages = [];
+      this.loading = true;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("api/journals/" + editJournalId, {
         user_id: this.userid,
         date: moment__WEBPACK_IMPORTED_MODULE_2___default()(date).format("YYYY-MM-DD"),
@@ -2248,6 +2266,8 @@ function Journal(_ref) {
         goal_tomorrow: goal_tomorrow,
         goal_status: goal_status
       }).then(function (response) {
+        _this5.loading = false;
+
         var index = _this5.journals.findIndex(function (journal) {
           return journal.id === editJournalId;
         });
@@ -2265,6 +2285,7 @@ function Journal(_ref) {
         if (error.response.status == 422) {
           var msgs = _this5.messages;
           var errors = error.response.data.errors;
+          _this5.loading = false;
           Object.keys(errors).forEach(function (key) {
             errors[key].forEach(function (error) {
               msgs.push(error);
@@ -2281,6 +2302,7 @@ function Journal(_ref) {
       var dateFrom = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var dateTo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var goalStatus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      this.loading = true;
       window.axios.get("api/journals", {
         params: {
           userId: this.userid,
@@ -2293,8 +2315,10 @@ function Journal(_ref) {
         data.forEach(function (journal) {
           _this6.journals.push(new Journal(journal));
         });
+        _this6.loading = false;
       }, function (error) {
         console.error(error);
+        _this6.loading = false;
       });
     },
     filter: function filter() {
@@ -55834,6 +55858,15 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm.loading
+        ? _c("div", { staticClass: "loading-screen" }, [
+            _c("img", {
+              staticClass: "loading-image",
+              attrs: { src: "./img/ajax_loader.gif", alt: "No image" }
+            })
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
@@ -56367,8 +56400,8 @@ function normalizeComponent (
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.5.22
- * (c) 2014-2019 Evan You
+ * Vue.js v2.5.21
+ * (c) 2014-2018 Evan You
  * Released under the MIT License.
  */
 
@@ -56997,7 +57030,7 @@ if (true) {
       ? vm.options
       : vm._isVue
         ? vm.$options || vm.constructor.options
-        : vm;
+        : vm || {};
     var name = options.name || options._componentTag;
     var file = options.__file;
     if (!name && file) {
@@ -57092,9 +57125,9 @@ Dep.prototype.notify = function notify () {
   }
 };
 
-// The current target watcher being evaluated.
-// This is globally unique because only one watcher
-// can be evaluated at a time.
+// the current target watcher being evaluated.
+// this is globally unique because there could be only one
+// watcher being evaluated at any time.
 Dep.target = null;
 var targetStack = [];
 
@@ -57622,26 +57655,13 @@ function mergeHook (
   parentVal,
   childVal
 ) {
-  var res = childVal
+  return childVal
     ? parentVal
       ? parentVal.concat(childVal)
       : Array.isArray(childVal)
         ? childVal
         : [childVal]
-    : parentVal;
-  return res
-    ? dedupeHooks(res)
-    : res
-}
-
-function dedupeHooks (hooks) {
-  var res = [];
-  for (var i = 0; i < hooks.length; i++) {
-    if (res.indexOf(hooks[i]) === -1) {
-      res.push(hooks[i]);
-    }
-  }
-  return res
+    : parentVal
 }
 
 LIFECYCLE_HOOKS.forEach(function (hook) {
@@ -57877,7 +57897,7 @@ function mergeOptions (
   normalizeProps(child, vm);
   normalizeInject(child, vm);
   normalizeDirectives(child);
-
+  
   // Apply extends and mixins on the child options,
   // but only if it is a raw options object that isn't
   // the result of another mergeOptions call.
@@ -58810,8 +58830,6 @@ function resolveAsyncComponent (
       // (async resolves are shimmed as synchronous during SSR)
       if (!sync) {
         forceRender(true);
-      } else {
-        contexts.length = 0;
       }
     });
 
@@ -58979,8 +58997,8 @@ function eventsMixin (Vue) {
     }
     // array of events
     if (Array.isArray(event)) {
-      for (var i$1 = 0, l = event.length; i$1 < l; i$1++) {
-        vm.$off(event[i$1], fn);
+      for (var i = 0, l = event.length; i < l; i++) {
+        vm.$off(event[i], fn);
       }
       return vm
     }
@@ -58993,14 +59011,16 @@ function eventsMixin (Vue) {
       vm._events[event] = null;
       return vm
     }
-    // specific handler
-    var cb;
-    var i = cbs.length;
-    while (i--) {
-      cb = cbs[i];
-      if (cb === fn || cb.fn === fn) {
-        cbs.splice(i, 1);
-        break
+    if (fn) {
+      // specific handler
+      var cb;
+      var i$1 = cbs.length;
+      while (i$1--) {
+        cb = cbs[i$1];
+        if (cb === fn || cb.fn === fn) {
+          cbs.splice(i$1, 1);
+          break
+        }
       }
     }
     return vm
@@ -61161,14 +61181,34 @@ function resolveConstructorOptions (Ctor) {
 function resolveModifiedOptions (Ctor) {
   var modified;
   var latest = Ctor.options;
+  var extended = Ctor.extendOptions;
   var sealed = Ctor.sealedOptions;
   for (var key in latest) {
     if (latest[key] !== sealed[key]) {
       if (!modified) { modified = {}; }
-      modified[key] = latest[key];
+      modified[key] = dedupe(latest[key], extended[key], sealed[key]);
     }
   }
   return modified
+}
+
+function dedupe (latest, extended, sealed) {
+  // compare latest and sealed to ensure lifecycle hooks won't be duplicated
+  // between merges
+  if (Array.isArray(latest)) {
+    var res = [];
+    sealed = Array.isArray(sealed) ? sealed : [sealed];
+    extended = Array.isArray(extended) ? extended : [extended];
+    for (var i = 0; i < latest.length; i++) {
+      // push original options and not sealed options to exclude duplicated options
+      if (extended.indexOf(latest[i]) >= 0 || sealed.indexOf(latest[i]) < 0) {
+        res.push(latest[i]);
+      }
+    }
+    return res
+  } else {
+    return latest
+  }
 }
 
 function Vue (options) {
@@ -61539,7 +61579,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.5.22';
+Vue.version = '2.5.21';
 
 /*  */
 
@@ -69648,8 +69688,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\User\Documents\journal-app\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\User\Documents\journal-app\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\codecordia\htdocs\journal-app\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\codecordia\htdocs\journal-app\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
