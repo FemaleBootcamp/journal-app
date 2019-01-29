@@ -23,36 +23,36 @@
           <option>Not-Achieved</option>
         </select>
       </div>
-      <div class="col-lg-auto offset-2">
-        <button @click="filter" class="btn-filter btn btn-group-lg btn-primary">Apply Filter</button>
+      <div class="col-lg-4">
+        <button @click="filter" class="text-white btn-filter btn btn-group-lg btn-info">Apply Filter</button>
+        <button class="text-white btn-filter btn btn-group-lg btn-info">Reset Filter</button>
       </div>
     </div>
 
     <table class="table">
       <thead class="thead-dark">
-      <tr>
-        <th scope="col">Date</th>
-        <th scope="col">Text</th>
-        <th scope="col">Plan for tomorrow</th>
-        <th scope="col">Goal for tomorrow</th>
-        <th scope="col">Achievment</th>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Text</th>
+          <th scope="col">Plan for tomorrow</th>
+          <th scope="col">Goal for tomorrow</th>
+          <th scope="col">Achievement</th>
 
-        <th scope="col">
-          <button
-            @click="showJournalCreateModal = true"
-            class="btn btn-primary mt-3"
-            id="show-journal-create-modal"
-          >Add New
-          </button>
-          <add-journal-modal
-            :messages="messages"
-            @close="showJournalCreateModal = false"
-            @createJournal="createJournal"
-            id="addJournalModal"
-            v-if="showJournalCreateModal"
-          ></add-journal-modal>
-        </th>
-      </tr>
+          <th scope="col">
+            <button
+              @click="showJournalCreateModal = true"
+              class="text-white btn btn-info"
+              id="show-journal-create-modal"
+            >Add New</button>
+            <add-journal-modal
+              :messages="messages"
+              @close="showJournalCreateModal = false"
+              @createJournal="createJournal"
+              id="addJournalModal"
+              v-if="showJournalCreateModal"
+            ></add-journal-modal>
+          </th>
+        </tr>
       </thead>
       <tbody>
       <journal
@@ -287,21 +287,17 @@
   };
 </script>
 <style>
-  .date-range-container {
-    margin-bottom: 5px;
-  }
+.date-range-container {
+  margin-bottom: 5px;
+}
 
-  .form-control {
-    margin-bottom: 10px;
-  }
+.form-control {
+  margin-bottom: 10px;
+}
 
-  .text-left {
-    alignment: left;
-  }
-
-  .btn-filter {
-    margin-top: 30px;
-    margin-left: 60px;
-  }
+.btn-filter {
+  margin-top: 30px;
+  margin-left: 60px;
+}
 </style>
 

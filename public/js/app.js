@@ -1821,6 +1821,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["messages"],
@@ -1999,8 +2000,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["id", "date", "text", "plan_tomorrow", "goal_tomorrow", "grade"]
+  props: ["id", "date", "text", "plan_tomorrow", "goal_tomorrow", "goal_status"]
 });
 
 /***/ }),
@@ -6619,7 +6625,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.date-range-container {\n  margin-bottom: 5px;\n}\n.form-control {\n  margin-bottom: 10px;\n}\n.text-left {\n  alignment: left;\n}\n.btn-filter {\n  margin-top: 30px;\n  margin-left: 60px;\n}\n", ""]);
+exports.push([module.i, "\n.date-range-container {\n  margin-bottom: 5px;\n}\n.form-control {\n  margin-bottom: 10px;\n}\n.btn-filter {\n  margin-top: 30px;\n  margin-left: 60px;\n}\n", ""]);
 
 // exports
 
@@ -6638,7 +6644,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-mask {\r\n  position: fixed;\r\n  z-index: 9998;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: rgba(0, 0, 0, 0.5);\r\n  display: table;\r\n  transition: opacity 0.3s ease;\n}\n.vdp-datepicker * {\r\n  border: 0;\n}\n.modal-wrapper {\r\n  display: table-cell;\r\n  vertical-align: middle;\n}\n.modal-container {\r\n  width: 300px;\r\n  margin: 0px auto;\r\n  padding: 20px 30px;\r\n  background-color: #fff;\r\n  border-radius: 2px;\r\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\r\n  transition: all 0.3s ease;\r\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\r\n  margin-top: 0;\r\n  color: #42b983;\n}\n.modal-body {\r\n  margin: 20px 0;\n}\n.modal-default-button {\r\n  float: right;\n}\n.modal-enter {\r\n  opacity: 0;\n}\n.modal-leave-active {\r\n  opacity: 0;\n}\n.modal-enter .modal-container,\r\n.modal-leave-active .modal-container {\r\n  -webkit-transform: scale(1.1);\r\n  transform: scale(1.1);\n}\r\n", ""]);
+exports.push([module.i, "\n.modal-mask {\r\n  position: fixed;\r\n  z-index: 9998;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: rgba(0, 0, 0, 0.5);\r\n  display: table;\r\n  transition: opacity 0.3s ease;\n}\n.vdp-datepicker * {\r\n  border: 0;\n}\n.modal-wrapper {\r\n  display: table-cell;\r\n  vertical-align: middle;\n}\n.modal-container {\r\n  width: 450px;\r\n  margin: 0px auto;\r\n  padding: 20px 30px;\r\n  background-color: #fff;\r\n  border-radius: 2px;\r\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\r\n  transition: all 0.3s ease;\r\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\r\n  margin-top: 0;\r\n  color: #42b983;\n}\n.modal-body {\r\n  margin: 20px 0;\n}\n.modal-default-button {\r\n  float: right;\n}\n.modal-enter {\r\n  opacity: 0;\n}\n.modal-leave-active {\r\n  opacity: 0;\n}\n.modal-enter .modal-container,\r\n.modal-leave-active .modal-container {\r\n  -webkit-transform: scale(1.1);\r\n  transform: scale(1.1);\n}\r\n", ""]);
 
 // exports
 
@@ -55326,12 +55332,12 @@ var render = function() {
               attrs: {
                 name: "goal_status",
                 type: "checkbox",
-                value: "",
                 id: "defaultCheck1"
               },
               domProps: {
+                value: _vm.goal_status,
                 checked: Array.isArray(_vm.goal_status)
-                  ? _vm._i(_vm.goal_status, "") > -1
+                  ? _vm._i(_vm.goal_status, _vm.goal_status) > -1
                   : _vm.goal_status
               },
               on: {
@@ -55340,7 +55346,7 @@ var render = function() {
                     $$el = $event.target,
                     $$c = $$el.checked ? true : false
                   if (Array.isArray($$a)) {
-                    var $$v = "",
+                    var $$v = _vm.goal_status,
                       $$i = _vm._i($$a, $$v)
                     if ($$el.checked) {
                       $$i < 0 && (_vm.goal_status = $$a.concat([$$v]))
@@ -55736,9 +55742,26 @@ var render = function() {
     _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.plan_tomorrow))]),
     _vm._v(" "),
-    _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.goal_tomorrow))]),
+    _c("td", [_vm._v(_vm._s(_vm.goal_tomorrow))]),
     _vm._v(" "),
-    _vm._m(0),
+    _c("td", [
+      _c("div", { staticClass: "custom-control custom-checkbox" }, [
+        _c("input", {
+          staticClass: "custom-control-input",
+          attrs: { type: "checkbox", id: "defaultUnchecked" },
+          domProps: { value: _vm.goal_status }
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          {
+            staticClass: "custom-control-label",
+            attrs: { for: "defaultUnchecked" }
+          },
+          [_vm._v("Did you achieve?")]
+        )
+      ])
+    ]),
     _vm._v(" "),
     _c("td", [
       _c(
@@ -55758,7 +55781,7 @@ var render = function() {
       _c(
         "button",
         {
-          staticClass: "btn btn-primary",
+          staticClass: "btn btn-info text-white",
           attrs: { id: "show-journal-edit-modal", type: "button" },
           on: {
             click: function($event) {
@@ -55780,35 +55803,12 @@ var render = function() {
             }
           }
         },
-        [_vm._v("Delete\n    ")]
+        [_c("i", { staticClass: "fa fa-trash" })]
       )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "custom-control custom-checkbox" }, [
-        _c("input", {
-          staticClass: "custom-control-input",
-          attrs: { id: "defaultUnchecked", type: "checkbox" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "custom-control-label",
-            attrs: { for: "defaultUnchecked" }
-          },
-          [_vm._v("Did you achieve?")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -55928,14 +55928,20 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-lg-auto offset-2" }, [
+        _c("div", { staticClass: "col-lg-4" }, [
           _c(
             "button",
             {
-              staticClass: "btn-filter btn btn-group-lg btn-primary",
+              staticClass: "text-white btn-filter btn btn-group-lg btn-info",
               on: { click: _vm.filter }
             },
             [_vm._v("Apply Filter")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "text-white btn-filter btn btn-group-lg btn-info" },
+            [_vm._v("Reset Filter")]
           )
         ])
       ]),
@@ -55955,7 +55961,7 @@ var render = function() {
               _vm._v("Goal for tomorrow")
             ]),
             _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Achievment")]),
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("Achievement")]),
             _vm._v(" "),
             _c(
               "th",
@@ -55964,7 +55970,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-primary mt-3",
+                    staticClass: "text-white btn btn-info",
                     attrs: { id: "show-journal-create-modal" },
                     on: {
                       click: function($event) {
@@ -55972,7 +55978,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("Add New\n        ")]
+                  [_vm._v("Add New")]
                 ),
                 _vm._v(" "),
                 _vm.showJournalCreateModal

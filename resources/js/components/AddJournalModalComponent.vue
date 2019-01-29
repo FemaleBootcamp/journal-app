@@ -33,13 +33,14 @@
             name="goal_status"
             class="form-check-input"
             type="checkbox"
-            value
+            :value="goal_status"
             id="defaultCheck1"
           >
           <label class="form-check-label" for="defaultCheck1">Did you achieve today's goal?</label>
-         
-            <span><p v-for="message in messages" :key="message">{{ message }}</p></span>
           
+          <span>
+            <p v-for="message in messages" :key="message">{{ message }}</p>
+          </span>
         </div>
       </form>
     </div>
