@@ -2231,7 +2231,6 @@ function Journal(_ref) {
     edit: function edit(editJournalId, date, text, plan_tomorrow, goal_tomorrow, goal_status) {
       var _this5 = this;
 
-      console.log(editJournalId, date, text, plan_tomorrow, goal_tomorrow, goal_status);
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("api/journals/" + editJournalId, {
         user_id: this.userid,
         date: moment__WEBPACK_IMPORTED_MODULE_2___default()(date).format("YYYY-MM-DD"),
@@ -2254,8 +2253,17 @@ function Journal(_ref) {
         }));
         _this5.showJournalEditModal = false;
       }).catch(function (error) {
-        if (error.response.status) {
-          alert("Server Error");
+        if (error.response.status == 422) {
+          var msgs = _this5.messages;
+          var errors = error.response.data.errors;
+          Object.keys(errors).forEach(function (key) {
+            errors[key].forEach(function (error) {
+              msgs.push(error);
+            });
+          });
+          _this5.messages = msgs;
+        } else {
+          _this5.messages = ["Server error."];
         }
       });
     },

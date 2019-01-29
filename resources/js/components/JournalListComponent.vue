@@ -207,7 +207,6 @@
           });
       },
       edit(editJournalId, date, text, plan_tomorrow, goal_tomorrow, goal_status) {
-        console.log(editJournalId, date, text, plan_tomorrow, goal_tomorrow, goal_status)
         axios.put("api/journals/" + editJournalId, {
           user_id: this.userid,
           date: moment(date).format("YYYY-MM-DD"),
@@ -234,8 +233,18 @@
             this.showJournalEditModal = false;
           })
           .catch(error => {
-            if (error.response.status) {
-              alert("Server Error");
+            if (error.response.status == 422) {
+              let msgs = this.messages;
+              let errors = error.response.data.errors;
+
+              Object.keys(errors).forEach(key => {
+                errors[key].forEach(function (error) {
+                  msgs.push(error);
+                });
+              });
+              this.messages = msgs;
+            } else {
+              this.messages = ["Server error."];
             }
           });
       },
