@@ -1876,6 +1876,83 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditJournalModalComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditJournalModalComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["editJournalId", "user_id", "date", "text", "plan_tomorrow", "goal_tomorrow", "goal_status", "messages"],
+  components: {
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/JournalComponent.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/JournalComponent.vue?vue&type=script&lang=js& ***!
@@ -1885,6 +1962,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2011,6 +2098,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2040,21 +2144,52 @@ function Journal(_ref) {
     return {
       showConfirmationModal: false,
       showJournalCreateModal: false,
+      showJournalEditModal: false,
+      showJournalDetailsModal: false,
       journals: [],
       messages: [],
       dateFrom: null,
       dateTo: null,
       goalStatus: null,
-      deleteJournalId: null
+      deleteJournalId: null,
+      editJournalId: null,
+      editJournal: null,
+      id: null
     };
   },
   methods: {
+    showEditModal: function showEditModal(id) {
+      var _this = this;
+
+      this.showJournalEditModal = true;
+      this.editJournalId = id;
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("api/journals/" + id).then(function (response) {
+        _this.editJournal = response.data;
+      }).catch(function (error) {
+        if (error.response.status) {
+          alert("Server Error");
+        }
+      });
+    },
+    showDetailsModal: function showDetailsModal(id) {
+      var _this2 = this;
+
+      this.showJournalDetailsModal = true;
+      this.editJournalId = id;
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("api/journals/" + id).then(function (response) {
+        _this2.editJournal = response.data;
+      }).catch(function (error) {
+        if (error.response.status) {
+          alert("Server Error");
+        }
+      });
+    },
     showDeleteModal: function showDeleteModal(id) {
       this.showConfirmationModal = true;
       this.deleteJournalId = id;
     },
     createJournal: function createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
-      var _this = this;
+      var _this3 = this;
 
       this.messages = [];
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/journals", {
@@ -2067,12 +2202,12 @@ function Journal(_ref) {
       }).then(function (_ref2) {
         var data = _ref2.data;
 
-        _this.journals.push(new Journal(data));
+        _this3.journals.push(new Journal(data));
 
-        _this.showJournalCreateModal = false;
+        _this3.showJournalCreateModal = false;
       }).catch(function (error) {
         if (error.response.status == 422) {
-          var msgs = _this.messages;
+          var msgs = _this3.messages;
           var errors = error.response.data.errors;
           Object.keys(errors).forEach(function (key) {
             errors[key].forEach(function (error) {
@@ -2080,29 +2215,68 @@ function Journal(_ref) {
             });
           });
         } else {
-          _this.messages = ["Server error."];
+          _this3.messages = ["Server error."];
         }
       });
     },
     deleteJournal: function deleteJournal(id) {
-      var _this2 = this;
+      var _this4 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete("api/journals/" + id).then(function (response) {
-        var index = _this2.journals.findIndex(function (journal) {
+        var index = _this4.journals.findIndex(function (journal) {
           return journal.id === id;
         });
 
-        _this2.journals.splice(index, 1);
+        _this4.journals.splice(index, 1);
 
-        _this2.showConfirmationModal = false;
+        _this4.showConfirmationModal = false;
       }).catch(function (error) {
         if (error.response.status) {
           alert("Server Error");
         }
       });
     },
+    edit: function edit(editJournalId, date, text, plan_tomorrow, goal_tomorrow, goal_status) {
+      var _this5 = this;
+
+      this.messages = [];
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("api/journals/" + editJournalId, {
+        user_id: this.userid,
+        date: moment__WEBPACK_IMPORTED_MODULE_2___default()(date).format("YYYY-MM-DD"),
+        text: text,
+        plan_tomorrow: plan_tomorrow,
+        goal_tomorrow: goal_tomorrow,
+        goal_status: goal_status
+      }).then(function (response) {
+        var index = _this5.journals.findIndex(function (journal) {
+          return journal.id === editJournalId;
+        });
+
+        Vue.set(_this5.journals, index, new Journal({
+          id: editJournalId,
+          date: date,
+          text: text,
+          plan_tomorrow: plan_tomorrow,
+          goal_tomorrow: goal_tomorrow,
+          goal_status: goal_status
+        }));
+        _this5.showJournalEditModal = false;
+      }).catch(function (error) {
+        if (error.response.status == 422) {
+          var msgs = _this5.messages;
+          var errors = error.response.data.errors;
+          Object.keys(errors).forEach(function (key) {
+            errors[key].forEach(function (error) {
+              msgs.push(error);
+            });
+          });
+        } else {
+          _this5.messages = ["Server error."];
+        }
+      });
+    },
     read: function read() {
-      var _this3 = this;
+      var _this6 = this;
 
       var dateFrom = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var dateTo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -2117,7 +2291,7 @@ function Journal(_ref) {
       }).then(function (_ref3) {
         var data = _ref3.data;
         data.forEach(function (journal) {
-          _this3.journals.push(new Journal(journal));
+          _this6.journals.push(new Journal(journal));
         });
       }, function (error) {
         console.error(error);
@@ -2130,6 +2304,52 @@ function Journal(_ref) {
   },
   created: function created() {
     this.read();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["editJournalId", "user_id", "date", "text", "plan_tomorrow", "goal_tomorrow", "goal_status"],
+  components: {
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -6406,7 +6626,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.date-range-container {\r\n  margin-bottom: 5px;\n}\n.form-control {\r\n  margin-bottom: 10px;\n}\n.btn-filter {\r\n  margin-top: 30px;\r\n  margin-left: 60px;\n}\r\n", ""]);
+exports.push([module.i, "\n.date-range-container {\n  margin-bottom: 5px;\n}\n.form-control {\n  margin-bottom: 10px;\n}\n.btn-filter {\n  margin-top: 30px;\n  margin-left: 60px;\n}\n", ""]);
 
 // exports
 
@@ -6426,6 +6646,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "\n.modal-mask {\r\n  position: fixed;\r\n  z-index: 9998;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: rgba(0, 0, 0, 0.5);\r\n  display: table;\r\n  transition: opacity 0.3s ease;\n}\n.vdp-datepicker * {\r\n  border: 0;\n}\n.modal-wrapper {\r\n  display: table-cell;\r\n  vertical-align: middle;\n}\n.modal-container {\r\n  width: 450px;\r\n  margin: 0px auto;\r\n  padding: 20px 30px;\r\n  background-color: #fff;\r\n  border-radius: 2px;\r\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\r\n  transition: all 0.3s ease;\r\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\r\n  margin-top: 0;\r\n  color: #42b983;\n}\n.modal-body {\r\n  margin: 20px 0;\n}\n.modal-default-button {\r\n  float: right;\n}\n.modal-enter {\r\n  opacity: 0;\n}\n.modal-leave-active {\r\n  opacity: 0;\n}\n.modal-enter .modal-container,\r\n.modal-leave-active .modal-container {\r\n  -webkit-transform: scale(1.1);\r\n  transform: scale(1.1);\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.close-btn {\n  alignment: left;\n}\n", ""]);
 
 // exports
 
@@ -54344,6 +54583,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ViewJournalDetailsModalComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -55223,6 +55492,235 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditJournalModalComponent.vue?vue&type=template&id=c092ccbc&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditJournalModalComponent.vue?vue&type=template&id=c092ccbc& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("modal-component", { staticClass: "black-text-modal" }, [
+    _c("div", { attrs: { slot: "header" }, slot: "header" }, [
+      _vm._v("Edit Journal")
+    ]),
+    _vm._v(" "),
+    _c("div", { attrs: { slot: "body" }, slot: "body" }, [
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              _vm.$emit(_vm.edit())
+            }
+          }
+        },
+        [
+          _c("datepicker", {
+            staticClass: "form-control",
+            attrs: { name: "date", placeholder: "Date" },
+            model: {
+              value: _vm.date,
+              callback: function($$v) {
+                _vm.date = $$v
+              },
+              expression: "date"
+            }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.text,
+                expression: "text"
+              }
+            ],
+            staticClass: "form-control mt-2",
+            attrs: {
+              name: "database_column",
+              placeholder: "Text",
+              type: "text"
+            },
+            domProps: { value: _vm.text },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.text = $event.target.value
+              }
+            }
+          }),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.plan_tomorrow,
+                expression: "plan_tomorrow"
+              }
+            ],
+            staticClass: "form-control mt-2",
+            attrs: {
+              id: "exampleFormControlTextarea1",
+              name: "plan_tomorrow",
+              placeholder: "Plan for next day ",
+              rows: "3"
+            },
+            domProps: { value: _vm.plan_tomorrow },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.plan_tomorrow = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.goal_tomorrow,
+                expression: "goal_tomorrow"
+              }
+            ],
+            staticClass: "form-control mt-2",
+            attrs: { name: "goal_tomorrow", type: "text" },
+            domProps: { value: _vm.goal_tomorrow },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.goal_tomorrow = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-check mt-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.goal_status,
+                  expression: "goal_status"
+                }
+              ],
+              staticClass: "form-check-input",
+              attrs: {
+                id: "defaultCheck1",
+                name: "goal_status",
+                type: "checkbox",
+                value: ""
+              },
+              domProps: {
+                checked: Array.isArray(_vm.goal_status)
+                  ? _vm._i(_vm.goal_status, "") > -1
+                  : _vm.goal_status
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.goal_status,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = "",
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.goal_status = $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        (_vm.goal_status = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.goal_status = $$c
+                  }
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "form-check-label",
+                attrs: { for: "defaultCheck1" }
+              },
+              [_vm._v("Did you achieve today's goal?")]
+            ),
+            _vm._v(" "),
+            _c(
+              "span",
+              _vm._l(_vm.messages, function(message) {
+                return _c("p", { key: message }, [_vm._v(_vm._s(message))])
+              }),
+              0
+            )
+          ])
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger modal-default-button",
+          on: {
+            click: function($event) {
+              _vm.$emit("close")
+            }
+          }
+        },
+        [_vm._v("Cancel")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary modal-default-button mr-2",
+          attrs: { type: "submit" },
+          on: {
+            click: function($event) {
+              _vm.$emit(
+                "edit",
+                _vm.editJournalId,
+                _vm.date,
+                _vm.text,
+                _vm.plan_tomorrow,
+                _vm.goal_tomorrow,
+                _vm.goal_status
+              )
+            }
+          }
+        },
+        [_vm._v("Save\n    ")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/JournalComponent.vue?vue&type=template&id=1dffca1e&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/JournalComponent.vue?vue&type=template&id=1dffca1e& ***!
@@ -55269,14 +55767,30 @@ var render = function() {
     _c("td", [
       _c(
         "button",
-        { staticClass: "btn btn-light", attrs: { type: "button" } },
+        {
+          staticClass: "btn btn-light",
+          attrs: { type: "button", id: "show-journal-details-modal" },
+          on: {
+            click: function($event) {
+              _vm.$emit("showDetailsModal", _vm.id)
+            }
+          }
+        },
         [_vm._v("View Details")]
       ),
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-info text-white", attrs: { type: "button" } },
-        [_vm._v("Edit")]
+        {
+          staticClass: "btn btn-info text-white",
+          attrs: { id: "show-journal-edit-modal", type: "button" },
+          on: {
+            click: function($event) {
+              _vm.$emit("showEditModal", _vm.id)
+            }
+          }
+        },
+        [_vm._v("Edit\n    ")]
       ),
       _vm._v(" "),
       _c(
@@ -55465,7 +55979,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("Add New")]
+                  [_vm._v("Add New\n        ")]
                 ),
                 _vm._v(" "),
                 _vm.showJournalCreateModal
@@ -55493,7 +56007,11 @@ var render = function() {
               _vm._b(
                 {
                   key: journal.id,
-                  on: { showDeleteModal: _vm.showDeleteModal }
+                  on: {
+                    showDeleteModal: _vm.showDeleteModal,
+                    showDetailsModal: _vm.showDetailsModal,
+                    showEditModal: _vm.showEditModal
+                  }
                 },
                 "journal",
                 journal,
@@ -55509,12 +56027,54 @@ var render = function() {
         ? _c("delete-component", {
             attrs: { id: _vm.deleteJournalId },
             on: {
-              delete: _vm.deleteJournal,
               close: function($event) {
                 _vm.showConfirmationModal = false
-              }
+              },
+              delete: _vm.deleteJournal
             }
           })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showJournalEditModal
+        ? _c(
+            "edit-component",
+            _vm._b(
+              {
+                attrs: {
+                  editJournalId: _vm.editJournalId,
+                  messages: _vm.messages
+                },
+                on: {
+                  close: function($event) {
+                    _vm.showJournalEditModal = false
+                  },
+                  edit: _vm.edit
+                }
+              },
+              "edit-component",
+              _vm.editJournal,
+              false
+            )
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showJournalDetailsModal
+        ? _c(
+            "view-details-component",
+            _vm._b(
+              {
+                attrs: { editJournalId: _vm.editJournalId },
+                on: {
+                  close: function($event) {
+                    _vm.showJournalDetailsModal = false
+                  }
+                }
+              },
+              "view-details-component",
+              _vm.editJournal,
+              false
+            )
+          )
         : _vm._e()
     ],
     1
@@ -55570,6 +56130,117 @@ var render = function() {
           _c("div", { staticClass: "modal-footer" }, [_vm._t("footer")], 2)
         ])
       ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("modal-component", { staticClass: "black-text-modal" }, [
+    _c("div", { attrs: { slot: "header" }, slot: "header" }, [
+      _vm._v("Journal Details")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form", attrs: { slot: "body" }, slot: "body" }, [
+      _c("h5", [_c("span", [_vm._v("Date:")]), _vm._v(" " + _vm._s(_vm.date))]),
+      _vm._v(" "),
+      _c("h5", [_c("span", [_vm._v("Text:")]), _vm._v(" " + _vm._s(_vm.text))]),
+      _vm._v(" "),
+      _c("h5", [
+        _c("span", [_vm._v("Plan for Tomorrow: ")]),
+        _vm._v(_vm._s(_vm.plan_tomorrow))
+      ]),
+      _vm._v(" "),
+      _c("h5", [
+        _c("span", [_vm._v("Goal for Tomorrow: ")]),
+        _vm._v(_vm._s(_vm.goal_tomorrow))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-check mt-2" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.goal_status,
+              expression: "goal_status"
+            }
+          ],
+          staticClass: "form-check-input",
+          attrs: {
+            id: "defaultCheck1",
+            name: "goal_status",
+            type: "checkbox",
+            value: ""
+          },
+          domProps: {
+            checked: Array.isArray(_vm.goal_status)
+              ? _vm._i(_vm.goal_status, "") > -1
+              : _vm.goal_status
+          },
+          on: {
+            change: function($event) {
+              var $$a = _vm.goal_status,
+                $$el = $event.target,
+                $$c = $$el.checked ? true : false
+              if (Array.isArray($$a)) {
+                var $$v = "",
+                  $$i = _vm._i($$a, $$v)
+                if ($$el.checked) {
+                  $$i < 0 && (_vm.goal_status = $$a.concat([$$v]))
+                } else {
+                  $$i > -1 &&
+                    (_vm.goal_status = $$a
+                      .slice(0, $$i)
+                      .concat($$a.slice($$i + 1)))
+                }
+              } else {
+                _vm.goal_status = $$c
+              }
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "span",
+          { staticClass: "form-check-label", attrs: { for: "defaultCheck1" } },
+          [_vm._v("Did you achieve today's goal?")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close-btn btn btn-danger modal-default-button",
+          on: {
+            click: function($event) {
+              _vm.$emit("close")
+            }
+          }
+        },
+        [_vm._v("Close")]
+      )
     ])
   ])
 }
@@ -55696,8 +56367,8 @@ function normalizeComponent (
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.5.21
- * (c) 2014-2018 Evan You
+ * Vue.js v2.5.22
+ * (c) 2014-2019 Evan You
  * Released under the MIT License.
  */
 
@@ -56326,7 +56997,7 @@ if (true) {
       ? vm.options
       : vm._isVue
         ? vm.$options || vm.constructor.options
-        : vm || {};
+        : vm;
     var name = options.name || options._componentTag;
     var file = options.__file;
     if (!name && file) {
@@ -56421,9 +57092,9 @@ Dep.prototype.notify = function notify () {
   }
 };
 
-// the current target watcher being evaluated.
-// this is globally unique because there could be only one
-// watcher being evaluated at any time.
+// The current target watcher being evaluated.
+// This is globally unique because only one watcher
+// can be evaluated at a time.
 Dep.target = null;
 var targetStack = [];
 
@@ -56951,13 +57622,26 @@ function mergeHook (
   parentVal,
   childVal
 ) {
-  return childVal
+  var res = childVal
     ? parentVal
       ? parentVal.concat(childVal)
       : Array.isArray(childVal)
         ? childVal
         : [childVal]
-    : parentVal
+    : parentVal;
+  return res
+    ? dedupeHooks(res)
+    : res
+}
+
+function dedupeHooks (hooks) {
+  var res = [];
+  for (var i = 0; i < hooks.length; i++) {
+    if (res.indexOf(hooks[i]) === -1) {
+      res.push(hooks[i]);
+    }
+  }
+  return res
 }
 
 LIFECYCLE_HOOKS.forEach(function (hook) {
@@ -57193,7 +57877,7 @@ function mergeOptions (
   normalizeProps(child, vm);
   normalizeInject(child, vm);
   normalizeDirectives(child);
-  
+
   // Apply extends and mixins on the child options,
   // but only if it is a raw options object that isn't
   // the result of another mergeOptions call.
@@ -58126,6 +58810,8 @@ function resolveAsyncComponent (
       // (async resolves are shimmed as synchronous during SSR)
       if (!sync) {
         forceRender(true);
+      } else {
+        contexts.length = 0;
       }
     });
 
@@ -58293,8 +58979,8 @@ function eventsMixin (Vue) {
     }
     // array of events
     if (Array.isArray(event)) {
-      for (var i = 0, l = event.length; i < l; i++) {
-        vm.$off(event[i], fn);
+      for (var i$1 = 0, l = event.length; i$1 < l; i$1++) {
+        vm.$off(event[i$1], fn);
       }
       return vm
     }
@@ -58307,16 +58993,14 @@ function eventsMixin (Vue) {
       vm._events[event] = null;
       return vm
     }
-    if (fn) {
-      // specific handler
-      var cb;
-      var i$1 = cbs.length;
-      while (i$1--) {
-        cb = cbs[i$1];
-        if (cb === fn || cb.fn === fn) {
-          cbs.splice(i$1, 1);
-          break
-        }
+    // specific handler
+    var cb;
+    var i = cbs.length;
+    while (i--) {
+      cb = cbs[i];
+      if (cb === fn || cb.fn === fn) {
+        cbs.splice(i, 1);
+        break
       }
     }
     return vm
@@ -60477,34 +61161,14 @@ function resolveConstructorOptions (Ctor) {
 function resolveModifiedOptions (Ctor) {
   var modified;
   var latest = Ctor.options;
-  var extended = Ctor.extendOptions;
   var sealed = Ctor.sealedOptions;
   for (var key in latest) {
     if (latest[key] !== sealed[key]) {
       if (!modified) { modified = {}; }
-      modified[key] = dedupe(latest[key], extended[key], sealed[key]);
+      modified[key] = latest[key];
     }
   }
   return modified
-}
-
-function dedupe (latest, extended, sealed) {
-  // compare latest and sealed to ensure lifecycle hooks won't be duplicated
-  // between merges
-  if (Array.isArray(latest)) {
-    var res = [];
-    sealed = Array.isArray(sealed) ? sealed : [sealed];
-    extended = Array.isArray(extended) ? extended : [extended];
-    for (var i = 0; i < latest.length; i++) {
-      // push original options and not sealed options to exclude duplicated options
-      if (extended.indexOf(latest[i]) >= 0 || sealed.indexOf(latest[i]) < 0) {
-        res.push(latest[i]);
-      }
-    }
-    return res
-  } else {
-    return latest
-  }
 }
 
 function Vue (options) {
@@ -60875,7 +61539,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.5.21';
+Vue.version = '2.5.22';
 
 /*  */
 
@@ -68373,6 +69037,8 @@ Vue.component('journals-list', __webpack_require__(/*! ./components/JournalListC
 Vue.component('modal-component', __webpack_require__(/*! ./components/ModalComponent.vue */ "./resources/js/components/ModalComponent.vue").default);
 Vue.component('add-journal-modal', __webpack_require__(/*! ./components/AddJournalModalComponent.vue */ "./resources/js/components/AddJournalModalComponent.vue").default);
 Vue.component('delete-component', __webpack_require__(/*! ./components/ConfirmationModalComponent.vue */ "./resources/js/components/ConfirmationModalComponent.vue").default);
+Vue.component('edit-component', __webpack_require__(/*! ./components/EditJournalModalComponent.vue */ "./resources/js/components/EditJournalModalComponent.vue").default);
+Vue.component('view-details-component', __webpack_require__(/*! ./components/ViewJournalDetailsModalComponent.vue */ "./resources/js/components/ViewJournalDetailsModalComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -68576,6 +69242,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConfirmationModalComponent_vue_vue_type_template_id_5befb890___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ConfirmationModalComponent_vue_vue_type_template_id_5befb890___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/EditJournalModalComponent.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/EditJournalModalComponent.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EditJournalModalComponent_vue_vue_type_template_id_c092ccbc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditJournalModalComponent.vue?vue&type=template&id=c092ccbc& */ "./resources/js/components/EditJournalModalComponent.vue?vue&type=template&id=c092ccbc&");
+/* harmony import */ var _EditJournalModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditJournalModalComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/EditJournalModalComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EditJournalModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditJournalModalComponent_vue_vue_type_template_id_c092ccbc___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EditJournalModalComponent_vue_vue_type_template_id_c092ccbc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/EditJournalModalComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/EditJournalModalComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/EditJournalModalComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditJournalModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./EditJournalModalComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditJournalModalComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditJournalModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/EditJournalModalComponent.vue?vue&type=template&id=c092ccbc&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/EditJournalModalComponent.vue?vue&type=template&id=c092ccbc& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditJournalModalComponent_vue_vue_type_template_id_c092ccbc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./EditJournalModalComponent.vue?vue&type=template&id=c092ccbc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditJournalModalComponent.vue?vue&type=template&id=c092ccbc&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditJournalModalComponent_vue_vue_type_template_id_c092ccbc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditJournalModalComponent_vue_vue_type_template_id_c092ccbc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -68808,6 +69543,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/ViewJournalDetailsModalComponent.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/ViewJournalDetailsModalComponent.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ViewJournalDetailsModalComponent_vue_vue_type_template_id_5cc85b2a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a& */ "./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a&");
+/* harmony import */ var _ViewJournalDetailsModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ViewJournalDetailsModalComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ViewJournalDetailsModalComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ViewJournalDetailsModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ViewJournalDetailsModalComponent_vue_vue_type_template_id_5cc85b2a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ViewJournalDetailsModalComponent_vue_vue_type_template_id_5cc85b2a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ViewJournalDetailsModalComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ViewJournalDetailsModalComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_template_id_5cc85b2a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewJournalDetailsModalComponent.vue?vue&type=template&id=5cc85b2a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_template_id_5cc85b2a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewJournalDetailsModalComponent_vue_vue_type_template_id_5cc85b2a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -68826,8 +69648,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\codecordia\htdocs\journal-app\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\codecordia\htdocs\journal-app\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\User\Documents\journal-app\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\User\Documents\journal-app\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

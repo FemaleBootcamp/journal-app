@@ -18,16 +18,26 @@
     </td>
 
     <td>
-      <button type="button" class="btn btn-light">View Details</button>
-      <button type="button" class="btn btn-info text-white">Edit</button>
+      <button class="btn btn-light"
+        @click="$emit('showDetailsModal', id)"
+        type="button"
+        id="show-journal-details-modal"
+      >View Details</button>
+      <button class="btn btn-info text-white"
+        @click="$emit('showEditModal', id)"
+        id="show-journal-edit-modal"
+        type="button"
+      >Edit
+      </button>
       <button
         id="show-journal-delete-modal"
-        @click="$emit('showDeleteModal', id)"
         type="button"
+        @click="$emit('showDeleteModal', id)"
         class="btn btn-danger"
       >
         <i class="fa fa-trash"></i>
       </button>
+
     </td>
   </tr>
 </template>
