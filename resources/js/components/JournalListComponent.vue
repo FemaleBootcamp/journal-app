@@ -31,28 +31,29 @@
 
     <table class="table">
       <thead class="thead-dark">
-        <tr>
-          <th scope="col">Date</th>
-          <th scope="col">Text</th>
-          <th scope="col">Plan for tomorrow</th>
-          <th scope="col">Goal for tomorrow</th>
-          <th scope="col">Achievement</th>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Text</th>
+        <th scope="col">Plan for tomorrow</th>
+        <th scope="col">Goal for tomorrow</th>
+        <th scope="col">Achievement</th>
 
-          <th scope="col">
-            <button
-              @click="showJournalCreateModal = true"
-              class="text-white btn btn-info"
-              id="show-journal-create-modal"
-            >Add New</button>
-            <add-journal-modal
-              :messages="messages"
-              @close="showJournalCreateModal = false"
-              @createJournal="createJournal"
-              id="addJournalModal"
-              v-if="showJournalCreateModal"
-            ></add-journal-modal>
-          </th>
-        </tr>
+        <th scope="col">
+          <button
+            @click="showJournalCreateModal = true"
+            class="text-white btn btn-info"
+            id="show-journal-create-modal"
+          >Add New
+          </button>
+          <add-journal-modal
+            :messages="messages"
+            @close="showJournalCreateModal = false"
+            @createJournal="createJournal"
+            id="addJournalModal"
+            v-if="showJournalCreateModal"
+          ></add-journal-modal>
+        </th>
+      </tr>
       </thead>
       <tbody>
       <journal
@@ -72,8 +73,8 @@
       v-if="showConfirmationModal"
     ></delete-component>
     <edit-component
-      :messages="messages"
       :editJournalId="editJournalId"
+      :messages="messages"
       @close="showJournalEditModal = false"
       @edit="edit"
       v-bind="editJournal"
@@ -164,6 +165,7 @@
         this.deleteJournalId = id;
       },
       createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
+        this.messages = [];
         axios
           .post("api/journals", {
             user_id: this.userid,
@@ -187,7 +189,6 @@
                   msgs.push(error);
                 });
               });
-              this.messages = msgs;
             } else {
               this.messages = ["Server error."];
             }
@@ -208,6 +209,7 @@
           });
       },
       edit(editJournalId, date, text, plan_tomorrow, goal_tomorrow, goal_status) {
+        this.messages = [];
         axios.put("api/journals/" + editJournalId, {
           user_id: this.userid,
           date: moment(date).format("YYYY-MM-DD"),
@@ -243,7 +245,6 @@
                   msgs.push(error);
                 });
               });
-              this.messages = msgs;
             } else {
               this.messages = ["Server error."];
             }
@@ -287,17 +288,17 @@
   };
 </script>
 <style>
-.date-range-container {
-  margin-bottom: 5px;
-}
+  .date-range-container {
+    margin-bottom: 5px;
+  }
 
-.form-control {
-  margin-bottom: 10px;
-}
+  .form-control {
+    margin-bottom: 10px;
+  }
 
-.btn-filter {
-  margin-top: 30px;
-  margin-left: 60px;
-}
+  .btn-filter {
+    margin-top: 30px;
+    margin-left: 60px;
+  }
 </style>
 

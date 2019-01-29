@@ -2114,6 +2114,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2190,6 +2191,7 @@ function Journal(_ref) {
     createJournal: function createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
       var _this3 = this;
 
+      this.messages = [];
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/journals", {
         user_id: this.userid,
         date: moment__WEBPACK_IMPORTED_MODULE_2___default()(date).format("YYYY-MM-DD"),
@@ -2212,7 +2214,6 @@ function Journal(_ref) {
               msgs.push(error);
             });
           });
-          _this3.messages = msgs;
         } else {
           _this3.messages = ["Server error."];
         }
@@ -2238,6 +2239,7 @@ function Journal(_ref) {
     edit: function edit(editJournalId, date, text, plan_tomorrow, goal_tomorrow, goal_status) {
       var _this5 = this;
 
+      this.messages = [];
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("api/journals/" + editJournalId, {
         user_id: this.userid,
         date: moment__WEBPACK_IMPORTED_MODULE_2___default()(date).format("YYYY-MM-DD"),
@@ -2268,7 +2270,6 @@ function Journal(_ref) {
               msgs.push(error);
             });
           });
-          _this5.messages = msgs;
         } else {
           _this5.messages = ["Server error."];
         }
@@ -55978,7 +55979,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("Add New")]
+                  [_vm._v("Add New\n        ")]
                 ),
                 _vm._v(" "),
                 _vm.showJournalCreateModal
@@ -56040,8 +56041,8 @@ var render = function() {
             _vm._b(
               {
                 attrs: {
-                  messages: _vm.messages,
-                  editJournalId: _vm.editJournalId
+                  editJournalId: _vm.editJournalId,
+                  messages: _vm.messages
                 },
                 on: {
                   close: function($event) {
