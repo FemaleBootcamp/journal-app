@@ -117,6 +117,7 @@ export default {
       this.deleteJournalId = id;
     },
     createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
+      this.messages = [];
       axios
         .post("api/journals", {
           user_id: this.userid,
@@ -140,7 +141,6 @@ export default {
                 msgs.push(error);
               });
             });
-            this.messages = msgs;
           } else {
             this.messages = ["Server error."];
           }
