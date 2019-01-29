@@ -2011,6 +2011,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2035,7 +2038,7 @@ function Journal(_ref) {
   components: {
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ["userid"],
+  props: ["userid", "assetLocation"],
   data: function data() {
     return {
       showConfirmationModal: false,
@@ -2045,7 +2048,8 @@ function Journal(_ref) {
       dateFrom: null,
       dateTo: null,
       goalStatus: null,
-      deleteJournalId: null
+      deleteJournalId: null,
+      loading: false
     };
   },
   methods: {
@@ -2057,6 +2061,7 @@ function Journal(_ref) {
       var _this = this;
 
       this.messages = [];
+      this.loading = true;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/journals", {
         user_id: this.userid,
         date: moment__WEBPACK_IMPORTED_MODULE_2___default()(date).format("YYYY-MM-DD"),
@@ -2070,10 +2075,12 @@ function Journal(_ref) {
         _this.journals.push(new Journal(data));
 
         _this.showJournalCreateModal = false;
+        _this.loading = false;
       }).catch(function (error) {
         if (error.response.status == 422) {
           var msgs = _this.messages;
           var errors = error.response.data.errors;
+          _this.loading = false;
           Object.keys(errors).forEach(function (key) {
             errors[key].forEach(function (error) {
               msgs.push(error);
@@ -2087,6 +2094,7 @@ function Journal(_ref) {
     deleteJournal: function deleteJournal(id) {
       var _this2 = this;
 
+      this.loading = true;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete("api/journals/" + id).then(function (response) {
         var index = _this2.journals.findIndex(function (journal) {
           return journal.id === id;
@@ -2095,7 +2103,10 @@ function Journal(_ref) {
         _this2.journals.splice(index, 1);
 
         _this2.showConfirmationModal = false;
+        _this2.loading = false;
       }).catch(function (error) {
+        _this2.loading = false;
+
         if (error.response.status) {
           alert("Server Error");
         }
@@ -2107,6 +2118,7 @@ function Journal(_ref) {
       var dateFrom = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var dateTo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var goalStatus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      this.loading = true;
       window.axios.get("api/journals", {
         params: {
           userId: this.userid,
@@ -2118,9 +2130,12 @@ function Journal(_ref) {
         var data = _ref3.data;
         data.forEach(function (journal) {
           _this3.journals.push(new Journal(journal));
+
+          _this3.loading = false;
         });
       }, function (error) {
         console.error(error);
+        _this3.loading = false;
       });
     },
     filter: function filter() {
@@ -55320,6 +55335,15 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm.loading
+        ? _c("div", { staticClass: "loading-screen" }, [
+            _c("img", {
+              staticClass: "loading-image",
+              attrs: { src: "./img/ajax_loader.gif", alt: "No image" }
+            })
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c(
           "div",

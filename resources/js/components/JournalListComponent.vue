@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="loading" class="loading-screen">
+      <img class="loading-image" :src="'./img/ajax_loader.gif'" alt="No image">
+    </div>
     <div class="row">
       <div class="date-range-container col-lg-3">
         <input id="user_id" name="user_id" type="hidden" v-model="userid">
@@ -98,7 +101,7 @@ export default {
   components: {
     Datepicker
   },
-  props: ["userid"],
+  props: ["userid", "assetLocation"],
   data() {
     return {
       showConfirmationModal: false,
@@ -108,7 +111,8 @@ export default {
       dateFrom: null,
       dateTo: null,
       goalStatus: null,
-      deleteJournalId: null
+      deleteJournalId: null,
+      loading: false
     };
   },
   methods: {
@@ -118,6 +122,7 @@ export default {
     },
     createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
       this.messages = [];
+      this.loading = true;
       axios
         .post("api/journals", {
           user_id: this.userid,
@@ -130,12 +135,13 @@ export default {
         .then(({ data }) => {
           this.journals.push(new Journal(data));
           this.showJournalCreateModal = false;
+          this.loading = false;
         })
         .catch(error => {
           if (error.response.status == 422) {
             let msgs = this.messages;
             let errors = error.response.data.errors;
-
+            this.loading = false;
             Object.keys(errors).forEach(key => {
               errors[key].forEach(function(error) {
                 msgs.push(error);
@@ -147,20 +153,24 @@ export default {
         });
     },
     deleteJournal(id) {
+      this.loading = true;
       axios
         .delete("api/journals/" + id)
         .then(response => {
           let index = this.journals.findIndex(journal => journal.id === id);
           this.journals.splice(index, 1);
           this.showConfirmationModal = false;
+          this.loading = false;
         })
         .catch(error => {
+          this.loading = false;
           if (error.response.status) {
             alert("Server Error");
           }
         });
     },
     read(dateFrom = null, dateTo = null, goalStatus = null) {
+      this.loading = true;
       window.axios
         .get("api/journals", {
           params: {
@@ -174,10 +184,12 @@ export default {
           ({ data }) => {
             data.forEach(journal => {
               this.journals.push(new Journal(journal));
+              this.loading = false;
             });
           },
           error => {
             console.error(error);
+            this.loading = false;
           }
         );
     },
