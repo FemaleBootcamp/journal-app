@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="loading" class="loading-screen">
+      <img class="loading-image" :src="'./img/ajax_loader.gif'" alt="No image">
+    </div>
     <div class="row">
       <div class="date-range-container col-lg-3">
         <input id="user_id" name="user_id" type="hidden" v-model="userid">
@@ -130,33 +133,40 @@
         deleteJournalId: null,
         editJournalId: null,
         editJournal: null,
-        id: null
+        id: null,
+        loading:false,
       };
     },
     methods: {
       showEditModal(id) {
         this.showJournalEditModal = true;
         this.editJournalId = id;
+        this.loading = true;
         axios.get("api/journals/" + id)
           .then(response => {
             this.editJournal = response.data;
+            this.loading = false;
           })
           .catch(error => {
             if (error.response.status) {
               alert("Server Error");
+              this.loading = false;
             }
           });
       },
       showDetailsModal(id) {
         this.showJournalDetailsModal = true;
         this.editJournalId = id;
+        this.loading = true;
         axios.get("api/journals/" + id)
           .then(response => {
             this.editJournal = response.data;
+            this.loading = false;
           })
           .catch(error => {
             if (error.response.status) {
               alert("Server Error");
+              this.loading = false;
             }
           });
       },
@@ -166,6 +176,7 @@
       },
       createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
         this.messages = [];
+        this.loading = true;
         axios
           .post("api/journals", {
             user_id: this.userid,
@@ -178,12 +189,13 @@
           .then(({data}) => {
             this.journals.push(new Journal(data));
             this.showJournalCreateModal = false;
+            this.loading = false;
           })
           .catch(error => {
             if (error.response.status == 422) {
               let msgs = this.messages;
               let errors = error.response.data.errors;
-
+              this.loading = false;
               Object.keys(errors).forEach(key => {
                 errors[key].forEach(function (error) {
                   msgs.push(error);
@@ -191,25 +203,30 @@
               });
             } else {
               this.messages = ["Server error."];
+              this.loading = false;
             }
           });
       },
       deleteJournal(id) {
+        this.loading = true;
         axios
           .delete("api/journals/" + id)
           .then(response => {
             let index = this.journals.findIndex(journal => journal.id === id);
             this.journals.splice(index, 1);
             this.showConfirmationModal = false;
+            this.loading = false;
           })
           .catch(error => {
             if (error.response.status) {
               alert("Server Error");
+              this.loading = false;
             }
           });
       },
       edit(editJournalId, date, text, plan_tomorrow, goal_tomorrow, goal_status) {
         this.messages = [];
+        this.loading = true;
         axios.put("api/journals/" + editJournalId, {
           user_id: this.userid,
           date: moment(date).format("YYYY-MM-DD"),
@@ -219,6 +236,7 @@
           goal_status: goal_status
         })
           .then(response => {
+            this.loading = false;
             let index = this.journals.findIndex(journal => journal.id === editJournalId);
             Vue.set(
               this.journals,
@@ -239,7 +257,7 @@
             if (error.response.status == 422) {
               let msgs = this.messages;
               let errors = error.response.data.errors;
-
+              this.loading = false;
               Object.keys(errors).forEach(key => {
                 errors[key].forEach(function (error) {
                   msgs.push(error);
@@ -251,6 +269,7 @@
           });
       },
       read(dateFrom = null, dateTo = null, goalStatus = null) {
+        this.loading = true;
         window.axios
           .get("api/journals", {
             params: {
@@ -265,9 +284,11 @@
               data.forEach(journal => {
                 this.journals.push(new Journal(journal));
               });
+              this.loading = false;
             },
             error => {
               console.error(error);
+              this.loading = false;
             }
           );
       },
