@@ -2245,7 +2245,7 @@ function Journal(_ref) {
         });
 
         Vue.set(_this5.journals, index, new Journal({
-          index: index,
+          id: editJournalId,
           date: date,
           text: text,
           plan_tomorrow: plan_tomorrow,
