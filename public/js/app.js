@@ -2056,6 +2056,7 @@ function Journal(_ref) {
     createJournal: function createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
       var _this = this;
 
+      this.messages = [];
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/journals", {
         user_id: this.userid,
         date: moment__WEBPACK_IMPORTED_MODULE_2___default()(date).format("YYYY-MM-DD"),
@@ -2078,7 +2079,6 @@ function Journal(_ref) {
               msgs.push(error);
             });
           });
-          _this.messages = msgs;
         } else {
           _this.messages = ["Server error."];
         }
@@ -6425,7 +6425,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.5);\n  display: table;\n  transition: opacity 0.3s ease;\n}\n.vdp-datepicker * {\n  border: 0;\n}\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-container {\n  width: 450px;\n  margin: 0px auto;\n  padding: 20px 30px;\n  background-color: #fff;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\n  transition: all 0.3s ease;\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\n  margin-top: 0;\n  color: #42b983;\n}\n.modal-body {\n  margin: 20px 0;\n}\n.modal-default-button {\n  float: right;\n}\n.modal-enter {\n  opacity: 0;\n}\n.modal-leave-active {\n  opacity: 0;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n", ""]);
+exports.push([module.i, "\n.modal-mask {\r\n  position: fixed;\r\n  z-index: 9998;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: rgba(0, 0, 0, 0.5);\r\n  display: table;\r\n  transition: opacity 0.3s ease;\n}\n.vdp-datepicker * {\r\n  border: 0;\n}\n.modal-wrapper {\r\n  display: table-cell;\r\n  vertical-align: middle;\n}\n.modal-container {\r\n  width: 450px;\r\n  margin: 0px auto;\r\n  padding: 20px 30px;\r\n  background-color: #fff;\r\n  border-radius: 2px;\r\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\r\n  transition: all 0.3s ease;\r\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\r\n  margin-top: 0;\r\n  color: #42b983;\n}\n.modal-body {\r\n  margin: 20px 0;\n}\n.modal-default-button {\r\n  float: right;\n}\n.modal-enter {\r\n  opacity: 0;\n}\n.modal-leave-active {\r\n  opacity: 0;\n}\n.modal-enter .modal-container,\r\n.modal-leave-active .modal-container {\r\n  -webkit-transform: scale(1.1);\r\n  transform: scale(1.1);\n}\r\n", ""]);
 
 // exports
 
