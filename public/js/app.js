@@ -2328,7 +2328,7 @@ function Journal(_ref) {
     resetFilter: function resetFilter() {
       this.dateFrom = null;
       this.dateTo = null;
-      this.goal_status = null;
+      this.goalStatus = null;
     }
   },
   created: function created() {
@@ -55932,16 +55932,37 @@ var render = function() {
           _vm._v(" "),
           _c(
             "select",
-            _vm._b(
-              { staticClass: "form-control", attrs: { id: "sel1" } },
-              "select",
-              _vm.goalStatus,
-              false
-            ),
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.goalStatus,
+                  expression: "goalStatus"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { id: "sel1" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.goalStatus = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
             [
-              _c("option", [_vm._v("Achieved")]),
+              _c("option", { attrs: { value: "1" } }, [_vm._v("Achieved")]),
               _vm._v(" "),
-              _c("option", [_vm._v("Not-Achieved")])
+              _c("option", { attrs: { value: "0" } }, [_vm._v("Not-Achieved")])
             ]
           )
         ]),

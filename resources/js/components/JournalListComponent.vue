@@ -21,9 +21,9 @@
         <h5 class="text-left text-white">
           <span>Status of the Goal:</span>
         </h5>
-        <select class="form-control" id="sel1" v-bind="goalStatus" >
-          <option>Achieved</option>
-          <option>Not-Achieved</option>
+        <select class="form-control" id="sel1" v-model="goalStatus" >
+          <option value="1">Achieved</option>
+          <option value="0">Not-Achieved</option>
         </select>
       </div>
       <div class="col-lg-4">
@@ -305,7 +305,7 @@
       resetFilter() {
         this.dateFrom = null;
         this.dateTo = null;
-        this.goal_status = null;
+        this.goalStatus = null;
       }
     },
     created() {
