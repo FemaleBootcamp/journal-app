@@ -174,7 +174,7 @@
         this.showConfirmationModal = true;
         this.deleteJournalId = id;
       },
-      createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status) {
+      createJournal(date, text, plan_tomorrow, goal_tomorrow, goal_status=false) {
         this.messages = [];
         this.loading = true;
         axios

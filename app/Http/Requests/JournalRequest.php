@@ -29,7 +29,7 @@ class JournalRequest extends FormRequest
             'text' => 'required|max:500',
             'plan_tomorrow' => 'required',
             'goal_tomorrow' => 'required|max:255',
-            'goal_status' => 'required'
+            'goal_status' => 'nullable|boolean'
         ];
     }
 }

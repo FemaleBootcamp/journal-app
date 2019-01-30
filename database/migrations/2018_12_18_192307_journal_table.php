@@ -19,7 +19,7 @@ class JournalTable extends Migration
             $table->text('text');
             $table->text('plan_tomorrow');
             $table->string('goal_tomorrow',255);
-            $table->boolean('goal_status');
+            $table->boolean('goal_status')->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
