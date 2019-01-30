@@ -21,14 +21,14 @@
         <h5 class="text-left text-white">
           <span>Status of the Goal:</span>
         </h5>
-        <select class="form-control" id="sel1" v-model="goalStatus">
+        <select class="form-control" id="sel1" v-bind="goalStatus" >
           <option>Achieved</option>
           <option>Not-Achieved</option>
         </select>
       </div>
       <div class="col-lg-4">
         <button @click="filter" class="text-white btn-filter btn btn-group-lg btn-info">Apply Filter</button>
-        <button class="text-white btn-filter btn btn-group-lg btn-info">Reset Filter</button>
+        <button @click="resetFilter"class="text-white btn-filter btn btn-group-lg btn-info">Reset Filter</button>
       </div>
     </div>
 
@@ -301,6 +301,11 @@
           this.dateTo == null ? null : moment(this.dateTo).format("YYYY-MM-DD"),
           this.goalStatus
         );
+      },
+      resetFilter() {
+        this.dateFrom = null;
+        this.dateTo = null;
+        this.goal_status = null;
       }
     },
     created() {
