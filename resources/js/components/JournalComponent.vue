@@ -10,10 +10,10 @@
         <input
           type="checkbox"
           class="custom-control-input"
-          id="defaultUnchecked"
-          :value="goal_status"
+          id="status"
+          :checked="goal_status"
         >
-        <label class="custom-control-label" for="defaultUnchecked">Did you achieve?</label>
+        <label class="custom-control-label" for="status">Did you achieve?</label>
       </div>
     </td>
 
