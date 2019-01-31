@@ -2005,6 +2005,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id", "date", "text", "plan_tomorrow", "goal_tomorrow", "goal_status"]
 });
@@ -55778,16 +55779,13 @@ var render = function() {
       _c("div", { staticClass: "custom-control custom-checkbox" }, [
         _c("input", {
           staticClass: "custom-control-input",
-          attrs: { type: "checkbox", id: "defaultUnchecked" },
-          domProps: { value: _vm.goal_status }
+          attrs: { disabled: "", type: "checkbox", id: "status" },
+          domProps: { checked: _vm.goal_status }
         }),
         _vm._v(" "),
         _c(
           "label",
-          {
-            staticClass: "custom-control-label",
-            attrs: { for: "defaultUnchecked" }
-          },
+          { staticClass: "custom-control-label", attrs: { for: "status" } },
           [_vm._v("Did you achieve?")]
         )
       ])
