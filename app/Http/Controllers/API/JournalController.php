@@ -59,7 +59,9 @@ class JournalController extends Controller
             $wherePart[] = ['user_id', $userId];
         }
 
-        return $journals = Journal::where($wherePart)->get();
+        return $journals = Journal::where($wherePart)
+            ->orderBy('date', 'asc')
+            ->get();
     }
 
     /**
