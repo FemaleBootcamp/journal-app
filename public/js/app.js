@@ -2324,6 +2324,11 @@ function Journal(_ref) {
     filter: function filter() {
       this.journals = [];
       this.read(this.dateFrom == null ? null : moment__WEBPACK_IMPORTED_MODULE_2___default()(this.dateFrom).format("YYYY-MM-DD"), this.dateTo == null ? null : moment__WEBPACK_IMPORTED_MODULE_2___default()(this.dateTo).format("YYYY-MM-DD"), this.goalStatus);
+    },
+    resetFilter: function resetFilter() {
+      this.dateFrom = null;
+      this.dateTo = null;
+      this.goalStatus = null;
     }
   },
   created: function created() {
@@ -55955,9 +55960,9 @@ var render = function() {
               }
             },
             [
-              _c("option", [_vm._v("Achieved")]),
+              _c("option", { attrs: { value: "1" } }, [_vm._v("Achieved")]),
               _vm._v(" "),
-              _c("option", [_vm._v("Not-Achieved")])
+              _c("option", { attrs: { value: "0" } }, [_vm._v("Not-Achieved")])
             ]
           )
         ]),
@@ -55974,7 +55979,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "button",
-            { staticClass: "text-white btn-filter btn btn-group-lg btn-info" },
+            {
+              staticClass: "text-white btn-filter btn btn-group-lg btn-info",
+              on: { click: _vm.resetFilter }
+            },
             [_vm._v("Reset Filter")]
           )
         ])
@@ -56400,8 +56408,8 @@ function normalizeComponent (
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.5.21
- * (c) 2014-2018 Evan You
+ * Vue.js v2.5.22
+ * (c) 2014-2019 Evan You
  * Released under the MIT License.
  */
 
@@ -57030,7 +57038,7 @@ if (true) {
       ? vm.options
       : vm._isVue
         ? vm.$options || vm.constructor.options
-        : vm || {};
+        : vm;
     var name = options.name || options._componentTag;
     var file = options.__file;
     if (!name && file) {
@@ -57125,9 +57133,9 @@ Dep.prototype.notify = function notify () {
   }
 };
 
-// the current target watcher being evaluated.
-// this is globally unique because there could be only one
-// watcher being evaluated at any time.
+// The current target watcher being evaluated.
+// This is globally unique because only one watcher
+// can be evaluated at a time.
 Dep.target = null;
 var targetStack = [];
 
@@ -57655,13 +57663,26 @@ function mergeHook (
   parentVal,
   childVal
 ) {
-  return childVal
+  var res = childVal
     ? parentVal
       ? parentVal.concat(childVal)
       : Array.isArray(childVal)
         ? childVal
         : [childVal]
-    : parentVal
+    : parentVal;
+  return res
+    ? dedupeHooks(res)
+    : res
+}
+
+function dedupeHooks (hooks) {
+  var res = [];
+  for (var i = 0; i < hooks.length; i++) {
+    if (res.indexOf(hooks[i]) === -1) {
+      res.push(hooks[i]);
+    }
+  }
+  return res
 }
 
 LIFECYCLE_HOOKS.forEach(function (hook) {
@@ -57897,7 +57918,7 @@ function mergeOptions (
   normalizeProps(child, vm);
   normalizeInject(child, vm);
   normalizeDirectives(child);
-  
+
   // Apply extends and mixins on the child options,
   // but only if it is a raw options object that isn't
   // the result of another mergeOptions call.
@@ -58830,6 +58851,8 @@ function resolveAsyncComponent (
       // (async resolves are shimmed as synchronous during SSR)
       if (!sync) {
         forceRender(true);
+      } else {
+        contexts.length = 0;
       }
     });
 
@@ -58997,8 +59020,8 @@ function eventsMixin (Vue) {
     }
     // array of events
     if (Array.isArray(event)) {
-      for (var i = 0, l = event.length; i < l; i++) {
-        vm.$off(event[i], fn);
+      for (var i$1 = 0, l = event.length; i$1 < l; i$1++) {
+        vm.$off(event[i$1], fn);
       }
       return vm
     }
@@ -59011,16 +59034,14 @@ function eventsMixin (Vue) {
       vm._events[event] = null;
       return vm
     }
-    if (fn) {
-      // specific handler
-      var cb;
-      var i$1 = cbs.length;
-      while (i$1--) {
-        cb = cbs[i$1];
-        if (cb === fn || cb.fn === fn) {
-          cbs.splice(i$1, 1);
-          break
-        }
+    // specific handler
+    var cb;
+    var i = cbs.length;
+    while (i--) {
+      cb = cbs[i];
+      if (cb === fn || cb.fn === fn) {
+        cbs.splice(i, 1);
+        break
       }
     }
     return vm
@@ -61181,34 +61202,14 @@ function resolveConstructorOptions (Ctor) {
 function resolveModifiedOptions (Ctor) {
   var modified;
   var latest = Ctor.options;
-  var extended = Ctor.extendOptions;
   var sealed = Ctor.sealedOptions;
   for (var key in latest) {
     if (latest[key] !== sealed[key]) {
       if (!modified) { modified = {}; }
-      modified[key] = dedupe(latest[key], extended[key], sealed[key]);
+      modified[key] = latest[key];
     }
   }
   return modified
-}
-
-function dedupe (latest, extended, sealed) {
-  // compare latest and sealed to ensure lifecycle hooks won't be duplicated
-  // between merges
-  if (Array.isArray(latest)) {
-    var res = [];
-    sealed = Array.isArray(sealed) ? sealed : [sealed];
-    extended = Array.isArray(extended) ? extended : [extended];
-    for (var i = 0; i < latest.length; i++) {
-      // push original options and not sealed options to exclude duplicated options
-      if (extended.indexOf(latest[i]) >= 0 || sealed.indexOf(latest[i]) < 0) {
-        res.push(latest[i]);
-      }
-    }
-    return res
-  } else {
-    return latest
-  }
 }
 
 function Vue (options) {
@@ -61579,7 +61580,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.5.21';
+Vue.version = '2.5.22';
 
 /*  */
 
@@ -69688,8 +69689,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\codecordia\htdocs\journal-app\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\codecordia\htdocs\journal-app\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\User\Documents\journal-app\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\User\Documents\journal-app\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
