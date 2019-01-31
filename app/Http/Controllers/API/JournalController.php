@@ -60,7 +60,7 @@ class JournalController extends Controller
         }
 
         return $journals = Journal::where($wherePart)
-            ->orderBy('date', 'asc')
+            ->orderBy('date', 'desc')
             ->get();
     }
 
