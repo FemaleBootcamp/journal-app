@@ -11,13 +11,16 @@ class JournalController extends Controller
 {
     public function store(JournalRequest $request)
     {
-        $journal = Journal::create($request->validated());
+        $input = $request->validated();
+        if (is_null($input['goal_status'])) {
+            $input['goal_status'] = false;
+        }
+        $journal = Journal::create($input);
         return response()->json(
             $journal,
             201
         );
     }
-
 
     /**
      * @param Request $request
@@ -26,15 +29,16 @@ class JournalController extends Controller
      * API Endpoint for retrieving records
      * based on a filter.
      */
-    public function get(Request $request) {
+    public function get(Request $request)
+    {
 
-        $goalStatus=$request->goalStatus;
-        $dateFrom=$request->dateFrom;
-        $dateTo=$request->dateTo;
-        $userId=$request->userId;
+        $goalStatus = $request->goalStatus;
+        $dateFrom = $request->dateFrom;
+        $dateTo = $request->dateTo;
+        $userId = $request->userId;
 
 
-        $wherePart=[];
+        $wherePart = [];
 
         if (empty($dateFrom) && empty($dateTo)) {
             $wherePart[] = ['date', '>=', date('Y-m-d', strtotime('first day of this month'))];
@@ -81,7 +85,7 @@ class JournalController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -92,7 +96,7 @@ class JournalController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -105,8 +109,8 @@ class JournalController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(JournalRequest $request, $id)
@@ -124,7 +128,7 @@ class JournalController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
