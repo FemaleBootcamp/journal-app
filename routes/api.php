@@ -23,3 +23,4 @@ Route::get('/journals', 'API\JournalController@get');
 Route::get('/journals/{id}', 'API\JournalController@show');
 Route::delete('/journals/{id}', 'API\JournalController@destroy');
 Route::put('/journals/{id}', 'API\JournalController@update');
+Route::get('/journals-counting', 'API\JournalController@counting');

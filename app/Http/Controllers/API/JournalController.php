@@ -37,7 +37,6 @@ class JournalController extends Controller
         $dateTo = $request->dateTo;
         $userId = $request->userId;
 
-
         $wherePart = [];
 
         if (empty($dateFrom) && empty($dateTo)) {
@@ -64,6 +63,21 @@ class JournalController extends Controller
             ->get();
     }
 
+    public function counting(Request $request)
+    {
+        $userId = $request->userId;
+
+        $count_achieved = Journal::where('user_id',$userId)->where('goal_status','=','true')->count();
+        $count_not_achieved = Journal::where('user_id',$userId)->where('goal_status','=','false')->count();
+
+        return response()->json(
+            [
+                'yes' => $count_achieved,
+                'no' => $count_not_achieved
+            ],
+            201
+        );
+    }
     /**
      * Display a listing of the resource.
      *
