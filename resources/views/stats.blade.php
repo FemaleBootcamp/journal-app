@@ -8,7 +8,7 @@
         </div>
     </section>
     <section>
-        <stats-component userid="{{$user->id}}"></stats-component>
+        <stats-component></stats-component>
     </section>
 </div>
 @endsection

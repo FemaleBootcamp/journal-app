@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "moment": "^2.23.0",
+        "vue-chart-js": "^1.4.1",
         "vuejs-datepicker": "^1.5.4"
     }
 }

@@ -33,7 +33,7 @@ class StaticController extends Controller
     public function stats()
     {
         $user = Auth::user();
-        return view('stats',compact('user'));
+        return view('stats',compact('user', 'journalsInfo'));
     }
 
 }
