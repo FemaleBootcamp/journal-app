@@ -4,8 +4,11 @@
      xmlns:v-on="http://www.w3.org/1999/xhtml">
     <section>
         <div class="row">
-            <h4 class="mt-5 col-6 text-left text-white"><span><i class="fa fa-filter"></i> Filter</span></h4>
-            <h4 class="mt-5 col-6 text-center text-white">{{ $user -> name }}'s <span>Journal</span> </h4>
+            <h4 class="mt-5 col-4 text-left text-white"><span><i class="fa fa-filter"></i> Filter</span></h4>
+            <h4 class="mt-5 col-4 text-center text-white">{{ $user -> name }}'s <span>Journal</span> </h4>
+            <div class="mt-3 col-4 text-right text-white">
+                <a href="{{ route('stats') }}" class="col-1.5 text-white btn-filter btn btn-info">See your stats</a>
+            </div>
         </div>
     </section>
     <section>

@@ -34,8 +34,3 @@
     },
   };
 </script>
-<style>
-  .close-btn {
-    alignment: left;
-  }
-</style>

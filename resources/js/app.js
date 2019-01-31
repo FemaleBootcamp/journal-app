@@ -33,6 +33,7 @@ Vue.component('add-journal-modal', require('./components/AddJournalModalComponen
 Vue.component('delete-component', require('./components/ConfirmationModalComponent.vue').default);
 Vue.component('edit-component', require('./components/EditJournalModalComponent.vue').default);
 Vue.component('view-details-component', require('./components/ViewJournalDetailsModalComponent.vue').default);
+Vue.component('stats-component', require('./components/StatsComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

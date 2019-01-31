@@ -28,7 +28,7 @@
       </div>
       <div class="col-lg-4">
         <button @click="filter" class="text-white btn-filter btn btn-group-lg btn-info">Apply Filter</button>
-        <button @click="resetFilter"class="text-white btn-filter btn btn-group-lg btn-info">Reset Filter</button>
+        <button @click="resetFilter" class="text-white btn-filter btn btn-group-lg btn-info">Reset Filter</button>
       </div>
     </div>
 
