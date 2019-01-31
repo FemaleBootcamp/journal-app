@@ -8,6 +8,7 @@
       <!-- Default unchecked -->
       <div class="custom-control custom-checkbox">
         <input
+          disabled
           type="checkbox"
           class="custom-control-input"
           id="status"
