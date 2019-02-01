@@ -2360,6 +2360,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["user-id"],
   components: {
     VueChart: vue_chart_js__WEBPACK_IMPORTED_MODULE_0___default.a
   },
@@ -2370,10 +2371,27 @@ __webpack_require__.r(__webpack_exports__);
         datasets: [{
           label: "Component 1",
           backgroundColor: ["#720d27", "#263b60"],
-          data: [10, 20]
+          data: [this.count_achieved, this.count_not_achieved]
         }]
       }
     };
+  },
+  methods: {
+    getJournalInfo: function getJournalInfo() {
+      window.axios.counting("api/journals-counting", {
+        params: {
+          userId: this.user - id,
+          count_achieved: count_achieved,
+          count_not_achieved: count_not_achieved
+        }
+      }).then(function (response) {
+        console.log(response);
+        counta = response.count_achieved;
+        countn = response.count_not_achieved;
+      }).catch(function (error) {
+        alert("Error");
+      });
+    }
   }
 });
 
@@ -84641,15 +84659,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./resources/js/components/StatsComponent.vue ***!
   \****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _StatsComponent_vue_vue_type_template_id_3cc9e749___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StatsComponent.vue?vue&type=template&id=3cc9e749& */ "./resources/js/components/StatsComponent.vue?vue&type=template&id=3cc9e749&");
 /* harmony import */ var _StatsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StatsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/StatsComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _StatsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _StatsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -84679,7 +84696,7 @@ component.options.__file = "resources/js/components/StatsComponent.vue"
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/StatsComponent.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

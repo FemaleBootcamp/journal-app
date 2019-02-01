@@ -67,13 +67,16 @@ class JournalController extends Controller
     {
         $userId = $request->userId;
 
-        $count_achieved = Journal::where('user_id',$userId)->where('goal_status','=','true')->count();
-        $count_not_achieved = Journal::where('user_id',$userId)->where('goal_status','=','false')->count();
+        $achieved = Journal::where('user_id',$userId)->where('goal_status','=','true')->get();
+        $not_achieved = Journal::where('user_id',$userId)->where('goal_status','=','false')->get();
+
+        $count_achieved = $achieved->count();
+        $count_not_achieved=$not_achieved->count();
 
         return response()->json(
             [
-                'yes' => $count_achieved,
-                'no' => $count_not_achieved
+                'Achieved' => $count_achieved,
+                'Not Achieved' => $count_not_achieved
             ],
             201
         );
